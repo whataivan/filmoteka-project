@@ -36,11 +36,12 @@ body {
 }
 
 h1 {
-  font-size: 300px;
+  font-size: 200px;
 }
 
 p {
   font-size: 100px;
+  color: green;
 }
 
 ul {
