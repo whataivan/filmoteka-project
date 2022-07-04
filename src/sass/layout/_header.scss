@@ -1,2 +1,17 @@
+.header__container {
+  display: flex;
+  align-items: center;
+}
 
 
+.logo__title {
+  display: none;
+
+  @include mq(tablet) {
+    margin-left: 8px;
+    color: #ffffff;
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 35px;
+  }
+}
