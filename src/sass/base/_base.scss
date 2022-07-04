@@ -1,0 +1,40 @@
+html {
+  
+}
+
+
+
+
+.page {
+  
+
+  @include mq(tablet) {
+    background-position: 50% -78px;
+    background-size: 840px 796px;
+  }
+
+  @include mq(desktop) {
+    background-position: 50% 0%;
+    background-size: 1856px 958px;
+  }
+}
+
+.container {
+  max-width: 480px;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-left: auto;
+  margin-right: auto;
+
+  @include mq(tablet) {
+    max-width: 768px;
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+  @include mq(desktop) {
+    max-width: 1346px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
