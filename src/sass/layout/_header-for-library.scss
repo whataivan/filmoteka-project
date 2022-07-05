@@ -1,4 +1,4 @@
-.header__library {
+.header-library {
   padding-top: 44px;
   padding-bottom: 62px;
   height: 230px;
@@ -24,7 +24,7 @@
   }
 }
 
-.header__library__container {
+.header-library__container {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -32,14 +32,14 @@
   max-width: 320px;
 }
 
-.logo__library__icon {
+.logo-library__icon {
   display: inline-block;
   fill: currentColor;
   align-items: baseline;
 }
 
 // ///////////Filmoteka///////////////////
-.logo__library__title {
+.logo-library__title {
   display: none;
 
   @include mq(tablet) {
@@ -52,19 +52,20 @@
 }
 
 // ///////////nav///////////////////
-.nav__library__list {
+.nav-library__list {
   display: flex;
 }
 
-.nav__library__item:not(:first-child) {
+.nav-library__item:not(:first-child) {
   margin-left: 39px;
+ 
 }
 
-.nav__library__item:last-child {
+.nav-library__item:last-child {
   margin-right: 0px;
 }
 
-.nav__library__link {
+.nav-library__link {
   display: block;
   font-style: normal;
   font-weight: 500;
@@ -78,9 +79,10 @@
   padding-bottom: 3px;
 }
 
+
 /* Лінія активної сторінки */
 
-.nav__library__link--current {
+.nav-library__link--current {
   position: relative;
   display: block;
 
@@ -116,7 +118,6 @@ align-items: center;
 text-align: center;
 text-transform: uppercase;
 color: #FFFFFF;
-cursor: pointer;
 max-width: 130px;
 
 padding-top: 14px;

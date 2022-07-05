@@ -47,6 +47,7 @@ h1,
 h2,
 h3,
 h4,
+li,
 p {
   margin-top: 0;
   margin-bottom: 0;
@@ -59,6 +60,7 @@ button {
 }
 
 a {
+  list-style: none;
   text-decoration: none;
 }
 
@@ -208,6 +210,10 @@ td {
 }
 
 .form__field {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
   min-width: 280px;
   background-color: rgba(0, 0, 0, 0);
   color: #ffffff;
@@ -364,60 +370,6 @@ td {
   color: white;
 }
 
-
-.footer {
-  padding-top: 29px;
-  padding-bottom: 30px;
-  background-color: #f7f7f7;
-}
-
-.footer__cotainer {
-  display: flex;
-  flex-direction: column;
-}
-
-@media screen and (min-width: 768px) {
-  .footer__cotainer {
-    flex-direction: row;
-    justify-content: center;
-  }
-}
-
-.title-footer {
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 1.14;
-  color: #545454;
-}
-
-.footer__first {
-  text-align: center;
-}
-
-.title-first {
-  margin-bottom: 10px;
-}
-
-@media screen and (min-width: 768px) {
-  .title-first {
-    margin-bottom: 0;
-  }
-}
-
-.footer__second {
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-@media screen and (min-width: 768px) {
-  .footer__second {
-    margin-left: 0;
-    margin-right: 0;
-  }
-=======
 .backdrop {
   position: fixed;
   z-index: 300;
@@ -562,20 +514,11 @@ tbody {
   line-height: 1.33;
 }
 
-
 .modal-group__close-icon {
   fill: black;
-
-.form-group__textarea::placeholder {
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 1.16;
-  letter-spacing: 0.01em;
-  color: rgba(117, 117, 117, 0.5);
-
 }
 
-.header__library {
+.header-library {
   padding-top: 44px;
   padding-bottom: 62px;
   height: 230px;
@@ -586,12 +529,12 @@ tbody {
 }
 
 @media screen and (min-device-pixel-ratio: 2), screen and (-moz-min-device-pixel-ratio: 2), screen and (-o-min-device-pixel-ratio: 2 / 1), screen and (-webkit-min-device-pixel-ratio: 2), screen and (min-resolution: 192dpi), screen and (min-resolution: 2dppx) {
-  .header__library {
+  .header-library {
     background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url(/src/images/library/mobile-header-bg-library-2x.jpg);
   }
 }
 
-.header__library__container {
+.header-library__container {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -599,18 +542,18 @@ tbody {
   max-width: 320px;
 }
 
-.logo__library__icon {
+.logo-library__icon {
   display: inline-block;
   fill: currentColor;
   align-items: baseline;
 }
 
-.logo__library__title {
+.logo-library__title {
   display: none;
 }
 
 @media screen and (min-width: 768px) {
-  .logo__library__title {
+  .logo-library__title {
     margin-left: 8px;
     color: #ffffff;
     font-weight: 500;
@@ -619,19 +562,19 @@ tbody {
   }
 }
 
-.nav__library__list {
+.nav-library__list {
   display: flex;
 }
 
-.nav__library__item:not(:first-child) {
+.nav-library__item:not(:first-child) {
   margin-left: 39px;
 }
 
-.nav__library__item:last-child {
+.nav-library__item:last-child {
   margin-right: 0px;
 }
 
-.nav__library__link {
+.nav-library__link {
   display: block;
   font-style: normal;
   font-weight: 500;
@@ -646,12 +589,12 @@ tbody {
 }
 
 /* Лінія активної сторінки */
-.nav__library__link--current {
+.nav-library__link--current {
   position: relative;
   display: block;
 }
 
-.nav__library__link--current::after {
+.nav-library__link--current::after {
   position: absolute;
   border-radius: 2px;
   display: block;
@@ -681,7 +624,6 @@ tbody {
   text-align: center;
   text-transform: uppercase;
   color: #FFFFFF;
-  cursor: pointer;
   max-width: 130px;
   padding-top: 14px;
   padding-left: 36px;
@@ -703,6 +645,60 @@ tbody {
   background-color: #ff6b01;
   filter: drop-shadow(0px 8px 43px rgba(255, 107, 1, 0.6));
   border: transparent;
+}
+
+.footer {
+  padding-top: 29px;
+  padding-bottom: 30px;
+  background-color: #f7f7f7;
+}
+
+.footer__cotainer {
+  display: flex;
+  flex-direction: column;
+}
+
+@media screen and (min-width: 768px) {
+  .footer__cotainer {
+    flex-direction: row;
+    justify-content: center;
+  }
+}
+
+.title-footer {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.14;
+  color: #545454;
+}
+
+.footer__first {
+  text-align: center;
+}
+
+.title-first {
+  margin-bottom: 10px;
+}
+
+@media screen and (min-width: 768px) {
+  .title-first {
+    margin-bottom: 0;
+  }
+}
+
+.footer__second {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media screen and (min-width: 768px) {
+  .footer__second {
+    margin-left: 0;
+    margin-right: 0;
+  }
 }
 
 .visually-hidden {
