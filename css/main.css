@@ -97,7 +97,7 @@ td {
 
 @media screen and (min-width: 768px) {
   .header {
-    padding-top: 49px;
+    padding-top: 40px;
     padding-bottom: 81px;
     height: 216px;
     background-image: url(/src/images/main/tablet-header-bg-1x.jpg);
@@ -108,6 +108,20 @@ td {
 @media screen and (min-width: 768px) and (min-device-pixel-ratio: 2), screen and (min-width: 768px) and (-moz-min-device-pixel-ratio: 2), screen and (min-width: 768px) and (-o-min-device-pixel-ratio: 2 / 1), screen and (min-width: 768px) and (-webkit-min-device-pixel-ratio: 2), screen and (min-width: 768px) and (min-resolution: 192dpi), screen and (min-width: 768px) and (min-resolution: 2dppx) {
   .header {
     background-image: url(/src/images/main/tablet-header-bg-2x.jpg);
+    opacity: 0.9;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .header {
+    background-image: url(/src/images/main/desktop-header-bg-1x.jpg);
+    opacity: 0.9;
+  }
+}
+
+@media screen and (min-width: 1280px) and (min-device-pixel-ratio: 2), screen and (min-width: 1280px) and (-moz-min-device-pixel-ratio: 2), screen and (min-width: 1280px) and (-o-min-device-pixel-ratio: 2 / 1), screen and (min-width: 1280px) and (-webkit-min-device-pixel-ratio: 2), screen and (min-width: 1280px) and (min-resolution: 192dpi), screen and (min-width: 1280px) and (min-resolution: 2dppx) {
+  .header {
+    background-image: url(/src/images/main/desktop-header-bg-2x.jpg);
     opacity: 0.9;
   }
 }
@@ -124,6 +138,8 @@ td {
   .header__container {
     min-width: 704px;
     align-items: baseline;
+    justify-content: space-around;
+    text-align: center;
   }
 }
 
@@ -147,12 +163,27 @@ td {
     font-weight: 500;
     font-size: 30px;
     line-height: 1.7;
+    height: 35px;
     margin-right: 387px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .logo__title {
+    margin-left: 10px;
+    margin-right: 898px;
   }
 }
 
 .nav__list {
   display: flex;
+}
+
+@media screen and (min-width: 768px) {
+  .nav__list {
+    justify-content: flex-end;
+    align-items: center;
+  }
 }
 
 .nav__item:not(:first-child) {
@@ -197,15 +228,14 @@ td {
 
 .form {
   max-width: 280px;
-  margin-top: 60px;
-  border-bottom: 0.5px solid #ffffff;
-  padding: 4px 10px;
+  margin-top: 50px;
 }
 
 @media screen and (min-width: 768px) {
   .form {
-    max-width: 336px;
-    margin-top: 40px;
+    max-width: 704px;
+    margin-top: 30px;
+    padding: 4px 10px;
   }
 }
 
@@ -217,18 +247,7 @@ td {
   min-width: 280px;
   background-color: rgba(0, 0, 0, 0);
   color: #ffffff;
-}
-
-@media screen and (min-width: 768px) {
-  .form__field {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    text-align: center;
-    flex-wrap: wrap;
-    align-content: space-between;
-    align-items: center;
-  }
+  align-items: center;
 }
 
 .form__input {
@@ -239,9 +258,26 @@ td {
   line-height: 1.14;
   outline: transparent;
   border: none;
+  border-bottom: 0.5px solid #ffffff;
   background-color: rgba(0, 0, 0, 0);
   color: #ffffff;
   text-align: left;
+  padding: 5px 3px;
+}
+
+@media screen and (min-width: 768px) {
+  .form__input {
+    width: 336px;
+    display: block;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .form__input {
+    width: 394px;
+    display: block;
+    align-items: center;
+  }
 }
 
 .form__input::placeholder {
@@ -250,12 +286,23 @@ td {
 
 .form-button {
   border: none;
-  cursor: pointer;
   position: absolute;
   top: 0;
   right: 0;
   padding: 10px;
   background-color: transparent;
+}
+
+@media screen and (min-width: 768px) {
+  .form-button {
+    right: 30px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .form-button {
+    right: 0px;
+  }
 }
 
 .form__icon {
@@ -272,6 +319,14 @@ td {
   color: #ff001b;
   margin-top: 16px;
   width: 280px;
+}
+
+@media screen and (min-width: 768px) {
+  .form-text {
+    width: 393px;
+    margin-top: 20px;
+    text-align: center;
+  }
 }
 
 @media screen and (max-width: 767.98px) {
@@ -534,12 +589,52 @@ tbody {
   }
 }
 
+@media screen and (min-width: 768px) {
+  .header-library {
+    padding-top: 50px;
+    padding-bottom: 60px;
+    height: 219px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url(/src/images/library/tablet-header-bg-library-1x.jpg);
+  }
+}
+
+@media screen and (min-width: 768px) and (min-device-pixel-ratio: 2), screen and (min-width: 768px) and (-moz-min-device-pixel-ratio: 2), screen and (min-width: 768px) and (-o-min-device-pixel-ratio: 2 / 1), screen and (min-width: 768px) and (-webkit-min-device-pixel-ratio: 2), screen and (min-width: 768px) and (min-resolution: 192dpi), screen and (min-width: 768px) and (min-resolution: 2dppx) {
+  .header-library {
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url(/src/images/library/tablet-header-bg-library-2x.jpg);
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .header-library {
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url(/src/images/library/desktop-header-bg-library-1x.jpg);
+  }
+}
+
+@media screen and (min-width: 1280px) and (min-device-pixel-ratio: 2), screen and (min-width: 1280px) and (-moz-min-device-pixel-ratio: 2), screen and (min-width: 1280px) and (-o-min-device-pixel-ratio: 2 / 1), screen and (min-width: 1280px) and (-webkit-min-device-pixel-ratio: 2), screen and (min-width: 1280px) and (min-resolution: 192dpi), screen and (min-width: 1280px) and (min-resolution: 2dppx) {
+  .header-library {
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url(/src/images/library/desktop-header-bg-library-2x.jpg);
+  }
+}
+
 .header-library__container {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   justify-content: space-between;
-  max-width: 320px;
+}
+
+@media screen and (max-width: 767.98px) {
+  .header-library__container {
+    max-width: 320px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .header-library__container {
+    align-items: baseline;
+    justify-content: space-around;
+    text-align: center;
+  }
 }
 
 .logo-library__icon {
@@ -548,22 +643,39 @@ tbody {
   align-items: baseline;
 }
 
-.logo-library__title {
-  display: none;
+@media screen and (max-width: 767.98px) {
+  .logo-library__title {
+    display: none;
+  }
 }
 
 @media screen and (min-width: 768px) {
   .logo-library__title {
-    margin-left: 8px;
+    display: inline-block;
+    margin-left: 10px;
     color: #ffffff;
     font-weight: 500;
     font-size: 30px;
     line-height: 1.16px;
+    margin-right: 385px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .logo-library__title {
+    margin-right: 898px;
   }
 }
 
 .nav-library__list {
   display: flex;
+}
+
+@media screen and (min-width: 768px) {
+  .nav-library__list {
+    justify-content: flex-end;
+    align-items: center;
+  }
 }
 
 .nav-library__item:not(:first-child) {
@@ -579,7 +691,7 @@ tbody {
   font-style: normal;
   font-weight: 500;
   font-size: 12px;
-  line-height: 14px;
+  line-height: 1.16;
   list-style: none;
   text-decoration: none;
   color: #ffffff;
@@ -612,10 +724,16 @@ tbody {
   margin-top: 65px;
 }
 
+@media screen and (min-width: 768px) {
+  .library {
+    margin-top: 52px;
+  }
+}
+
 .library__button {
   display: inline-block;
   background-color: rgba(0, 0, 0, 0.56);
-  border: 1px solid #FFFFFF;
+  border: 1px solid #ffffff;
   border-radius: 5px;
   font-weight: 500;
   font-size: 12px;
@@ -623,7 +741,7 @@ tbody {
   align-items: center;
   text-align: center;
   text-transform: uppercase;
-  color: #FFFFFF;
+  color: #ffffff;
   max-width: 130px;
   padding-top: 14px;
   padding-left: 36px;
@@ -631,7 +749,22 @@ tbody {
   padding-right: 36px;
 }
 
-.library__button:hover, .library__button:focus {
+@media screen and (min-width: 768px) {
+  .library__button {
+    max-width: 152px;
+    padding: 13px 46px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .library__button {
+    max-width: 148px;
+    padding: 12px 42px;
+  }
+}
+
+library__button:hover,
+library__button:focus {
   background-color: #ff6b01;
   filter: drop-shadow(0px 8px 43px rgba(255, 107, 1, 0.6));
   border: transparent;
@@ -639,6 +772,18 @@ tbody {
 
 .library__button:last-child {
   margin-left: 20px;
+}
+
+@media screen and (min-width: 768px) {
+  .library__button:last-child {
+    margin-left: 32px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .library__button:last-child {
+    margin-left: 16px;
+  }
 }
 
 .library__button.active {
