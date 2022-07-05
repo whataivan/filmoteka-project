@@ -1,14 +1,23 @@
-import { fetchTrends } from './api/fetchApi';
+import { fetchByName, fetchTrends } from './api/fetchApi';
 
 const list = document.querySelector('.gallery');
 
-const isHidden = document.querySelector('.backdrop');
-console.log(isHidden);
-console.log(list);
-list.addEventListener('click', onClick);
+const backdrop = document.querySelector('.backdrop');
+const btnQuene = document.querySelector('.queue-btn');
+btnQuene.addEventListener('click', ()=> console.log('BTN2'))
 
-function onClick(event) {
-  console.log(event);
+
+
+
+list.addEventListener('click', onClick);
+const closeBtn = document.querySelector('.modal-group__close-btn');
+console.log(closeBtn);
+closeBtn.addEventListener('click', onClickBtn);
+
+
+
+function onClick(event){
+  backdrop.classList.remove('is-hidden')
   let elementForModal;
   if (event.target.classList.contains('gallery__img')) {
     console.log(event.target.id);
@@ -16,12 +25,21 @@ function onClick(event) {
       elementForModal = resp.results.find(
         el => String(el.id) === event.target.id
       );
-      // createMarkUpModal(elementForModal)
+      createMarkUpModal(elementForModal)
     });
+
   }
 
   return;
+
+
 }
+
+function onClickBtn(evt) {
+  console.log(evt);
+   console.log('BTN!!!');
+backdrop.classList.add('is-hidden')
+    }
 
 function createMarkUpModal(obj) {
   console.log(obj);
@@ -83,5 +101,5 @@ function createMarkUpModal(obj) {
       </div>
     </div>`;
 
-  isHidden.innerHTML = markUp;
+  backdrop.innerHTML = markUp;
 }
