@@ -1,50 +1,58 @@
 import { fetchTrends, fetchByName, fetchGenres } from './js/api/fetchApi'
-let obj1 ={}
-fetchTrends().then(data =>{ 
-    console.log(data);
-    data.results.map(el=>{
-    
-        obj1[el.id] = el.name})
-        markUpForGallery(data.results, obj)
-        console.log(obj1['28'])
+let obj1 = {}
+fetchGenres().then(data => {
+    // console.log(data);
+    data.genres.map(el => {
+
+        obj1[el.id] = el.name
     })
 
+
+
+})
+
+fetchTrends().then(res => markUpForGallery(res.results))
+
 fetchByName('batman')
-.then(res=>{
-    console.log(res.genres);
-    
-    
+    .then(res => {
 
-        }) 
 
-    
-    console.log(obj1);
+
+
+    })
+
+
+
 const galleryItem = document.querySelector('.gallery')
 
 function markUpForGallery(arr) {
-    console.log(arr, obj1)
-   const url ='https://developers.themoviedb.org/'
-   let a =  arr.reduce((acc, el) =>
+   
+    const urlImg ='https://image.tmdb.org/t/p/w500'
+    let a = arr.reduce((acc, el) =>
         acc +=
         `<li class="gallery__item">
         <a class="gallery__link" href="#">
           <img
             class="gallery__img"
-            src='${el.poster_path}'
+            src='${urlImg}${el.poster_path}'
             alt=""
+            width = '280'
           />
           <div class="gallery-text">
             <p class="gallery-text__title">${el.original_title}</p>
             <div class="gallery-text__info">
-              <p class="gallery-text__genre"> ${el.genre_ids.map(gen=>{ gen = obj1[gen]})}| ${el.release_date}</p>
-              <span class="gallery-text__rating">${el.vote_average}</span>
+              <p class="gallery-text__genre"> ${el.genre_ids.map(gen => { return( gen = obj1[gen]) }).length>3?
+              (el.genre_ids.map(gen => { return gen =' '+ obj1[gen] }).slice(0,2)+', Other '):el.genre_ids.map(gen => { return gen = ' '+ obj1[gen] })
+              
+            } | ${el.release_date.slice(0,4)}</p>
+              
             </div>
           </div>
         </a>
       </li>`
-        )
-        galleryItem.insertAdjacentHTML('beforeend', a)
-        
+    ,'')
+    galleryItem.insertAdjacentHTML('beforeend', a)
+//<span class="gallery-text__rating">${el.vote_average}</span>
 }
 
 // adult: false
@@ -64,7 +72,7 @@ function markUpForGallery(arr) {
 
 
 
-let obj ={
+let obj = {
     "genres": [
         {
             "id": 28,
