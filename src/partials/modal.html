@@ -1,56 +1,53 @@
 <div class="container">
-  <button class="hero__button" type="button" data-modal-open>Открыть</button>
   <div class="backdrop is-hidden" data-modal>
     <div class="modal-group">
-      <button data-modal-close class="modal-group__close-btn"></button>
+      <button data-modal-close class="modal-group__close-btn">
+        <object class="modal-group__close-object">
+          <svg class="modal-group__close-icon" width="18" height="18">
+            <use href="./images/symbol-defs.svg#icon-close-modal"></use>
+          </svg>
+        </object>
+      </button>
+      <img
+        class="modal-group__img"
+        src="https://citaty.info/files/posters/once_upon_a_time._in_hollywood.jpg"
+        alt=""
+      />
+      <h2 class="modal-group__title">Once upon a time in Hollywood</h2>
+      <table class="table">
+        <tbody>
+          <tr>
+            <td class="table__title">Vote / Votes</td>
+            <td class="table__text">
+              <span class="gallery-text__rating table-text-orange">7.8</span> /
+              <span class="table-text-grey">1260</span>
+            </td>
+          </tr>
 
-      <form class="form">
-        <b class="form__title">Оставьте свои данные, мы вам перезвоним</b>
+          <tr>
+            <td class="table__title">Popularity</td>
+            <td class="table__text">100.2</td>
+          </tr>
+          <tr>
+            <td class="table__title">Original Title</td>
+            <td class="table__text">Once</td>
+          </tr>
+          <tr>
+            <td class="table__title">Genre</td>
+            <td class="table__text">Comedy</td>
+          </tr>
+        </tbody>
+      </table>
 
-        <div class="form-group">
-          <label class="form-group__label">
-            <span class="form-group__subtitle">Имя</span>
-            <input class="form-group__input" type="text" name="user-name" />
-          </label>
-
-          <label class="form-group__label">
-            <span class="form-group__subtitle">Телефон</span>
-            <input class="form-group__input" type="tel" name="user-tel" />
-          </label>
-
-          <label class="form-group__label">
-            <span class="form-group__subtitle">Почта</span>
-            <input class="form-group__input" type="email" name="user-email" />
-          </label>
-
-          <label class="form-group__label">
-            <span class="form-group__subtitle">Комментарий</span>
-            <textarea
-              class="form-group__textarea"
-              name="comment"
-              placeholder="Введите текст"
-            ></textarea>
-          </label>
-
-          <label class="form-group__checkbox">
-            <input
-              class="form-group__checkbox-input"
-              type="checkbox"
-              name="policy"
-              value="agree"
-            />
-            <span class="form-group__checkbox-check"> </span>
-            <span>
-              Соглашаюсь с рассылкой и принимаю
-              <a class="form-group__policy-link" href="">Условия договора </a>
-            </span>
-          </label>
-
-          <button class="form-group__submit-btn" type="submit">
-            Отправить
-          </button>
-        </div>
-      </form>
+      <h3 class="modal-group__about-title">About</h3>
+      <p class="modal-group__about-text">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod, ipsa nam
+        magni quaerat in atque!
+      </p>
+      <div class="modal-group__btns">
+        <button class="watched-btn" type="submit">add to Watched</button>
+        <button class="queue-btn" type="submit">add to queue</button>
+      </div>
     </div>
   </div>
 </div>
