@@ -75,12 +75,12 @@ svg {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url(/src/images/main/mobile-header-bg-1x.jpg);
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1)), url(/src/images/main/mobile-header-bg-1x.jpg);
 }
 
 @media screen and (min-device-pixel-ratio: 2), screen and (-moz-min-device-pixel-ratio: 2), screen and (-o-min-device-pixel-ratio: 2 / 1), screen and (-webkit-min-device-pixel-ratio: 2), screen and (min-resolution: 192dpi), screen and (min-resolution: 2dppx) {
   .header {
-    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url(/src/images/main/mobile-header-bg-2x.jpg);
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url(/src/images/main/mobile-header-bg-2x.jpg);
   }
 }
 
@@ -134,6 +134,8 @@ svg {
   text-decoration: none;
   color: #ffffff;
   text-transform: uppercase;
+  padding-top: 3px;
+  padding-bottom: 3px;
 }
 
 /* Лінія активної сторінки */
@@ -157,6 +159,8 @@ svg {
 .form {
   max-width: 280px;
   margin-top: 60px;
+  border-bottom: 0.5px solid #ffffff;
+  padding: 4px 10px;
 }
 
 .form__field {
@@ -164,7 +168,6 @@ svg {
   display: flex;
   flex-direction: column;
   text-align: left;
-  margin-bottom: 4px;
   min-width: 280px;
   background-color: rgba(0, 0, 0, 0);
   color: #ffffff;
@@ -180,7 +183,6 @@ svg {
   border: none;
   background-color: rgba(0, 0, 0, 0);
   color: #ffffff;
-  border-bottom: 0.5px solid #ffffff;
 }
 
 .form__input::placeholder {
@@ -194,13 +196,15 @@ svg {
   top: 0;
   right: 0;
   padding: 10px;
+  background-color: transparent;
 }
 
 .form__icon {
   position: absolute;
   fill: currentColor;
   text-align: center;
-  right: 0px;
+  left: 15%;
+  top: 15%;
 }
 
 @media screen and (max-width: 767.98px) {
@@ -229,6 +233,10 @@ svg {
     margin-right: -16px;
     margin-bottom: -32px;
   }
+}
+
+.gallery-contaienr {
+  padding-top: 20px;
 }
 
 @media screen and (min-width: 768px) and (max-width: 1279.98px) {
