@@ -1,24 +1,43 @@
 .header {
   padding-top: 40px;
   padding-bottom: 92px;
+  height: 230px;
 
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  background-image: linear-gradient(
-      to right,
-      rgba(0, 0, 0, 0),
-      rgba(0, 0, 0, 0.1)
-    ),
-    url(/src/images/main/mobile-header-bg-1x.jpg);
+  background-image: url(/src/images/main/mobile-header-bg-1x.jpg);
+  opacity: 0.9;
 
   @include mq(retina) {
-    background-image: linear-gradient(
-        to right,
-        rgba(0, 0, 0, 0.1),
-        rgba(0, 0, 0, 0.1)
-      ),
-      url(/src/images/main/mobile-header-bg-2x.jpg);
+    background-image: url(/src/images/main/mobile-header-bg-2x.jpg);
+    opacity: 0.9;
+  }
+
+  // tablet ///////
+  @include mq(tablet) {
+    padding-top: 40px;
+    padding-bottom: 81px;
+    height: 216px;
+
+    background-image: url(/src/images/main/tablet-header-bg-1x.jpg);
+    opacity: 0.9;
+
+    @include mq(retina) {
+      background-image: url(/src/images/main/tablet-header-bg-2x.jpg);
+      opacity: 0.9;
+    }
+  }
+
+  // desktop ///////
+  @include mq(desktop) {
+    background-image: url(/src/images/main/desktop-header-bg-1x.jpg);
+    opacity: 0.9;
+
+    @include mq(retina) {
+      background-image: url(/src/images/main/desktop-header-bg-2x.jpg);
+      opacity: 0.9;
+    }
   }
 }
 
@@ -28,6 +47,13 @@
   flex-wrap: wrap;
   justify-content: space-between;
   min-width: 280px;
+
+  @include mq(tablet) {
+    min-width: 704px;
+    align-items: baseline;
+    justify-content: space-around;
+    text-align: center;
+  }
 }
 
 .logo__icon {
@@ -38,20 +64,36 @@
 
 // ///////////Filmoteka///////////////////
 .logo__title {
-  display: none;
+  @include mq(mobile-only) {
+    display: none;
+  }
 
   @include mq(tablet) {
+    display: inline-block;
     margin-left: 8px;
     color: #ffffff;
     font-weight: 500;
     font-size: 30px;
-    line-height: 35px;
+    line-height: 1.7;
+    height: 35px;
+    margin-right: 387px;
+  }
+
+  @include mq(desktop) {
+    margin-left: 10px;
+    margin-right: 898px;
   }
 }
 
 // ///////////nav///////////////////
+
 .nav__list {
   display: flex;
+
+  @include mq(tablet) {
+    justify-content: flex-end;
+    align-items: center;
+  }
 }
 
 .nav__item:not(:first-child) {
@@ -67,14 +109,13 @@
   font-style: normal;
   font-weight: 500;
   font-size: 12px;
-  line-height: 14px;
+  line-height: 1.7;
   list-style: none;
   text-decoration: none;
   color: #ffffff;
   text-transform: uppercase;
   padding-top: 3px;
   padding-bottom: 3px;
-  // padding: 5px 5px;
 }
 
 /* Лінія активної сторінки */
@@ -99,20 +140,28 @@
 // /////////////////////input//////////////////////////////////////
 .form {
   max-width: 280px;
-  margin-top: 60px;
-  border-bottom: 0.5px solid #ffffff;
-  padding: 4px 10px;
+  margin-top: 50px;
+  // border-bottom: 0.5px solid #ffffff;
+
+  @include mq(tablet) {
+    max-width: 704px;
+    margin-top: 30px;
+    padding: 4px 10px;
+  }
+
 }
 
 .form__field {
   position: relative;
   display: flex;
   flex-direction: column;
-  text-align: left;
+  text-align: center;
 
   min-width: 280px;
   background-color: rgba(0, 0, 0, 0);
   color: #ffffff;
+
+  align-items: center;
 }
 
 .form__input {
@@ -120,11 +169,25 @@
   min-height: 20px;
   cursor: pointer;
   font-size: 14px;
-  line-height: 16px;
+  line-height: 1.14;
   outline: transparent;
   border: none;
+  border-bottom: 0.5px solid #ffffff;
   background-color: rgba(0, 0, 0, 0);
   color: #ffffff;
+  text-align: left;
+  padding: 5px 3px;
+
+  @include mq(tablet) {
+    width: 336px;
+    display: block;
+  }
+
+  @include mq(desktop) {
+    width: 394px;
+    display: block;
+    align-items: center;
+  }
 }
 
 .form__input::placeholder {
@@ -133,13 +196,19 @@
 
 .form-button {
   border: none;
-  cursor: pointer;
   position: absolute;
   top: 0;
   right: 0;
   padding: 10px;
   background-color: transparent;
-  // display: none;
+
+  @include mq(tablet) {
+    right: 30px;
+  }
+
+  @include mq(desktop) {
+    right: 0px;
+  }
 }
 
 .form__icon {
@@ -148,7 +217,18 @@
   text-align: center;
   left: 15%;
   top: 15%;
+}
 
-  // transform: translateY(-50%);
-  // transform: translateZ(-50%);
+.form-text {
+  font-size: 14px;
+  line-height: 1.14;
+  color: #ff001b;
+  margin-top: 16px;
+  width: 280px;
+
+  @include mq(tablet) {
+    width: 393px;
+    margin-top: 20px;
+    text-align: center;
+  }
 }
