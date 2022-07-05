@@ -1,8 +1,10 @@
 const paginList = document.querySelector('.pagination__list');
 const paginBlock = document.querySelector('.pagination');
+const prevBtn = document.querySelector('.pagination__btn-prev');
+const nextBtn = document.querySelector('.pagination__btn-next');
 
-let currentPage = 10;
-let totalPages = 10;
+let currentPage = 1;
+let totalPages = 20;
 function paginationMarkup() {
   let markup = '';
   if (currentPage >= 1) {
@@ -48,6 +50,7 @@ function paginationMarkup() {
     if (totalPages > 5) {
       addEdgeClass();
       addCurrentClassBtn();
+      isEdgePage();
     }
     return;
   }
@@ -57,6 +60,7 @@ function paginationMarkup() {
   if (totalPages > 5) {
     addEdgeClass();
     addCurrentClassBtn();
+    isEdgePage();
   }
 }
 function onClickPagination(evt) {
@@ -96,6 +100,23 @@ function addCurrentClassBtn() {
   console.log('~ paginList', paginList);
   //  paginList.children
   //   console.log('~ paginList.children', paginList.children);
-  const list = paginList.document.querySelectorAll('li');
+  const list = document.querySelectorAll('.pagination__item');
   console.log('~ list', list);
+  list.forEach(el => {
+    if (el.textContent === String(currentPage)) {
+      el.classList.add('pagination__currentPage');
+    }
+  });
+}
+function isEdgePage() {
+  if (currentPage === 1) {
+    prevBtn.disabled = true;
+    prevBtn.classList.remove('pagination__btn');
+    prevBtn.classList.add('pagination__btn-Ldisabled');
+  }
+  if (currentPage === totalPages) {
+    nextBtn.disabled = true;
+    nextBtn.classList.remove('pagination__btn');
+    nextBtn.classList.add('pagination__btn-Rdisabled');
+  }
 }

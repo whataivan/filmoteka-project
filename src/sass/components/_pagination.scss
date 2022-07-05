@@ -35,27 +35,51 @@
   }
 }
 .pagination__currentPage {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 5px;
   background-color: orange;
 }
+
 .pagination__btn {
   width: 40px;
   height: 40px;
   border-radius: 5px;
   background-color: transparent;
-  color: black;
-  fill: black;
 }
+
 .pagination__btn:hover {
   background-color: orange;
 }
+
 .pagination-edge {
   @include mq(mobile-only) {
     display: none;
   }
+}
+
+.pagination__btn-prev {
+  background-image: url('/src/images/pagination/arrow-left.svg');
+  background-size: 16px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.pagination__btn-next {
+  background-image: url('/src/images/pagination/arrow-right.svg');
+  background-size: 16px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.pagination__btn-Ldisabled {
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  background-image: url('/src/images/pagination/arrow-left-grey.svg');
+  cursor: default;
+}
+.pagination__btn-Rdisabled {
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  background-image: url('/src/images/pagination/arrow-right-grey.svg');
+  cursor: default;
 }
