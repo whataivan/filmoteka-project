@@ -1,0 +1,56 @@
+<div class="container">
+  <button class="hero__button" type="button" data-modal-open>Открыть</button>
+  <div class="backdrop is-hidden" data-modal>
+    <div class="modal-group">
+      <button data-modal-close class="modal-group__close-btn"></button>
+
+      <form class="form">
+        <b class="form__title">Оставьте свои данные, мы вам перезвоним</b>
+
+        <div class="form-group">
+          <label class="form-group__label">
+            <span class="form-group__subtitle">Имя</span>
+            <input class="form-group__input" type="text" name="user-name" />
+          </label>
+
+          <label class="form-group__label">
+            <span class="form-group__subtitle">Телефон</span>
+            <input class="form-group__input" type="tel" name="user-tel" />
+          </label>
+
+          <label class="form-group__label">
+            <span class="form-group__subtitle">Почта</span>
+            <input class="form-group__input" type="email" name="user-email" />
+          </label>
+
+          <label class="form-group__label">
+            <span class="form-group__subtitle">Комментарий</span>
+            <textarea
+              class="form-group__textarea"
+              name="comment"
+              placeholder="Введите текст"
+            ></textarea>
+          </label>
+
+          <label class="form-group__checkbox">
+            <input
+              class="form-group__checkbox-input"
+              type="checkbox"
+              name="policy"
+              value="agree"
+            />
+            <span class="form-group__checkbox-check"> </span>
+            <span>
+              Соглашаюсь с рассылкой и принимаю
+              <a class="form-group__policy-link" href="">Условия договора </a>
+            </span>
+          </label>
+
+          <button class="form-group__submit-btn" type="submit">
+            Отправить
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
