@@ -309,6 +309,60 @@ td {
   color: white;
 }
 
+
+.footer {
+  padding-top: 29px;
+  padding-bottom: 30px;
+  background-color: #f7f7f7;
+}
+
+.footer__cotainer {
+  display: flex;
+  flex-direction: column;
+}
+
+@media screen and (min-width: 768px) {
+  .footer__cotainer {
+    flex-direction: row;
+    justify-content: center;
+  }
+}
+
+.title-footer {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.14;
+  color: #545454;
+}
+
+.footer__first {
+  text-align: center;
+}
+
+.title-first {
+  margin-bottom: 10px;
+}
+
+@media screen and (min-width: 768px) {
+  .title-first {
+    margin-bottom: 0;
+  }
+}
+
+.footer__second {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media screen and (min-width: 768px) {
+  .footer__second {
+    margin-left: 0;
+    margin-right: 0;
+  }
+=======
 .backdrop {
   position: fixed;
   z-index: 300;
@@ -453,8 +507,17 @@ tbody {
   line-height: 1.33;
 }
 
+
 .modal-group__close-icon {
   fill: black;
+
+.form-group__textarea::placeholder {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.16;
+  letter-spacing: 0.01em;
+  color: rgba(117, 117, 117, 0.5);
+
 }
 
 .visually-hidden {
