@@ -164,8 +164,8 @@ svg {
   display: flex;
   flex-direction: column;
   text-align: left;
-  margin-bottom: 4px;
   min-width: 280px;
+  margin-bottom: 4px;
   background-color: rgba(0, 0, 0, 0);
   color: #ffffff;
 }
