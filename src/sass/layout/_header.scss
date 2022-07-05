@@ -30,7 +30,6 @@
   min-width: 280px;
 }
 
-
 .logo__icon {
   display: inline-block;
   fill: currentColor;
@@ -100,7 +99,8 @@
   margin-top: 60px;
 }
 
-.form_field {
+
+.form__field {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -111,7 +111,7 @@
   color: #ffffff;
 }
 
-.form_input {
+.form__input {
   width: 100%;
   min-height: 20px;
   cursor: pointer;
@@ -124,7 +124,21 @@
   border-bottom: 0.5px solid #ffffff;
 }
 
-.form_icon {
+
+.form__input::placeholder {
+  color: #ffffff;
+}
+
+.form-button{
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: none;
+}
+
+.form__icon {
   position: absolute;
   fill: currentColor;
   text-align: center;
