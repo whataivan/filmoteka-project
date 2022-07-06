@@ -1,5 +1,4 @@
-import { fetchTrends, fetchByName, fetchGenres } from './api/fetchApi';
-import { markUpForGallery } from '/src/index';
+import { markUpForLibrary } from './markUp/markUpforLibrary';
 const paginList = document.querySelector('.pagination__list');
 const paginBlock = document.querySelector('.pagination');
 const prevBtn = document.querySelector('.pagination__btn-prev');
@@ -7,12 +6,16 @@ const nextBtn = document.querySelector('.pagination__btn-next');
 
 let currentPage;
 let totalPages;
-let searchName = null;
-function paginationMarkup(page, pages, name = null) {
-  currentPage = page;
-  totalPages = pages;
-  searchName = name;
-  paginBlock.removeEventListener('click', onClickPagination);
+let arrLib;
+function firstPaginationCall(arr) {
+  arrLib = JSON.parse(localStorage.getItem(`${arr}`));
+  currentPage = 1;
+  totalPages = Math.ceil(arrLib.length / 20);
+  markUpForLibrary(arrLib.slice(0, 20));
+  paginationMarkupLib();
+}
+function paginationMarkupLib() {
+  //   paginBlock.removeEventListener('click', onClickPagination);
   let markup = '';
   if (currentPage >= 1) {
     markup += `<li class="pagination__item">1</li>`;
@@ -55,7 +58,7 @@ function paginationMarkup(page, pages, name = null) {
     paginList.innerHTML = markup;
     addEdgeClass();
     addCurrentClassBtn();
-    isEdgePage(page, pages);
+    isEdgePage();
     paginBlock.addEventListener('click', onClickPagination);
     return;
   }
@@ -63,7 +66,7 @@ function paginationMarkup(page, pages, name = null) {
   paginList.innerHTML = markup;
   addEdgeClass();
   addCurrentClassBtn();
-  isEdgePage(page, pages);
+  isEdgePage();
   paginBlock.addEventListener('click', onClickPagination);
 }
 
@@ -87,7 +90,7 @@ function onClickPagination(evt) {
   if (String(currentPage) === evt.target.textContent) {
     return;
   }
-  currentPage = evt.target.textContent;
+  currentPage = Number(evt.target.textContent);
   sendRequest();
 }
 
@@ -135,20 +138,12 @@ function isEdgePage() {
 }
 
 function sendRequest() {
-  if (searchName === null) {
-    paginBlock.removeEventListener('click', onClickPagination);
-    fetchTrends(currentPage).then(res => {
-      markUpForGallery(res.results);
-      localStorage.setItem('response', JSON.stringify(res.results));
-      paginationMarkup(res.page, res.total_pages);
-    });
-  } else {
-    paginBlock.removeEventListener('click', onClickPagination);
-    fetchByName(searchName, currentPage).then(res => {
-      markUpForGallery(res.results);
-      localStorage.setItem('response', JSON.stringify(res.results));
-      paginationMarkup(res.page, res.total_pages, searchName);
-    });
-  }
+  paginBlock.removeEventListener('click', onClickPagination);
+  const indexOfArrLib = (currentPage - 1) * 20;
+  markUpForLibrary(arrLib.slice(indexOfArrLib, indexOfArrLib + 20));
+
+  paginationMarkupLib();
+  console.log('~ currentPage', currentPage);
+  console.log('~ totalPages', totalPages);
 }
-export { paginationMarkup };
+export { paginationMarkupLib, firstPaginationCall };

@@ -31,15 +31,33 @@ function onClick(event) {
     arrForWatched.push(elementForModal);
     
     createMarkUpModal(elementForModal);
-    
-    
+
+
+    JSON.parse(localStorage.getItem('watched')).map(el => {
+      // console.log(addToWatched.textContent);
+      if (el.id === objFindItem.id) {
+        // console.log();
+        console.log(addToWatched);
+        return (addToWatched.textContent = 'Remove from watched');
+      }
+    });
+
     return;
   }
 }
 
 function createMarkUpModal(obj) {
+
   
   objFindItem = obj;
+
+
+// //////////////////////////////////////////////////////
+  document.addEventListener('click', handleClick);
+  document.addEventListener('keydown', onEscape);
+// ////////////////////////////////////////////////////
+
+
   const genres = JSON.parse(localStorage.getItem('genres'));
 
   const urlImg = 'https://image.tmdb.org/t/p/w500';
@@ -109,10 +127,15 @@ function createMarkUpModal(obj) {
 
   closeBtn.addEventListener('click', () => {
     backdrop.classList.add('is-hidden');
+
+    // ///////////////////////////////////////////
+    document.removeEventListener('click', handleClick);
+    document.removeEventListener('keydown', onEscape);
+    // ///////////////////////////////////////////////////
   });
 
 
-  
+
   const addToWatched = document.querySelector('.watched-btn');
     console.log(addToWatched);  
     const addToQueue = document.querySelector('.queue-btn');
@@ -142,3 +165,20 @@ function createMarkUpModal(obj) {
 }
 
 export { onClick, createMarkUpModal };
+
+///////// Ф-ція закриття по Escape/////
+
+function onEscape(event) {
+  if (event.keyCode === 27) {
+    backdrop.classList.add('is-hidden');
+  }
+}
+
+///////// Ф-ція закриття модалки  handleClick за кліком поза межами модалки/////
+function handleClick(event) {
+  if (event.target === backdrop) {
+    backdrop.classList.add('is-hidden');
+  } 
+}
+
+
