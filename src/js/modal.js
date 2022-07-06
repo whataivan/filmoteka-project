@@ -28,6 +28,7 @@ function onClick(event) {
     arrForQueue.push(elementForModal);
     arrForWatched.push(elementForModal);
     createMarkUpModal(elementForModal);
+
     return;
   }
 }
@@ -102,6 +103,8 @@ function createMarkUpModal(obj) {
 
   closeBtn.addEventListener('click', () => {
     backdrop.classList.add('is-hidden');
+
+    
   });
   const addToWatched = document.querySelector('.watched-btn');
   const addToQueue = document.querySelector('.queue-btn');
@@ -119,3 +122,23 @@ function createMarkUpModal(obj) {
 }
 
 export { onClick, createMarkUpModal };
+
+///////// Ф-ція закриття по Escape/////
+
+document.addEventListener('keydown', onEscape);
+
+function onEscape(event) {
+  if (event.keyCode === 27) {
+    backdrop.classList.add('is-hidden');
+  }
+  document.removeEventListener('keydown', event);
+}
+
+///////// Ф-ція закриття модалки за кліком поза межами модалки/////
+
+document.addEventListener('click', (e) => {
+  if(e.target === backdrop) {
+    backdrop.classList.add('is-hidden');
+  }
+  document.removeEventListener('click', e);
+});
