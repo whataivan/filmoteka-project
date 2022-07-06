@@ -64,8 +64,7 @@ a {
   text-decoration: none;
 }
 
-img,
-svg {
+img {
   display: block;
   max-width: 100%;
   height: auto;
@@ -84,14 +83,13 @@ td {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  background-image: url(/src/images/main/mobile-header-bg-1x.jpg);
-  opacity: 0.9;
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.2)), url(/src/images/main/mobile-header-bg-1x.jpg);
 }
 
 @media screen and (min-device-pixel-ratio: 2), screen and (-moz-min-device-pixel-ratio: 2), screen and (-o-min-device-pixel-ratio: 2 / 1), screen and (-webkit-min-device-pixel-ratio: 2), screen and (min-resolution: 192dpi), screen and (min-resolution: 2dppx) {
   .header {
-    background-image: url(/src/images/main/mobile-header-bg-2x.jpg);
-    opacity: 0.9;
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.2)), url(/src/images/main/mobile-header-bg-2x.jpg);
+    opacity: 1;
   }
 }
 
@@ -100,29 +98,29 @@ td {
     padding-top: 40px;
     padding-bottom: 81px;
     height: 216px;
-    background-image: url(/src/images/main/tablet-header-bg-1x.jpg);
-    opacity: 0.9;
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.2)), url(/src/images/main/tablet-header-bg-1x.jpg);
+    opacity: 1;
   }
 }
 
 @media screen and (min-width: 768px) and (min-device-pixel-ratio: 2), screen and (min-width: 768px) and (-moz-min-device-pixel-ratio: 2), screen and (min-width: 768px) and (-o-min-device-pixel-ratio: 2 / 1), screen and (min-width: 768px) and (-webkit-min-device-pixel-ratio: 2), screen and (min-width: 768px) and (min-resolution: 192dpi), screen and (min-width: 768px) and (min-resolution: 2dppx) {
   .header {
-    background-image: url(/src/images/main/tablet-header-bg-2x.jpg);
-    opacity: 0.9;
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.2)), url(/src/images/main/tablet-header-bg-2x.jpg);
+    opacity: 1;
   }
 }
 
 @media screen and (min-width: 1280px) {
   .header {
-    background-image: url(/src/images/main/desktop-header-bg-1x.jpg);
-    opacity: 0.9;
+    background-color: black;
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.2)), url(/src/images/main/desktop-header-bg-1x.jpg);
   }
 }
 
 @media screen and (min-width: 1280px) and (min-device-pixel-ratio: 2), screen and (min-width: 1280px) and (-moz-min-device-pixel-ratio: 2), screen and (min-width: 1280px) and (-o-min-device-pixel-ratio: 2 / 1), screen and (min-width: 1280px) and (-webkit-min-device-pixel-ratio: 2), screen and (min-width: 1280px) and (min-resolution: 192dpi), screen and (min-width: 1280px) and (min-resolution: 2dppx) {
   .header {
-    background-image: url(/src/images/main/desktop-header-bg-2x.jpg);
-    opacity: 0.9;
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.2)), url(/src/images/main/desktop-header-bg-2x.jpg);
+    opacity: 1;
   }
 }
 
@@ -281,7 +279,7 @@ td {
 }
 
 .form__input::placeholder {
-  color: #ffffff;
+  color: #ffffff5c;
 }
 
 .form-button {
@@ -311,6 +309,12 @@ td {
   text-align: center;
   left: 15%;
   top: 15%;
+  transition: 0.3s;
+}
+
+.form__icon:hover {
+  transform: scale(1.35);
+  fill: red;
 }
 
 .form-text {
@@ -627,14 +631,21 @@ tbody {
 }
 
 .watched-btn {
-  background-color: var(--main-accent-color);
-  color: #ffffff;
+  background-color: #e6e6e6;
+  color: #000000;
   padding: 6px 27px;
   text-transform: uppercase;
   border-radius: 5px;
   font-size: 12px;
   font-weight: 500;
   line-height: 1.33;
+  transition: 0.25s;
+}
+
+.watched-btn:hover {
+  background-color: var(--main-accent-color);
+  color: #ffffff;
+  border: transparent;
 }
 
 @media screen and (min-width: 768px) {
@@ -644,14 +655,19 @@ tbody {
 }
 
 .queue-btn {
-  border: 1px solid #000000;
-  background-color: transparent;
+  background-color: #e6e6e6;
   padding: 6px 27px;
   text-transform: uppercase;
   border-radius: 5px;
   font-size: 12px;
   font-weight: 500;
   line-height: 1.33;
+  transition: 0.25s;
+}
+
+.queue-btn:hover {
+  background-color: var(--main-accent-color);
+  color: #ffffff;
 }
 
 @media screen and (min-width: 768px) {
@@ -662,6 +678,14 @@ tbody {
 
 .modal-group__close-icon {
   fill: black;
+  transition: 0.3s;
+  width: 23px;
+  height: 23px;
+  transform-origin: center;
+}
+
+.modal-group__close-icon:hover {
+  transform: rotateZ(90deg);
 }
 
 .header-library {
