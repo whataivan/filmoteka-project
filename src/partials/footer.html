@@ -12,7 +12,485 @@
         src="./images/heart.svg"
         alt="heart"
       />
-      <p class="title-footer">by <u>GoIT Students</u></p>
+      <p class="title-footer">
+        by <span class="title-footer__link"><a>GoIT Students</a></span>
+      </p>
     </div>
+  </div>
+
+  <div class="modal-team">
+    <div class="modal-team__window">
+      <section class="section team">
+        <div class="container team__container">
+          <h2 class="section-title">Наша команда</h2>
+          <ul class="team__list">
+            <li class="team__item">
+              <picture>
+                <source
+                  srcset="
+                    ./images/teammates/igor-lg.jpg    1x,
+                    ./images/teammates/igor@2x-lg.jpg 2x
+                  "
+                  media="(min-width: 1200px)"
+                  type="image/jpg"
+                />
+                <source
+                  srcset="
+                    ./images/teammates/igor-m.jpg    1x,
+                    ./images/teammates/igor@2x-m.jpg 2x
+                  "
+                  media="(min-width: 768px)"
+                  type="image/jpg"
+                />
+                <source
+                  srcset="
+                    ./images/teammates/igor-s.jpg    1x,
+                    ./images/teammates/igor@2x-s.jpg 2x
+                  "
+                  media="(max-width: 767px)"
+                  type="image/jpg"
+                />
+                <img
+                  class="team__img"
+                  src="./images/teammates/igor-s.jpg"
+                  alt="фото Игоря"
+                  width="450"
+                  height="460"
+                  loading="lazy"
+                />
+              </picture>
+              <div class="team__members">
+                <h3 class="team__name">Игорь Демьяненко</h3>
+                <p class="team__position" lang="en">Product Designer</p>
+                <ul class="socials">
+                  <li class="socials__item">
+                    <a
+                      class="socials__link"
+                      href="https://www.instagram.com/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="ссылка на instagram"
+                    >
+                      <svg
+                        class="socials__icon"
+                        width="20"
+                        height="20"
+                        role="img"
+                      >
+                        <use href="./images/icons.svg#icon-instagram"></use>
+                      </svg>
+                    </a>
+                  </li>
+                  <li class="socials__item">
+                    <a
+                      class="socials__link"
+                      href="https://twitter.com/?lang=ru"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="ссылка на twitter"
+                    >
+                      <svg
+                        class="socials__icon"
+                        width="20"
+                        height="20"
+                        role="img"
+                      >
+                        <use href="./images/icons.svg#icon-twitter"></use>
+                      </svg>
+                    </a>
+                  </li>
+                  <li class="socials__item">
+                    <a
+                      class="socials__link"
+                      href="https://www.facebook.com/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="ссылка на facebook"
+                    >
+                      <svg
+                        class="socials__icon"
+                        width="20"
+                        height="20"
+                        role="img"
+                      >
+                        <use href="./images/icons.svg#icon-facebook"></use>
+                      </svg>
+                    </a>
+                  </li>
+                  <li class="socials__item">
+                    <a
+                      class="socials__link"
+                      href="https://ru.linkedin.com/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="ссылка на linkedin"
+                    >
+                      <svg
+                        class="socials__icon"
+                        width="20"
+                        height="20"
+                        role="img"
+                      >
+                        <use href="./images/icons.svg#icon-linkedin"></use>
+                      </svg>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li class="team__item">
+              <picture>
+                <source
+                  srcset="
+                    ./images/teammates/olga-lg.jpg    1x,
+                    ./images/teammates/olga@2x-lg.jpg 2x
+                  "
+                  media="(min-width: 1200px)"
+                  type="image/jpg"
+                />
+                <source
+                  srcset="
+                    ./images/teammates/olga-md.jpg    1x,
+                    ./images/teammates/olga@2x-md.jpg 2x
+                  "
+                  media="(min-width: 768px)"
+                  type="image/jpg"
+                />
+                <source
+                  srcset="
+                    ./images/teammates/olga-s.jpg    1x,
+                    ./images/teammates/olga@2x-s.jpg 2x
+                  "
+                  media="(max-width: 767px)"
+                  type="image/jpg"
+                />
+                <img
+                  class="team__img"
+                  src="./images/teammates/olga-s.jpg"
+                  alt="фото Ольги"
+                  width="450"
+                  height="460"
+                  loading="lazy"
+                />
+              </picture>
+              <div class="team__members">
+                <h3 class="team__name">Ольга Репина</h3>
+                <p class="team__position" lang="en">Frontend Developer</p>
+                <ul class="socials">
+                  <li class="socials__item">
+                    <a
+                      class="socials__link"
+                      href="https://www.instagram.com/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="ссылка на instagram"
+                    >
+                      <svg
+                        class="socials__icon"
+                        width="20"
+                        height="20"
+                        role="img"
+                      >
+                        <use href="./images/icons.svg#icon-instagram"></use>
+                      </svg>
+                    </a>
+                  </li>
+                  <li class="socials__item">
+                    <a
+                      class="socials__link"
+                      href="https://twitter.com/?lang=ru"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="ссылка на twitter"
+                    >
+                      <svg
+                        class="socials__icon"
+                        width="20"
+                        height="20"
+                        role="img"
+                      >
+                        <use href="./images/icons.svg#icon-twitter"></use>
+                      </svg>
+                    </a>
+                  </li>
+                  <li class="socials__item">
+                    <a
+                      class="socials__link"
+                      href="https://www.facebook.com/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="ссылка на facebook"
+                    >
+                      <svg
+                        class="socials__icon"
+                        width="20"
+                        height="20"
+                        role="img"
+                      >
+                        <use href="./images/icons.svg#icon-facebook"></use>
+                      </svg>
+                    </a>
+                  </li>
+                  <li class="socials__item">
+                    <a
+                      class="socials__link"
+                      href="https://ru.linkedin.com/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="ссылка на linkedin"
+                    >
+                      <svg
+                        class="socials__icon"
+                        width="20"
+                        height="20"
+                        role="img"
+                      >
+                        <use href="./images/icons.svg#icon-linkedin"></use>
+                      </svg>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li class="team__item">
+              <picture>
+                <source
+                  srcset="
+                    ./images/teammates/mikle-lg.jpg    1x,
+                    ./images/teammates/mikle@2x-lg.jpg 2x
+                  "
+                  media="(min-width: 1200px)"
+                  type="image/jpg"
+                />
+                <source
+                  srcset="
+                    ./images/teammates/mikle-m.jpg    1x,
+                    ./images/teammates/mikle@2x-m.jpg 2x
+                  "
+                  media="(min-width: 768px)"
+                  type="image/jpg"
+                />
+                <source
+                  srcset="
+                    ./images/teammates/mikle-s.jpg    1x,
+                    ./images/teammates/mikle@2x-s.jpg 2x
+                  "
+                  media="(max-width: 767px)"
+                  type="image/jpg"
+                />
+                <img
+                  class="team__img"
+                  src="./images/teammates/mikle-s.jpg"
+                  alt="фото Коли"
+                  width="450"
+                  height="460"
+                  loading="lazy"
+                />
+              </picture>
+              <div class="team__members">
+                <h3 class="team__name">Николай Тарасов</h3>
+                <p class="team__position" lang="en">Marketing</p>
+                <ul class="socials">
+                  <li class="socials__item">
+                    <a
+                      class="socials__link"
+                      href="https://www.instagram.com/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="ссылка на instagram"
+                    >
+                      <svg
+                        class="socials__icon"
+                        width="20"
+                        height="20"
+                        role="img"
+                      >
+                        <use href="./images/icons.svg#icon-instagram"></use>
+                      </svg>
+                    </a>
+                  </li>
+                  <li class="socials__item">
+                    <a
+                      class="socials__link"
+                      href="https://twitter.com/?lang=ru"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="ссылка на twitter"
+                    >
+                      <svg
+                        class="socials__icon"
+                        width="20"
+                        height="20"
+                        role="img"
+                      >
+                        <use href="./images/icons.svg#icon-twitter"></use>
+                      </svg>
+                    </a>
+                  </li>
+                  <li class="socials__item">
+                    <a
+                      class="socials__link"
+                      href="https://www.facebook.com/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="ссылка на facebook"
+                    >
+                      <svg
+                        class="socials__icon"
+                        width="20"
+                        height="20"
+                        role="img"
+                      >
+                        <use href="./images/icons.svg#icon-facebook"></use>
+                      </svg>
+                    </a>
+                  </li>
+                  <li class="socials__item">
+                    <a
+                      class="socials__link"
+                      href="https://ru.linkedin.com/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="ссылка на linkedin"
+                    >
+                      <svg
+                        class="socials__icon"
+                        width="20"
+                        height="20"
+                        role="img"
+                      >
+                        <use href="./images/icons.svg#icon-linkedin"></use>
+                      </svg>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li class="team__item">
+              <picture>
+                <source
+                  srcset="
+                    ./images/teammates/misha-lg.jpg    1x,
+                    ./images/teammates/misha@2x-lg.jpg 2x
+                  "
+                  media="(min-width: 1200px)"
+                  type="image/jpg"
+                />
+                <source
+                  srcset="
+                    ./images/teammates/misha-m.jpg    1x,
+                    ./images/teammates/misha@2x-m.jpg 2x
+                  "
+                  media="(min-width: 768px)"
+                  type="image/jpg"
+                />
+                <source
+                  srcset="
+                    ./images/teammates/misha-s.jpg    1x,
+                    ./images/teammates/misha@2x-s.jpg 2x
+                  "
+                  media="(max-width: 767px)"
+                  type="image/jpg"
+                />
+                <img
+                  class="team__img"
+                  src="./images/teammates/misha-s.jpg"
+                  alt="фото Миши"
+                  width="450"
+                  height="460"
+                  loading="lazy"
+                />
+              </picture>
+              <div class="team__members">
+                <h3 class="team__name">Михаил Ермаков</h3>
+                <p class="team__position" lang="en">UI Designer</p>
+                <ul class="socials">
+                  <li class="socials__item">
+                    <a
+                      class="socials__link"
+                      href="https://www.instagram.com/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="ссылка на instagram"
+                    >
+                      <svg
+                        class="socials__icon"
+                        width="20"
+                        height="20"
+                        role="img"
+                      >
+                        <use href="./images/icons.svg#icon-instagram"></use>
+                      </svg>
+                    </a>
+                  </li>
+                  <li class="socials__item">
+                    <a
+                      class="socials__link"
+                      href="https://twitter.com/?lang=ru"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="ссылка на twitter"
+                    >
+                      <svg
+                        class="socials__icon"
+                        width="20"
+                        height="20"
+                        role="img"
+                      >
+                        <use href="./images/icons.svg#icon-twitter"></use>
+                      </svg>
+                    </a>
+                  </li>
+                  <li class="socials__item">
+                    <a
+                      class="socials__link"
+                      href="https://www.facebook.com/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="ссылка на facebook"
+                    >
+                      <svg
+                        class="socials__icon"
+                        width="20"
+                        height="20"
+                        role="img"
+                      >
+                        <use href="./images/icons.svg#icon-facebook"></use>
+                      </svg>
+                    </a>
+                  </li>
+                  <li class="socials__item">
+                    <a
+                      class="socials__link"
+                      href="https://ru.linkedin.com/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="ссылка на linkedin"
+                    >
+                      <svg
+                        class="socials__icon"
+                        width="20"
+                        height="20"
+                        role="img"
+                      >
+                        <use href="./images/icons.svg#icon-linkedin"></use>
+                      </svg>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </section>
+      <button data-modal-close class="modal-group__close-btn">
+        <object class="modal-group__close-object">
+          <svg class="modal-group__close-icon" width="28" height="28">
+            <use href="/src/images/symbol-defs.svg#icon-close-modal"></use>
+          </svg>
+        </object>
+      </button>
+    </div>
+    <div class="overlay-team"></div>
   </div>
 </footer>
