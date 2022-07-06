@@ -196,8 +196,9 @@ tbody {
 }
 
 .watched-btn {
-  background-color: var(--main-accent-color);
-  color: #ffffff;
+  background-color: #e6e6e6;
+  color: #000000;
+  // border: 1px solid #a4a4a4;
 
   padding: 6px 27px;
   text-transform: uppercase;
@@ -206,14 +207,22 @@ tbody {
   font-size: 12px;
   font-weight: 500;
   line-height: 1.33;
+
+  transition: 0.25s;
+
+  &:hover {
+    background-color: var(--main-accent-color);
+    color: #ffffff;
+    border: transparent;
+  }
 
   @include mq(tablet) {
     padding: 14px 9px;
   }
 }
 .queue-btn {
-  border: 1px solid #000000;
-  background-color: transparent;
+  // border: 1px solid #a4a4a4;
+  background-color: #e6e6e6;
 
   padding: 6px 27px;
   text-transform: uppercase;
@@ -222,6 +231,13 @@ tbody {
   font-size: 12px;
   font-weight: 500;
   line-height: 1.33;
+  transition: 0.25s;
+
+  &:hover {
+    background-color: var(--main-accent-color);
+    color: #ffffff;
+  }
+
   @include mq(tablet) {
     padding: 14px 9px;
   }
@@ -229,4 +245,12 @@ tbody {
 
 .modal-group__close-icon {
   fill: black;
+  transition: 0.3s;
+
+  width: 23px;
+  height: 23px;
+  transform-origin: center;
+}
+.modal-group__close-icon:hover {
+  transform: rotateZ(90deg);
 }
