@@ -1,6 +1,7 @@
 
-import { fetchTrends, fetchByName, fetchGenres, markUpForLibrary } from './js/api/fetchApi';
-let findErr = document.querySelector('.form-text')
+import { fetchTrends, fetchByName, fetchGenres } from './js/api/fetchApi';
+import { paginationMarkup } from './js/pagination';
+let findErr = document.querySelector('.form-text');
 
 
 let obj1 = {};
@@ -17,6 +18,10 @@ fetchGenres().then(data => {
 fetchTrends().then(res => {
   markUpForGallery(res.results);
   localStorage.setItem('response', JSON.stringify(res.results));
+
+  paginationMarkup(res.page, res.total_pages);
+
+
 });
 
 const form = document.querySelector('.form');
@@ -26,6 +31,7 @@ function onSubmit(evt) {
   evt.preventDefault();
   const query = evt.currentTarget.name.value.trim();
   if (!query) {
+
 
     findErr.classList.remove('visually-hidden')
     setTimeout(() => {
@@ -48,15 +54,19 @@ function onSubmit(evt) {
       }
       localStorage.setItem('response', JSON.stringify(res.results));
       markUpForGallery(res.results);
+
+      paginationMarkup(res.page, res.total_pages, query);
+
     })
     .catch(err => {
       console.log(err);
     });
 }
-
 const galleryItem = document.querySelector('.gallery');
 
+
 function markUpForGallery(arr) {
+
   galleryItem.innerHTML = '';
   let a = arr.reduce(
     (acc, el) =>
@@ -69,7 +79,9 @@ function markUpForGallery(arr) {
             src='${
               el.poster_path
                 ? urlImg + el.poster_path
+
                 : 'https://s1.hostingkartinok.com/uploads/images/2022/07/40ceaea2e22257d2a139ca5a0c0b8ba9.jpg'
+
             }'
             alt="${el.original_title}"
             
@@ -77,6 +89,7 @@ function markUpForGallery(arr) {
           <div class="gallery-text">
             <p class="gallery-text__title">${el.original_title}</p>
             <div class="gallery-text__info">
+
 
               <p class="gallery-text__genre"> ${
                 el.genre_ids.map(gen => {
@@ -92,11 +105,11 @@ function markUpForGallery(arr) {
                     })
               } | ${el.release_date.slice(0, 4)}</p>
 
-              
-            </div>
-          </div>
-        </a>
-        </li>`),
+                </div>
+                </div>
+                </a>
+                </li>`),
+
     ``
   );
   galleryItem.insertAdjacentHTML('beforeend', a);
