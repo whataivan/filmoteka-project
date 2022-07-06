@@ -1,46 +1,39 @@
 import { fetchByName, fetchTrends } from './api/fetchApi';
 
-import {markUpForLibrary} from '../index'
+import { markUpForLibrary } from '../index';
 
 import sprite from './../images/symbol-defs.svg';
-
 
 const list = document.querySelector('.gallery');
 
 const backdrop = document.querySelector('.backdrop');
 
-let arrForWatched =[]
-let arrForQueue =[]
+let arrForWatched = [];
+let arrForQueue = [];
 let elementForModal;
-
-
 
 list.addEventListener('click', onClick);
 
 function onClick(event) {
-
   let elementForModal;
 
-  // if (event.target.nodeName !== 'IMG') {
-  //   return
-  // } else {
-  let response = JSON.parse(localStorage.getItem('response'));
-  backdrop.classList.remove('is-hidden');
-  elementForModal = response.find(el => String(el.id) === event.target.id);
-  // console.log(elementForModal);
-  arrForQueue.push(elementForModal);
-  arrForWatched.push(elementForModal);
-  createMarkUpModal(elementForModal);
-  //   return
-  // }
-
+  if (!event.target.closest('li')) {
+    return;
+  } else {
+    let response = JSON.parse(localStorage.getItem('response'));
+    backdrop.classList.remove('is-hidden');
+    const currentId = event.target.closest('li').id;
+    elementForModal = response.find(el => String(el.id) === currentId);
+    // console.log(elementForModal);
+    arrForQueue.push(elementForModal);
+    arrForWatched.push(elementForModal);
+    createMarkUpModal(elementForModal);
+    return;
+  }
 }
 
 function createMarkUpModal(obj) {
-
-  const genres = JSON.parse(localStorage.getItem('genres'))
-  
-
+  const genres = JSON.parse(localStorage.getItem('genres'));
 
   const urlImg = 'https://image.tmdb.org/t/p/w500';
 
@@ -107,26 +100,22 @@ function createMarkUpModal(obj) {
   backdrop.innerHTML = markUp;
   const closeBtn = document.querySelector('.modal-group__close-btn');
 
+  closeBtn.addEventListener('click', () => {
+    backdrop.classList.add('is-hidden');
+  });
+  const addToWatched = document.querySelector('.watched-btn');
+  const addToQueue = document.querySelector('.queue-btn');
+  addToWatched.addEventListener('click', onClickWatched);
+  addToQueue.addEventListener('click', onClickQueue);
+  // console.log(addToWatched);
+  // console.log(addToQueue);
+  function onClickWatched() {
+    localStorage.setItem('watched', JSON.stringify(arrForWatched));
+  }
 
-closeBtn.addEventListener('click', ()=>{
-  backdrop.classList.add('is-hidden')
-})
-const addToWatched = document.querySelector('.watched-btn')
-const addToQueue = document.querySelector('.queue-btn')
-addToWatched.addEventListener('click', onClickWatched)
-addToQueue.addEventListener('click', onClickQueue)
-// console.log(addToWatched);
-// console.log(addToQueue);
-function onClickWatched(){
-  console.log(arrForWatched);
-  localStorage.setItem('watched', JSON.stringify(arrForWatched))
-
+  function onClickQueue() {
+    localStorage.setItem('queue', JSON.stringify(arrForQueue));
+  }
 }
 
-function onClickQueue(){
-  localStorage.setItem('queue', JSON.stringify(arrForQueue))
-  
-console.log(arrForQueue);
-}
-
-}
+export { onClick, createMarkUpModal };
