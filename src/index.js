@@ -1,10 +1,13 @@
-import { fetchTrends, fetchByName, fetchGenres } from './js/api/fetchApi';
-let findErr = document.querySelector('.form-text');
+
+import { fetchTrends, fetchByName, fetchGenres, markUpForLibrary } from './js/api/fetchApi';
+let findErr = document.querySelector('.form-text')
+
+
 let obj1 = {};
 let forLocalStor;
 const urlImg = 'https://image.tmdb.org/t/p/w500';
 fetchGenres().then(data => {
-  console.log(data);
+  
   data.genres.map(el => {
     obj1[el.id] = el.name;
     localStorage.setItem('genres', JSON.stringify(obj1));
@@ -23,8 +26,13 @@ function onSubmit(evt) {
   evt.preventDefault();
   const query = evt.currentTarget.name.value.trim();
   if (!query) {
-    findErr.classList.remove('visually-hidden');
-    return;
+
+    findErr.classList.remove('visually-hidden')
+    setTimeout(() => {
+      findErr.classList.add('visually-hidden');
+    }, 3000)
+    return
+
   }
 
   fetchByName(query)

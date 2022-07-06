@@ -1,13 +1,24 @@
 import { fetchByName, fetchTrends } from './api/fetchApi';
+
+import {markUpForLibrary} from '../index'
+
 import sprite from './../images/symbol-defs.svg';
+
 
 const list = document.querySelector('.gallery');
 
 const backdrop = document.querySelector('.backdrop');
 
+let arrForWatched =[]
+let arrForQueue =[]
+let elementForModal;
+
+
+
 list.addEventListener('click', onClick);
 
 function onClick(event) {
+
   let elementForModal;
 
   // if (event.target.nodeName !== 'IMG') {
@@ -16,15 +27,20 @@ function onClick(event) {
   let response = JSON.parse(localStorage.getItem('response'));
   backdrop.classList.remove('is-hidden');
   elementForModal = response.find(el => String(el.id) === event.target.id);
-  console.log(elementForModal);
+  // console.log(elementForModal);
+  arrForQueue.push(elementForModal);
+  arrForWatched.push(elementForModal);
   createMarkUpModal(elementForModal);
   //   return
   // }
+
 }
 
 function createMarkUpModal(obj) {
-  const genres = JSON.parse(localStorage.getItem('genres'));
-  console.log(genres);
+
+  const genres = JSON.parse(localStorage.getItem('genres'))
+  
+
 
   const urlImg = 'https://image.tmdb.org/t/p/w500';
 
@@ -90,10 +106,27 @@ function createMarkUpModal(obj) {
 
   backdrop.innerHTML = markUp;
   const closeBtn = document.querySelector('.modal-group__close-btn');
-  console.log(closeBtn);
-  closeBtn.addEventListener('click', onClickBtn);
 
-  function onClickBtn(evt) {
-    backdrop.classList.add('is-hidden');
-  }
+
+closeBtn.addEventListener('click', ()=>{
+  backdrop.classList.add('is-hidden')
+})
+const addToWatched = document.querySelector('.watched-btn')
+const addToQueue = document.querySelector('.queue-btn')
+addToWatched.addEventListener('click', onClickWatched)
+addToQueue.addEventListener('click', onClickQueue)
+// console.log(addToWatched);
+// console.log(addToQueue);
+function onClickWatched(){
+  console.log(arrForWatched);
+  localStorage.setItem('watched', JSON.stringify(arrForWatched))
+
+}
+
+function onClickQueue(){
+  localStorage.setItem('queue', JSON.stringify(arrForQueue))
+  
+console.log(arrForQueue);
+}
+
 }
