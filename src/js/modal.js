@@ -9,9 +9,7 @@ const backdrop = document.querySelector('.backdrop');
 
 
 list.addEventListener('click', onClick);
-const closeBtn = document.querySelector('.modal-group__close-btn');
-console.log(closeBtn);
-closeBtn.addEventListener('click', onClickBtn);
+
 
 
 
@@ -36,11 +34,7 @@ function onClick(event) {
 
 }
 
-function onClickBtn(evt) {
-  // console.log(evt);
-  //  console.log('BTN!!!');
-  backdrop.classList.add('is-hidden')
-}
+
 
 function createMarkUpModal(obj) {
   const genres = JSON.parse(localStorage.getItem('genres'))
@@ -51,11 +45,7 @@ function createMarkUpModal(obj) {
   const markUp = `
     <div class="modal-group">
       <button data-modal-close class="modal-group__close-btn">X
-        <object class="modal-group__close-object">
-          <svg class="modal-group__close-icon" width="18" height="18">
-            <use href="./images/symbol-defs.svg#icon-close-modal"></use>
-          </svg>
-        </object>
+      <img src="../images/close.png" width=18 height =18/>
       </button>
       <div class="modal-group__img-wrapper">
         <img
@@ -107,4 +97,12 @@ function createMarkUpModal(obj) {
     </div>`;
 
   backdrop.innerHTML = markUp;
+  const closeBtn = document.querySelector('.modal-group__close-btn');
+console.log(closeBtn);
+closeBtn.addEventListener('click', onClickBtn);
+
+function onClickBtn(evt) {
+  
+  backdrop.classList.add('is-hidden')
+}
 }
