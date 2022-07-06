@@ -3,8 +3,7 @@ import { fetchByName, fetchTrends } from './api/fetchApi';
 const list = document.querySelector('.gallery');
 
 const backdrop = document.querySelector('.backdrop');
-const btnQuene = document.querySelector('.queue-btn');
-btnQuene.addEventListener('click', ()=> console.log('BTN2'))
+
 
 
 
@@ -16,33 +15,37 @@ closeBtn.addEventListener('click', onClickBtn);
 
 
 
-function onClick(event){
-  backdrop.classList.remove('is-hidden')
+function onClick(event) {
+
   let elementForModal;
-  if (event.target.classList.contains('gallery__img')) {
-    console.log(event.target.id);
-    fetchTrends().then(resp => {
-      elementForModal = resp.results.find(
-        el => String(el.id) === event.target.id
-      );
-      createMarkUpModal(elementForModal)
-    });
+  
+  // if (event.target.nodeName !== 'IMG') {
+  //   return
+  // } else {
+    let response = JSON.parse(localStorage.getItem('response'))
+    backdrop.classList.remove('is-hidden')
+    elementForModal = response.find(
+      el => String(el.id) === event.target.id
+    )
+    console.log(elementForModal);
+    createMarkUpModal(elementForModal)
+  //   return
+  // }
 
-  }
-
-  return;
 
 
 }
 
 function onClickBtn(evt) {
-  console.log(evt);
-   console.log('BTN!!!');
-backdrop.classList.add('is-hidden')
-    }
+  // console.log(evt);
+  //  console.log('BTN!!!');
+  backdrop.classList.add('is-hidden')
+}
 
 function createMarkUpModal(obj) {
-  console.log(obj);
+  const genres = JSON.parse(localStorage.getItem('genres'))
+  console.log(genres);
+
   const urlImg = 'https://image.tmdb.org/t/p/w500';
 
   const markUp = `
@@ -85,7 +88,9 @@ function createMarkUpModal(obj) {
             </tr>
             <tr>
               <td class="table__title">Genre</td>
-              <td class="table__text">ANY GENRES</td>
+              <td class="table__text">${obj.genre_ids.map(gen => {
+    return (gen = ' ' + genres[gen])
+  })}</td>
             </tr>
           </tbody>
         </table>
