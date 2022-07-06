@@ -419,6 +419,10 @@ td {
   }
 }
 
+.gallery__item:hover {
+  cursor: pointer;
+}
+
 .gallery__img {
   border-radius: 5px;
 }
