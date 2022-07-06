@@ -667,6 +667,7 @@ tbody {
 .pagination {
   display: flex;
   justify-content: center;
+  gap: 5px;
 }
 
 .pagination__list {
@@ -686,10 +687,12 @@ tbody {
   height: 40px;
   border-radius: 5px;
   cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
 }
 
 .pagination__item:hover {
-  background-color: orange;
+  background-color: var(--main-accent-color);
 }
 
 .pagination__item-hidden {
@@ -708,7 +711,8 @@ tbody {
 }
 
 .pagination__currentPage {
-  background-color: orange;
+  background-color: var(--main-accent-color);
+  color: white;
 }
 
 .pagination__btn {
@@ -719,7 +723,7 @@ tbody {
 }
 
 .pagination__btn:hover {
-  background-color: orange;
+  background-color: var(--main-accent-color);
 }
 
 @media screen and (max-width: 767.98px) {

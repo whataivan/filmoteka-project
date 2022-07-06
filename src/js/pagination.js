@@ -1,11 +1,18 @@
+import { fetchTrends, fetchByName, fetchGenres } from './api/fetchApi';
+import { markUpForGallery } from '/src/index';
 const paginList = document.querySelector('.pagination__list');
 const paginBlock = document.querySelector('.pagination');
 const prevBtn = document.querySelector('.pagination__btn-prev');
 const nextBtn = document.querySelector('.pagination__btn-next');
 
-let currentPage = 1;
-let totalPages = 20;
-function paginationMarkup() {
+let currentPage;
+let totalPages;
+let searchName = null;
+export function paginationMarkup(page, pages, name = null) {
+  currentPage = page;
+  totalPages = pages;
+  searchName = name;
+  paginBlock.removeEventListener('click', onClickPagination);
   let markup = '';
   if (currentPage >= 1) {
     markup += `<li class="pagination__item">1</li>`;
@@ -46,30 +53,32 @@ function paginationMarkup() {
   }
   if (totalPages - currentPage === 0) {
     paginList.innerHTML = markup;
-    paginBlock.addEventListener('click', onClickPagination);
     if (totalPages > 5) {
       addEdgeClass();
       addCurrentClassBtn();
-      isEdgePage();
+      isEdgePage(page, pages);
     }
+    paginBlock.addEventListener('click', onClickPagination);
     return;
   }
   markup += `<li class="pagination__item">${totalPages}</li>`;
   paginList.innerHTML = markup;
-  paginBlock.addEventListener('click', onClickPagination);
   if (totalPages > 5) {
     addEdgeClass();
     addCurrentClassBtn();
-    isEdgePage();
+    isEdgePage(page, pages);
   }
+  paginBlock.addEventListener('click', onClickPagination);
 }
 function onClickPagination(evt) {
   if (evt.target.nodeName === 'BUTTON') {
     if (evt.target.dataset.btn === 'prev') {
-      cons(currentPage - 1);
+      currentPage -= 1;
+      sendRequest();
     }
     if (evt.target.dataset.btn === 'next') {
-      cons(currentPage + 1);
+      currentPage += 1;
+      sendRequest();
     }
   }
   if (
@@ -78,14 +87,15 @@ function onClickPagination(evt) {
   ) {
     return;
   }
-  cons(evt.target.textContent);
+  if (String(currentPage) === evt.target.textContent) {
+    return;
+  }
+  currentPage = evt.target.textContent;
+  sendRequest();
 }
 
-paginationMarkup();
+// paginationMarkup();
 
-function cons(page) {
-  console.log('console page', page);
-}
 function addEdgeClass() {
   paginList.lastElementChild.classList.add('pagination-edge');
   if (currentPage > 3) {
@@ -97,11 +107,7 @@ function addEdgeClass() {
 }
 
 function addCurrentClassBtn() {
-  console.log('~ paginList', paginList);
-  //  paginList.children
-  //   console.log('~ paginList.children', paginList.children);
   const list = document.querySelectorAll('.pagination__item');
-  console.log('~ list', list);
   list.forEach(el => {
     if (el.textContent === String(currentPage)) {
       el.classList.add('pagination__currentPage');
@@ -113,10 +119,36 @@ function isEdgePage() {
     prevBtn.disabled = true;
     prevBtn.classList.remove('pagination__btn');
     prevBtn.classList.add('pagination__btn-Ldisabled');
+  } else {
+    prevBtn.disabled = false;
+    prevBtn.classList.add('pagination__btn');
+    prevBtn.classList.remove('pagination__btn-Ldisabled');
   }
   if (currentPage === totalPages) {
     nextBtn.disabled = true;
     nextBtn.classList.remove('pagination__btn');
     nextBtn.classList.add('pagination__btn-Rdisabled');
+  } else {
+    nextBtn.disabled = false;
+    nextBtn.classList.add('pagination__btn');
+    nextBtn.classList.remove('pagination__btn-Rdisabled');
+  }
+}
+
+function sendRequest() {
+  if (searchName === null) {
+    paginBlock.removeEventListener('click', onClickPagination);
+    fetchTrends(currentPage).then(res => {
+      markUpForGallery(res.results);
+      paginationMarkup(res.page, res.total_pages);
+      console.log('~ page total_pages', res.page, res.total_pages);
+    });
+  } else {
+    paginBlock.removeEventListener('click', onClickPagination);
+    fetchByName(searchName, currentPage).then(res => {
+      markUpForGallery(res.results);
+      paginationMarkup(res.page, res.total_pages, searchName);
+      console.log('~ page total_pages', res.page, res.total_pages);
+    });
   }
 }

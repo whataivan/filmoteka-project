@@ -1,4 +1,5 @@
 import { fetchTrends, fetchByName, fetchGenres } from './js/api/fetchApi';
+import { paginationMarkup } from './js/pagination';
 let findErr = document.querySelector('.form-text');
 let obj1 = {};
 const urlImg = 'https://image.tmdb.org/t/p/w500';
@@ -8,7 +9,10 @@ fetchGenres().then(data => {
   });
 });
 
-fetchTrends().then(res => markUpForGallery(res.results));
+fetchTrends().then(res => {
+  markUpForGallery(res.results);
+  paginationMarkup(res.page, res.total_pages);
+});
 
 const form = document.querySelector('.form');
 form.addEventListener('submit', onSubmit);
@@ -33,6 +37,7 @@ function onSubmit(evt) {
         return;
       }
       markUpForGallery(res.results);
+      paginationMarkup(res.page, res.total_pages, query);
     })
     .catch(err => {
       console.log(err);
@@ -41,7 +46,7 @@ function onSubmit(evt) {
 
 const galleryItem = document.querySelector('.gallery');
 
-function markUpForGallery(arr) {
+export function markUpForGallery(arr) {
   galleryItem.innerHTML = '';
   let a = arr.reduce(
     (acc, el) =>
@@ -120,4 +125,4 @@ function markUpForLibrary(arr) {
   galleryItem.insertAdjacentHTML('beforeend', a);
 }
 
-// console.log(fetchByName('batman', 1).then(res => console.log(res)));
+console.log(fetchByName('batman', 1).then(res => console.log(res)));
