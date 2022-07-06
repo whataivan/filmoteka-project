@@ -9,8 +9,8 @@ const list = document.querySelector('.gallery');
 
 const backdrop = document.querySelector('.backdrop');
 
-
-let arrForQuene =[]
+let arrForWatched =[]
+let arrForQueue =[]
 let elementForModal;
 
 
@@ -27,7 +27,9 @@ function onClick(event) {
   let response = JSON.parse(localStorage.getItem('response'));
   backdrop.classList.remove('is-hidden');
   elementForModal = response.find(el => String(el.id) === event.target.id);
-  console.log(elementForModal);
+  // console.log(elementForModal);
+  arrForQueue.push(elementForModal);
+  arrForWatched.push(elementForModal);
   createMarkUpModal(elementForModal);
   //   return
   // }
@@ -113,17 +115,18 @@ const addToWatched = document.querySelector('.watched-btn')
 const addToQueue = document.querySelector('.queue-btn')
 addToWatched.addEventListener('click', onClickWatched)
 addToQueue.addEventListener('click', onClickQueue)
-console.log(addToWatched);
-console.log(addToQueue);
+// console.log(addToWatched);
+// console.log(addToQueue);
 function onClickWatched(){
-console.log('ClickWatched');
-arrForQuene.push(elementForModal);
-console.log(arrForQuene);
+  console.log(arrForWatched);
+  localStorage.setItem('watched', JSON.stringify(arrForWatched))
+
 }
 
 function onClickQueue(){
-  console.log('ClickQ');
+  localStorage.setItem('queue', JSON.stringify(arrForQueue))
+  
+console.log(arrForQueue);
 }
-
 
 }
