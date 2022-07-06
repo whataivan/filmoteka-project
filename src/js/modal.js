@@ -11,6 +11,8 @@ const backdrop = document.querySelector('.backdrop');
 let arrForWatched = [];
 let arrForQueue = [];
 let elementForModal;
+let objFindItem;
+let addToWatched;
 
 list.addEventListener('click', onClick);
 
@@ -27,12 +29,22 @@ function onClick(event) {
     // console.log(elementForModal);
     arrForQueue.push(elementForModal);
     arrForWatched.push(elementForModal);
+
     createMarkUpModal(elementForModal);
+    JSON.parse(localStorage.getItem('watched')).map(el => {
+      // console.log(addToWatched.textContent);
+      if (el.id === objFindItem.id) {
+        // console.log();
+        console.log(addToWatched);
+        return (addToWatched.textContent = 'Remove from watched');
+      }
+    });
     return;
   }
 }
 
 function createMarkUpModal(obj) {
+  objFindItem = obj;
   const genres = JSON.parse(localStorage.getItem('genres'));
 
   const urlImg = 'https://image.tmdb.org/t/p/w500';
@@ -104,13 +116,16 @@ function createMarkUpModal(obj) {
     backdrop.classList.add('is-hidden');
   });
   const addToWatched = document.querySelector('.watched-btn');
+  console.log(addToWatched);
   const addToQueue = document.querySelector('.queue-btn');
   addToWatched.addEventListener('click', onClickWatched);
   addToQueue.addEventListener('click', onClickQueue);
   // console.log(addToWatched);
   // console.log(addToQueue);
+
   function onClickWatched() {
     localStorage.setItem('watched', JSON.stringify(arrForWatched));
+    // console.log(addToWatched.textContent);
   }
 
   function onClickQueue() {
