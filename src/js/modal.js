@@ -1,52 +1,55 @@
 import { fetchByName, fetchTrends } from './api/fetchApi';
+
 import {markUpForLibrary} from '../index'
+
+import sprite from './../images/symbol-defs.svg';
+
 
 const list = document.querySelector('.gallery');
 
 const backdrop = document.querySelector('.backdrop');
 
+
 let arrForQuene =[]
 let elementForModal;
 
 
+
 list.addEventListener('click', onClick);
-
-
-
 
 function onClick(event) {
 
-  
-  
+  let elementForModal;
+
   // if (event.target.nodeName !== 'IMG') {
   //   return
   // } else {
-    let response = JSON.parse(localStorage.getItem('response'))
-    backdrop.classList.remove('is-hidden')
-    elementForModal = response.find(
-      el => String(el.id) === event.target.id
-    )
-    
-    createMarkUpModal(elementForModal)
+  let response = JSON.parse(localStorage.getItem('response'));
+  backdrop.classList.remove('is-hidden');
+  elementForModal = response.find(el => String(el.id) === event.target.id);
+  console.log(elementForModal);
+  createMarkUpModal(elementForModal);
   //   return
   // }
-  
-
 
 }
 
-
-
 function createMarkUpModal(obj) {
+
   const genres = JSON.parse(localStorage.getItem('genres'))
   
+
 
   const urlImg = 'https://image.tmdb.org/t/p/w500';
 
   const markUp = `
     <div class="modal-group">
-      <button data-modal-close class="modal-group__close-btn">X
-      <img src="../images/close.png" width=18 height =18/>
+      <button data-modal-close class="modal-group__close-btn">
+      <object class="modal-group__close-object">
+          <svg class="modal-group__close-icon" width="28" height="28">
+            <use href="${sprite}#icon-close-modal"></use>
+          </svg>
+        </object>
       </button>
       <div class="modal-group__img-wrapper">
         <img
@@ -63,7 +66,9 @@ function createMarkUpModal(obj) {
             <tr>
               <td class="table__title">Vote / Votes</td>
               <td class="table__text">
-                <span class="gallery-text__rating table-text-orange">${obj.vote_average}</span>
+                <span class="gallery-text__rating table-text-orange">${
+                  obj.vote_average
+                }</span>
                 /
                 <span class="table-text-grey">${obj.vote_count}</span>
               </td>
@@ -80,8 +85,8 @@ function createMarkUpModal(obj) {
             <tr>
               <td class="table__title">Genre</td>
               <td class="table__text">${obj.genre_ids.map(gen => {
-    return (gen = ' ' + genres[gen])
-  })}</td>
+                return (gen = ' ' + genres[gen]);
+              })}</td>
             </tr>
           </tbody>
         </table>
@@ -99,6 +104,7 @@ function createMarkUpModal(obj) {
 
   backdrop.innerHTML = markUp;
   const closeBtn = document.querySelector('.modal-group__close-btn');
+
 
 closeBtn.addEventListener('click', ()=>{
   backdrop.classList.add('is-hidden')

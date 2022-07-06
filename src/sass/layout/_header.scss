@@ -6,12 +6,23 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  background-image: url(/src/images/main/mobile-header-bg-1x.jpg);
-  opacity: 0.9;
+
+  background-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.9),
+      rgba(0, 0, 0, 0.2)
+    ),
+    url(/src/images/main/mobile-header-bg-1x.jpg);
+
 
   @include mq(retina) {
-    background-image: url(/src/images/main/mobile-header-bg-2x.jpg);
-    opacity: 0.9;
+    background-image: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.9),
+        rgba(0, 0, 0, 0.2)
+      ),
+      url(/src/images/main/mobile-header-bg-2x.jpg);
+    opacity: 1;
   }
 
   // tablet ///////
@@ -20,23 +31,44 @@
     padding-bottom: 81px;
     height: 216px;
 
-    background-image: url(/src/images/main/tablet-header-bg-1x.jpg);
-    opacity: 0.9;
+    background-image: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.9),
+        rgba(0, 0, 0, 0.2)
+      ),
+      url(/src/images/main/tablet-header-bg-1x.jpg);
+    opacity: 1;
 
     @include mq(retina) {
-      background-image: url(/src/images/main/tablet-header-bg-2x.jpg);
-      opacity: 0.9;
+      background-image: linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0.9),
+          rgba(0, 0, 0, 0.2)
+        ),
+        url(/src/images/main/tablet-header-bg-2x.jpg);
+      opacity: 1;
     }
   }
 
   // desktop ///////
   @include mq(desktop) {
-    background-image: url(/src/images/main/desktop-header-bg-1x.jpg);
-    opacity: 0.9;
+    background-color: black;
+
+    background-image: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.9),
+        rgba(0, 0, 0, 0.2)
+      ),
+      url(/src/images/main/desktop-header-bg-1x.jpg);
 
     @include mq(retina) {
-      background-image: url(/src/images/main/desktop-header-bg-2x.jpg);
-      opacity: 0.9;
+      background-image: linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0.9),
+          rgba(0, 0, 0, 0.2)
+        ),
+        url(/src/images/main/desktop-header-bg-2x.jpg);
+      opacity: 1;
     }
   }
 }
@@ -58,8 +90,24 @@
 
 .logo__icon {
   display: inline-block;
-  fill: currentColor;
   align-items: baseline;
+  fill: currentColor;
+}
+
+.header--animals {
+  animation: logo 1s ease 0.5s backwards;
+}
+
+@keyframes logo {
+  0% {
+    opacity: 0;
+    letter-spacing: -0.6em;
+  }
+
+  100% {
+    opacity: 1;
+    letter-spacing: 0.03em;
+  }
 }
 
 // ///////////Filmoteka///////////////////
@@ -77,6 +125,12 @@
     line-height: 1.7;
     height: 35px;
     margin-right: 387px;
+    transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+    &:hover,
+    &:focus {
+      color: #ff6b01;
+    }
   }
 
   @include mq(desktop) {
@@ -116,6 +170,12 @@
   text-transform: uppercase;
   padding-top: 3px;
   padding-bottom: 3px;
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:hover,
+  &:focus {
+    color: #ff6b01;
+  }
 }
 
 /* Лінія активної сторінки */
@@ -148,7 +208,6 @@
     margin-top: 30px;
     padding: 4px 10px;
   }
-
 }
 
 .form__field {
@@ -156,11 +215,8 @@
   display: flex;
   flex-direction: column;
   text-align: center;
-
   min-width: 280px;
   background-color: rgba(0, 0, 0, 0);
-  color: #ffffff;
-
   align-items: center;
 }
 
@@ -172,9 +228,9 @@
   line-height: 1.14;
   outline: transparent;
   border: none;
+  color: #ffffff;
   border-bottom: 0.5px solid #ffffff;
   background-color: rgba(0, 0, 0, 0);
-  color: #ffffff;
   text-align: left;
   padding: 5px 3px;
 
@@ -190,8 +246,15 @@
   }
 }
 
+.form__input:focus,
+.form__input:hover,
+.form__input:active {
+  background-color: rgba(0, 0, 0, 0);
+  outline: transparent;
+}
+
 .form__input::placeholder {
-  color: #ffffff;
+  color: #ffffff5c;
 }
 
 .form-button {
@@ -203,7 +266,7 @@
   background-color: transparent;
 
   @include mq(tablet) {
-    right: 30px;
+    right: 10px;
   }
 
   @include mq(desktop) {
@@ -217,6 +280,13 @@
   text-align: center;
   left: 15%;
   top: 15%;
+
+  transition: 0.3s;
+}
+
+.form__icon:hover {
+  transform: scale(1.35);
+  fill: red;
 }
 
 .form-text {
