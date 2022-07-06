@@ -1,40 +1,51 @@
-import { fetchTrends } from './api/fetchApi';
+import { fetchByName, fetchTrends } from './api/fetchApi';
 
 const list = document.querySelector('.gallery');
 
-const isHidden = document.querySelector('.backdrop');
-console.log(isHidden);
-console.log(list);
+const backdrop = document.querySelector('.backdrop');
+
+
+
+
+
 list.addEventListener('click', onClick);
 
-function onClick(event) {
-  console.log(event);
-  let elementForModal;
-  if (event.target.classList.contains('gallery__img')) {
-    console.log(event.target.id);
-    fetchTrends().then(resp => {
-      elementForModal = resp.results.find(
-        el => String(el.id) === event.target.id
-      );
-      // createMarkUpModal(elementForModal)
-    });
-  }
 
-  return;
+
+
+function onClick(event) {
+
+  let elementForModal;
+  
+  // if (event.target.nodeName !== 'IMG') {
+  //   return
+  // } else {
+    let response = JSON.parse(localStorage.getItem('response'))
+    backdrop.classList.remove('is-hidden')
+    elementForModal = response.find(
+      el => String(el.id) === event.target.id
+    )
+    console.log(elementForModal);
+    createMarkUpModal(elementForModal)
+  //   return
+  // }
+
+
+
 }
 
+
+
 function createMarkUpModal(obj) {
-  console.log(obj);
+  const genres = JSON.parse(localStorage.getItem('genres'))
+  console.log(genres);
+
   const urlImg = 'https://image.tmdb.org/t/p/w500';
 
   const markUp = `
     <div class="modal-group">
       <button data-modal-close class="modal-group__close-btn">X
-        <object class="modal-group__close-object">
-          <svg class="modal-group__close-icon" width="18" height="18">
-            <use href="./images/symbol-defs.svg#icon-close-modal"></use>
-          </svg>
-        </object>
+      <img src="../images/close.png" width=18 height =18/>
       </button>
       <div class="modal-group__img-wrapper">
         <img
@@ -67,7 +78,9 @@ function createMarkUpModal(obj) {
             </tr>
             <tr>
               <td class="table__title">Genre</td>
-              <td class="table__text">ANY GENRES</td>
+              <td class="table__text">${obj.genre_ids.map(gen => {
+    return (gen = ' ' + genres[gen])
+  })}</td>
             </tr>
           </tbody>
         </table>
@@ -83,5 +96,13 @@ function createMarkUpModal(obj) {
       </div>
     </div>`;
 
-  isHidden.innerHTML = markUp;
+  backdrop.innerHTML = markUp;
+  const closeBtn = document.querySelector('.modal-group__close-btn');
+console.log(closeBtn);
+closeBtn.addEventListener('click', onClickBtn);
+
+function onClickBtn(evt) {
+  
+  backdrop.classList.add('is-hidden')
+}
 }
