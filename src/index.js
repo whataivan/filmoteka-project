@@ -1,11 +1,14 @@
+
 import { fetchTrends, fetchByName, fetchGenres } from './js/api/fetchApi';
 import { paginationMarkup } from './js/pagination';
 let findErr = document.querySelector('.form-text');
+
+
 let obj1 = {};
 let forLocalStor;
 const urlImg = 'https://image.tmdb.org/t/p/w500';
 fetchGenres().then(data => {
-  console.log(data);
+  
   data.genres.map(el => {
     obj1[el.id] = el.name;
     localStorage.setItem('genres', JSON.stringify(obj1));
@@ -15,7 +18,10 @@ fetchGenres().then(data => {
 fetchTrends().then(res => {
   markUpForGallery(res.results);
   localStorage.setItem('response', JSON.stringify(res.results));
+
   paginationMarkup(res.page, res.total_pages);
+
+
 });
 
 const form = document.querySelector('.form');
@@ -25,8 +31,14 @@ function onSubmit(evt) {
   evt.preventDefault();
   const query = evt.currentTarget.name.value.trim();
   if (!query) {
-    findErr.classList.remove('visually-hidden');
-    return;
+
+
+    findErr.classList.remove('visually-hidden')
+    setTimeout(() => {
+      findErr.classList.add('visually-hidden');
+    }, 3000)
+    return
+
   }
 
   fetchByName(query)
@@ -36,12 +48,15 @@ function onSubmit(evt) {
         setTimeout(() => {
           findErr.classList.add('visually-hidden');
         }, 3000);
+
         evt.target.reset();
         return;
       }
       localStorage.setItem('response', JSON.stringify(res.results));
       markUpForGallery(res.results);
+
       paginationMarkup(res.page, res.total_pages, query);
+
     })
     .catch(err => {
       console.log(err);
@@ -49,7 +64,9 @@ function onSubmit(evt) {
 }
 const galleryItem = document.querySelector('.gallery');
 
-export function markUpForGallery(arr) {
+
+function markUpForGallery(arr) {
+
   galleryItem.innerHTML = '';
   let a = arr.reduce(
     (acc, el) =>
@@ -62,7 +79,9 @@ export function markUpForGallery(arr) {
             src='${
               el.poster_path
                 ? urlImg + el.poster_path
-                : 'https://cdn5.vectorstock.com/i/1000x1000/73/49/404-error-page-not-found-miss-paper-with-white-vector-20577349.jpg'
+
+                : 'https://s1.hostingkartinok.com/uploads/images/2022/07/40ceaea2e22257d2a139ca5a0c0b8ba9.jpg'
+
             }'
             alt="${el.original_title}"
             
@@ -85,10 +104,12 @@ export function markUpForGallery(arr) {
                       return (gen = ' ' + obj1[gen]);
                     })
               } | ${el.release_date.slice(0, 4)}</p>
+
                 </div>
                 </div>
                 </a>
                 </li>`),
+
     ``
   );
   galleryItem.insertAdjacentHTML('beforeend', a);
