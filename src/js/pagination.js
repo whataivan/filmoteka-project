@@ -8,7 +8,7 @@ const nextBtn = document.querySelector('.pagination__btn-next');
 let currentPage;
 let totalPages;
 let searchName = null;
-export function paginationMarkup(page, pages, name = null) {
+function paginationMarkup(page, pages, name = null) {
   currentPage = page;
   totalPages = pages;
   searchName = name;
@@ -53,21 +53,18 @@ export function paginationMarkup(page, pages, name = null) {
   }
   if (totalPages - currentPage === 0) {
     paginList.innerHTML = markup;
-    if (totalPages > 5) {
-      addEdgeClass();
-      addCurrentClassBtn();
-      isEdgePage(page, pages);
-    }
+    addEdgeClass();
+    addCurrentClassBtn();
+    isEdgePage(page, pages);
     paginBlock.addEventListener('click', onClickPagination);
     return;
   }
   markup += `<li class="pagination__item">${totalPages}</li>`;
   paginList.innerHTML = markup;
-  if (totalPages > 5) {
-    addEdgeClass();
-    addCurrentClassBtn();
-    isEdgePage(page, pages);
-  }
+  addEdgeClass();
+  addCurrentClassBtn();
+  isEdgePage(page, pages);
+
   paginBlock.addEventListener('click', onClickPagination);
 }
 function onClickPagination(evt) {
@@ -152,3 +149,4 @@ function sendRequest() {
     });
   }
 }
+export { paginationMarkup };

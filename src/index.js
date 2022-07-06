@@ -28,27 +28,25 @@ function onSubmit(evt) {
     findErr.classList.remove('visually-hidden');
     return;
   }
+
+  fetchByName(query)
+    .then(res => {
+      if (!res.results.length) {
+        findErr.classList.remove('visually-hidden');
+        setTimeout(() => {
+          findErr.classList.add('visually-hidden');
+        }, 3000);
+        evt.target.reset();
+        return;
+      }
+      localStorage.setItem('response', JSON.stringify(res.results));
+      markUpForGallery(res.results);
+      paginationMarkup(res.page, res.total_pages, query);
+    })
+    .catch(err => {
+      console.log(err);
+    });
 }
-
-fetchByName(query)
-  .then(res => {
-    if (!res.results.length) {
-      findErr.classList.remove('visually-hidden');
-      setTimeout(() => {
-        findErr.classList.add('visually-hidden');
-      }, 3000);
-
-      evt.target.reset();
-      return;
-    }
-    localStorage.setItem('response', JSON.stringify(res.results));
-    markUpForGallery(res.results);
-    paginationMarkup(res.page, res.total_pages, query);
-  })
-  .catch(err => {
-    console.log(err);
-  });
-
 const galleryItem = document.querySelector('.gallery');
 
 export function markUpForGallery(arr) {
@@ -87,10 +85,10 @@ export function markUpForGallery(arr) {
                       return (gen = ' ' + obj1[gen]);
                     })
               } | ${el.release_date.slice(0, 4)}</p>
-                          </div>
-          </div>
-        </a>
-        </li>`),
+                </div>
+                </div>
+                </a>
+                </li>`),
     ``
   );
   galleryItem.insertAdjacentHTML('beforeend', a);
