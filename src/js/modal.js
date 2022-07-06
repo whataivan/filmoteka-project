@@ -1,11 +1,12 @@
 import { fetchByName, fetchTrends } from './api/fetchApi';
+import {markUpForLibrary} from '../index'
 
 const list = document.querySelector('.gallery');
 
 const backdrop = document.querySelector('.backdrop');
 
-
-
+let arrForQuene =[]
+let elementForModal;
 
 
 list.addEventListener('click', onClick);
@@ -15,7 +16,7 @@ list.addEventListener('click', onClick);
 
 function onClick(event) {
 
-  let elementForModal;
+  
   
   // if (event.target.nodeName !== 'IMG') {
   //   return
@@ -25,11 +26,11 @@ function onClick(event) {
     elementForModal = response.find(
       el => String(el.id) === event.target.id
     )
-    console.log(elementForModal);
+    
     createMarkUpModal(elementForModal)
   //   return
   // }
-
+  
 
 
 }
@@ -38,7 +39,7 @@ function onClick(event) {
 
 function createMarkUpModal(obj) {
   const genres = JSON.parse(localStorage.getItem('genres'))
-  console.log(genres);
+  
 
   const urlImg = 'https://image.tmdb.org/t/p/w500';
 
@@ -98,11 +99,25 @@ function createMarkUpModal(obj) {
 
   backdrop.innerHTML = markUp;
   const closeBtn = document.querySelector('.modal-group__close-btn');
-console.log(closeBtn);
-closeBtn.addEventListener('click', onClickBtn);
 
-function onClickBtn(evt) {
-  
+closeBtn.addEventListener('click', ()=>{
   backdrop.classList.add('is-hidden')
+})
+const addToWatched = document.querySelector('.watched-btn')
+const addToQueue = document.querySelector('.queue-btn')
+addToWatched.addEventListener('click', onClickWatched)
+addToQueue.addEventListener('click', onClickQueue)
+console.log(addToWatched);
+console.log(addToQueue);
+function onClickWatched(){
+console.log('ClickWatched');
+arrForQuene.push(elementForModal);
+console.log(arrForQuene);
 }
+
+function onClickQueue(){
+  console.log('ClickQ');
+}
+
+
 }
