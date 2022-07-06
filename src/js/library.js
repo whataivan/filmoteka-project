@@ -13,6 +13,7 @@ function onClickWatched() {
 }
 
 queue.addEventListener('click', onClickQueue);
+
 function onClickQueue() {
   const item = JSON.parse(localStorage.getItem('queue'));
   markUpForLibrary(item);
