@@ -901,6 +901,7 @@ tbody {
   padding-left: 36px;
   padding-bottom: 12px;
   padding-right: 36px;
+  transition: 0.3s;
 }
 
 @media screen and (min-width: 768px) {
@@ -921,7 +922,7 @@ tbody {
 .library__button:focus {
   background-color: #ff6b01;
   filter: drop-shadow(0px 8px 43px rgba(255, 107, 1, 0.6));
-  border: transparent;
+  border-color: #ff6b01;
 }
 
 .library__button:last-child {
