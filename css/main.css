@@ -145,8 +145,23 @@ td {
 
 .logo__icon {
   display: inline-block;
-  fill: currentColor;
   align-items: baseline;
+  fill: currentColor;
+}
+
+.header--animals {
+  animation: logo 1s ease 0.5s backwards;
+}
+
+@keyframes logo {
+  0% {
+    opacity: 0;
+    letter-spacing: -0.6em;
+  }
+  100% {
+    opacity: 1;
+    letter-spacing: 0.03em;
+  }
 }
 
 @media screen and (max-width: 767.98px) {
@@ -165,6 +180,10 @@ td {
     line-height: 1.7;
     height: 35px;
     margin-right: 387px;
+    transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .logo__title:hover, .logo__title:focus {
+    color: #ff6b01;
   }
 }
 
@@ -206,6 +225,11 @@ td {
   text-transform: uppercase;
   padding-top: 3px;
   padding-bottom: 3px;
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav__link:hover, .nav__link:focus {
+  color: #ff6b01;
 }
 
 /* Лінія активної сторінки */
@@ -246,7 +270,6 @@ td {
   text-align: center;
   min-width: 280px;
   background-color: rgba(0, 0, 0, 0);
-  color: #ffffff;
   align-items: center;
 }
 
@@ -258,9 +281,9 @@ td {
   line-height: 1.14;
   outline: transparent;
   border: none;
+  color: #ffffff;
   border-bottom: 0.5px solid #ffffff;
   background-color: rgba(0, 0, 0, 0);
-  color: #ffffff;
   text-align: left;
   padding: 5px 3px;
 }
@@ -278,6 +301,13 @@ td {
     display: block;
     align-items: center;
   }
+}
+
+.form__input:focus,
+.form__input:hover,
+.form__input:active {
+  background-color: rgba(0, 0, 0, 0);
+  outline: transparent;
 }
 
 .form__input::placeholder {
@@ -749,6 +779,10 @@ tbody {
     font-size: 30px;
     line-height: 1.16px;
     margin-right: 385px;
+    transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .logo-library__title:hover, .logo-library__title:focus {
+    color: #ff6b01;
   }
 }
 
@@ -789,6 +823,11 @@ tbody {
   text-transform: uppercase;
   padding-top: 3px;
   padding-bottom: 3px;
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-library__link:hover, .nav-library__link:focus {
+  color: #ff6b01;
 }
 
 /* Лінія активної сторінки */
@@ -854,8 +893,8 @@ tbody {
   }
 }
 
-library__button:hover,
-library__button:focus {
+.library__button:hover,
+.library__button:focus {
   background-color: #ff6b01;
   filter: drop-shadow(0px 8px 43px rgba(255, 107, 1, 0.6));
   border: transparent;
