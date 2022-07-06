@@ -7,12 +7,22 @@
   background-size: cover;
   background-position: center;
 
-  background-image: url(/src/images/main/mobile-header-bg-1x.jpg);
-  opacity: 0.9;
+  background-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.9),
+      rgba(0, 0, 0, 0.2)
+    ),
+    url(/src/images/main/mobile-header-bg-1x.jpg);
+
 
   @include mq(retina) {
-    background-image: url(/src/images/main/mobile-header-bg-2x.jpg);
-    opacity: 0.9;
+    background-image: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.9),
+        rgba(0, 0, 0, 0.2)
+      ),
+      url(/src/images/main/mobile-header-bg-2x.jpg);
+    opacity: 1;
   }
 
   // tablet ///////
@@ -21,23 +31,44 @@
     padding-bottom: 81px;
     height: 216px;
 
-    background-image: url(/src/images/main/tablet-header-bg-1x.jpg);
-    opacity: 0.9;
+    background-image: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.9),
+        rgba(0, 0, 0, 0.2)
+      ),
+      url(/src/images/main/tablet-header-bg-1x.jpg);
+    opacity: 1;
 
     @include mq(retina) {
-      background-image: url(/src/images/main/tablet-header-bg-2x.jpg);
-      opacity: 0.9;
+      background-image: linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0.9),
+          rgba(0, 0, 0, 0.2)
+        ),
+        url(/src/images/main/tablet-header-bg-2x.jpg);
+      opacity: 1;
     }
   }
 
   // desktop ///////
   @include mq(desktop) {
-    background-image: url(/src/images/main/desktop-header-bg-1x.jpg);
-    opacity: 0.9;
+    background-color: black;
+
+    background-image: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.9),
+        rgba(0, 0, 0, 0.2)
+      ),
+      url(/src/images/main/desktop-header-bg-1x.jpg);
 
     @include mq(retina) {
-      background-image: url(/src/images/main/desktop-header-bg-2x.jpg);
-      opacity: 0.9;
+      background-image: linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0.9),
+          rgba(0, 0, 0, 0.2)
+        ),
+        url(/src/images/main/desktop-header-bg-2x.jpg);
+      opacity: 1;
     }
   }
 }
@@ -223,7 +254,7 @@
 }
 
 .form__input::placeholder {
-  color: #ffffff;
+  color: #ffffff5c;
 }
 
 .form-button {
@@ -249,6 +280,13 @@
   text-align: center;
   left: 15%;
   top: 15%;
+
+  transition: 0.3s;
+}
+
+.form__icon:hover {
+  transform: scale(1.35);
+  fill: red;
 }
 
 .form-text {
