@@ -7,10 +7,10 @@ closeBtn.addEventListener('click', forClose);
 
 function onClick(a) {
   console.log(a);
-  backdrop.classList.remove('.backdrop-hidden');
+  backdrop.classList.remove('backdrop-hidden');
 }
 
 function forClose(a) {
   console.log(a);
-  backdrop.classList.add('.backdrop-hidden');
+  backdrop.classList.add('backdrop-hidden');
 }
