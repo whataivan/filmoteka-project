@@ -17,7 +17,7 @@ if (localStorage.getItem('watched')) {
 if (localStorage.getItem('queue')) {
   arrForQueue = JSON.parse(localStorage.getItem('queue'))
 }
-let elementForModal; 
+ 
 let objFindItem;
 
 
