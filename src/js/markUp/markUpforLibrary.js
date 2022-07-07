@@ -1,9 +1,12 @@
 const urlImg = 'https://image.tmdb.org/t/p/w500';
-let obj1 = {};
-const galleryItem = document.querySelector('.gallery');
+let obj1 = JSON.parse(localStorage.getItem('genres'));
+const gallery = document.querySelector('.gallery');
 
 export function markUpForLibrary(arr) {
-  let a = arr.reduce(
+  if (arr.length===0) {
+    gallery.innerHTML =''
+  }
+  let markUp = arr.reduce(
     (acc, el) =>
       (acc += `<li id="${el.id}" class="gallery__item">
         <a class="gallery__link" href="#">
@@ -36,5 +39,5 @@ export function markUpForLibrary(arr) {
       </li>`),
     ''
   );
-  galleryItem.innerHTML = a;
+  gallery.innerHTML = markUp;
 }
