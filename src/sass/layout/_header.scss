@@ -14,7 +14,6 @@
     ),
     url(/src/images/main/mobile-header-bg-1x.jpg);
 
-
   @include mq(retina) {
     background-image: linear-gradient(
         to bottom,
@@ -199,6 +198,8 @@
 
 // /////////////////////input//////////////////////////////////////
 .form {
+  margin-left: auto;
+  margin-right: auto;
   max-width: 280px;
   margin-top: 50px;
   // border-bottom: 0.5px solid #ffffff;
