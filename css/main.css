@@ -1104,6 +1104,7 @@ tbody {
   }
 }
 
+
 .title-footer__link {
   text-decoration: underline;
 }
@@ -1290,6 +1291,12 @@ tbody {
   fill: var(--main-accent-color);
 }
 
+
+.underline {
+  text-decoration: underline;
+}
+
+n
 .visually-hidden {
   position: absolute;
   width: 1px;

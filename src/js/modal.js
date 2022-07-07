@@ -1,6 +1,6 @@
 import { fetchByName, fetchTrends } from './api/fetchApi';
 
-import { markUpForLibrary } from '../index';
+import { markUpForLibrary } from './markUp/markUpforLibrary'
 
 import sprite from './../images/symbol-defs.svg';
 
@@ -8,14 +8,21 @@ const list = document.querySelector('.gallery');
 
 const backdrop = document.querySelector('.backdrop');
 
-let arrForWatched = [];
+let forLocalStorage
 let arrForQueue = [];
-let elementForModal;
+let arrForWatched = []
+if (localStorage.getItem('watched')) {
+  arrForWatched = JSON.parse(localStorage.getItem('watched'))
+}
+if (localStorage.getItem('queue')) {
+  arrForQueue = JSON.parse(localStorage.getItem('queue'))
+}
+let elementForModal; 
 let objFindItem;
-let addToWatched;
+
 
 list.addEventListener('click', onClick);
-
+//при нажатии на карточку обект карточки пущится в массив
 function onClick(event) {
   let elementForModal;
 
@@ -26,27 +33,22 @@ function onClick(event) {
     backdrop.classList.remove('is-hidden');
     const currentId = event.target.closest('li').id;
     elementForModal = response.find(el => String(el.id) === currentId);
-    // console.log(elementForModal);
-    arrForQueue.push(elementForModal);
-    arrForWatched.push(elementForModal);
+   
+    forLocalStorage = elementForModal
 
     createMarkUpModal(elementForModal);
-    JSON.parse(localStorage.getItem('watched')).map(el => {
-      // console.log(addToWatched.textContent);
-      if (el.id === objFindItem.id) {
-        // console.log();
-        console.log(addToWatched);
-        return (addToWatched.textContent = 'Remove from watched');
-      }
-    });
-    return;
+
   }
 }
 
+
 function createMarkUpModal(obj) {
   objFindItem = obj;
+  // //////////////////////////////////////////////////////
+  document.addEventListener('click', handleClick);
+  document.addEventListener('keydown', onEscape);
+  // ////////////////////////////////////////////////////
   const genres = JSON.parse(localStorage.getItem('genres'));
-
   const urlImg = 'https://image.tmdb.org/t/p/w500';
 
   const markUp = `
@@ -73,9 +75,8 @@ function createMarkUpModal(obj) {
             <tr>
               <td class="table__title">Vote / Votes</td>
               <td class="table__text">
-                <span class="gallery-text__rating table-text-orange">${
-                  obj.vote_average
-                }</span>
+                <span class="gallery-text__rating table-text-orange">${obj.vote_average
+    }</span>
                 /
                 <span class="table-text-grey">${obj.vote_count}</span>
               </td>
@@ -92,8 +93,8 @@ function createMarkUpModal(obj) {
             <tr>
               <td class="table__title">Genre</td>
               <td class="table__text">${obj.genre_ids.map(gen => {
-                return (gen = ' ' + genres[gen]);
-              })}</td>
+      return (gen = ' ' + genres[gen]);
+    })}</td>
             </tr>
           </tbody>
         </table>
@@ -103,8 +104,8 @@ function createMarkUpModal(obj) {
         ${obj.overview}
         </p>
         <div class="modal-group__btns">
-          <button class="watched-btn" type="submit">add to Watched</button>
-          <button class="queue-btn" type="submit">add to queue</button>
+          <button class="watched-btn" type="submit">ADD TO WATCHED</button>
+          <button class="queue-btn" type="submit">ADD TO QUEUE</button>
         </div>
       </div>
     </div>`;
@@ -114,23 +115,125 @@ function createMarkUpModal(obj) {
 
   closeBtn.addEventListener('click', () => {
     backdrop.classList.add('is-hidden');
+    arrForLocalStorage = []
+    // ///////////////////////////////////////////
+    document.removeEventListener('click', handleClick);
+    document.removeEventListener('keydown', onEscape);
+    // ///////////////////////////////////////////////////
   });
+
+
+
   const addToWatched = document.querySelector('.watched-btn');
-  console.log(addToWatched);
   const addToQueue = document.querySelector('.queue-btn');
+
   addToWatched.addEventListener('click', onClickWatched);
   addToQueue.addEventListener('click', onClickQueue);
-  // console.log(addToWatched);
-  // console.log(addToQueue);
+ 
+  //проверка для вотчд==========================================
+  let resFromLocalWatch = JSON.parse(localStorage.getItem('watched'))
+  const finalRes = resFromLocalWatch.some(el =>
+    el.id === objFindItem.id
+  )
+  if (finalRes) {
+    addToWatched.textContent = 'REMOVE FROM WATCHED'
+  } else {
+    addToWatched.textContent = 'ADD TO WATCHED'
+  }
+
+  //================ //проверка для que
+  let resFromLocalQueue = JSON.parse(localStorage.getItem('queue'))
+  const finalResQ = resFromLocalQueue.some(el =>
+    el.id === objFindItem.id
+  )
+  if (finalResQ) {
+    addToQueue.textContent = 'REMOVE FROM QUEUE'
+  } else {
+    addToQueue.textContent = 'ADD TO QUEUE'
+  }
+  //====================================== END
+  function checkWatched() {
+   
+    if (addToWatched.textContent === 'ADD TO WATCHED') {
+      addToWatched.textContent = 'REMOVE FROM WATCHED'
+      return 'ADD'
+    } else {
+      addToWatched.textContent = 'ADD TO WATCHED'
+      return 'REMOVE'
+    }
+ 
+  }
+
+  function checkQueue() {
+
+    if (addToQueue.textContent === 'ADD TO QUEUE') {
+      addToQueue.textContent = 'REMOVE FROM QUEUE'
+      return 'ADD'
+    } else {
+      addToQueue.textContent = 'ADD TO QUEUE'
+      return 'REMOVE'
+    }
+  }
 
   function onClickWatched() {
-    localStorage.setItem('watched', JSON.stringify(arrForWatched));
-    // console.log(addToWatched.textContent);
+    // checkWatched()
+    const resWatched = checkWatched()
+    console.log(resWatched);
+    if (resWatched === 'REMOVE') {
+      console.log('rew');
+      let resFromWatch = JSON.parse(localStorage.getItem('watched'))
+      console.log(resFromWatch);
+      let resToStorage = resFromWatch.filter(el => el.id !== objFindItem.id)
+      console.log(resToStorage);
+      localStorage.setItem('watched', JSON.stringify(resToStorage))
+    
+  
+    } else {
+      
+      arrForWatched.push(forLocalStorage)
+      localStorage.setItem('watched', JSON.stringify(arrForWatched))
+      
+    }
+    
   }
 
   function onClickQueue() {
-    localStorage.setItem('queue', JSON.stringify(arrForQueue));
+    const resq = checkQueue()
+    if (resq === 'REMOVE') {
+      // console.log('rew');
+      let resFromQ = JSON.parse(localStorage.getItem('queue'))
+      // console.log(resFromWatch);
+      let resToStorage = resFromQ.filter(el => el.id !== objFindItem.id)
+      // console.log(resToStorage);
+      localStorage.setItem('queue', JSON.stringify(resToStorage))
+    
+  
+    } else {
+      
+      arrForQueue.push(forLocalStorage)
+      localStorage.setItem('queue', JSON.stringify(arrForQueue))
+      
+    }
   }
 }
 
-export { onClick, createMarkUpModal };
+// export { onClick, createMarkUpModal };
+
+///////// Ф-ція закриття по Escape/////
+
+function onEscape(event) {
+  if (event.keyCode === 27) {
+    backdrop.classList.add('is-hidden');
+    arrForLocalStorage = []
+  }
+}
+
+///////// Ф-ція закриття модалки  handleClick за кліком поза межами модалки/////
+function handleClick(event) {
+  if (event.target === backdrop) {
+    backdrop.classList.add('is-hidden');
+    arrForLocalStorage = []
+  }
+}
+
+
