@@ -72,7 +72,7 @@ export default function markUpModalLib(obj, nameBtnFirst, nameBtnLast) {
           ${obj.overview}
           </p>
           <div class="modal-group__btns">
-            <button class="watched-btn delete-btn" type="submit">${nameBtnFirst.toUpperCase()}</button>
+            <button class="watched-btn delete-btn" type="submit" >${nameBtnFirst.toUpperCase()}</button>
             <button class="queue-btn" type="submit">${nameBtnLast.toUpperCase()}</button>
           </div>
         </div>

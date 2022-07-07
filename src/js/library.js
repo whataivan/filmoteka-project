@@ -1,10 +1,10 @@
 import { markUpForLibrary } from './markUp/markUpforLibrary';
 import { firstPaginationCall } from './paginationLib';
 import markUpModalLib from './markUp/markupModalLibrary'
-
+import Notiflix from 'notiflix';
 const watched = document.querySelector('.library__button--watched');
 const queue = document.querySelector('.library__button--queue');
-
+let elementForModal;
 onClickWatched()//dont touch
 
 let arrForQueue = [];
@@ -30,7 +30,7 @@ gallery.addEventListener('click', onClick);
 
 function onClick(event) {
 
-  let elementForModal;
+  
 
   if (!event.target.closest('li')) {
     return;
@@ -65,9 +65,18 @@ function checkDeleteBtn() {
   
   if (deleteBtn.textContent === 'DELETE') {
     deleteBtn.textContent = 'DONE!'
+    Notiflix.Notify.success('Film was removed')
+    deleteBtn.classList.add('visually-hidden')
+    let resFromWatch = JSON.parse(localStorage.getItem('watched'))
+    console.log(elementForModal);
+        let resToStorage = resFromWatch.filter(el => el.id !== elementForModal.id)
+        
+        localStorage.setItem('watched', JSON.stringify(resToStorage))
     return 'ADD'
   }
+  return
     // return 'REMOVE'
+
   // }
 }
 // if (deleteBtn.textContent === 'ADD TO QUEUE') {
