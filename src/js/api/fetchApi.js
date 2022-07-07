@@ -15,7 +15,7 @@ function fetchTrends(page = 1) {
   const url = 'https://developers.themoviedb.org/3/trending/get-trending';
 
   return fetch(
-    `https://api.themoviedb.org/3/movie/top_rated?api_key=${key}&page=${page}&language=en-US`
+    `https://api.themoviedb.org/3/trending/movie/day?api_key=${key}&page=${page}&language=en-US`
   ).then(res => res.json());
   // .then(res=>console.log(res)).catch(err=>console.log(err))
 }

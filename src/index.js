@@ -1,5 +1,5 @@
 import { fetchTrends, fetchByName, fetchGenres } from './js/api/fetchApi';
-import { paginationMarkup } from './js/pagination';
+import { paginationMarkup, firstPaginationCall } from './js/pagination';
 let findErr = document.querySelector('.form-text');
 
 let obj1 = {};
@@ -15,10 +15,13 @@ fetchGenres().then(data => {
 });
 
 fetchTrends().then(res => {
-  markUpForGallery(res.results);
-  localStorage.setItem('response', JSON.stringify(res.results));
-
-  paginationMarkup(res.page, res.total_pages);
+  if (localStorage.getItem('page')) {
+    firstPaginationCall(res.total_pages);
+  } else {
+    localStorage.setItem('response', JSON.stringify(res.results));
+    markUpForGallery(res.results);
+    paginationMarkup(res.page, res.total_pages);
+  }
 });
 
 form.addEventListener('submit', onSubmit);
