@@ -42,7 +42,6 @@
   }
 }
 
-
 .title-footer__link {
   text-decoration: underline;
 }
@@ -224,6 +223,7 @@
   }
 
   @include mq(tablet) {
+    max-width: 550px;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -235,6 +235,10 @@
       ),
       url(/src/images/main/tablet-header-bg-1x.jpg);
   }
+
+  @include mq(desktop) {
+    max-width: 950px;
+  }
 }
 
 .team-modal-btn {
@@ -244,4 +248,3 @@
 .underline {
   text-decoration: underline;
 }
-
