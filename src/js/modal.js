@@ -15,9 +15,9 @@ if (localStorage.getItem('watched')) {
   arrForWatched = JSON.parse(localStorage.getItem('watched'))
 }
 if (localStorage.getItem('queue')) {
-  arrForWatched = JSON.parse(localStorage.getItem('queue'))
+  arrForQueue = JSON.parse(localStorage.getItem('queue'))
 }
-let elementForModal;
+let elementForModal; 
 let objFindItem;
 
 
@@ -173,7 +173,6 @@ function createMarkUpModal(obj) {
       addToQueue.textContent = 'ADD TO QUEUE'
       return 'REMOVE'
     }
-
   }
 
   function onClickWatched() {

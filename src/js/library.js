@@ -22,10 +22,9 @@ function onClickWatched() {
   
 }
 
-
-
 function onClickQueue() {
   const item = JSON.parse(localStorage.getItem('queue'));
+  console.log(item);
   if (item) {
     
   markUpForLibrary(item)
