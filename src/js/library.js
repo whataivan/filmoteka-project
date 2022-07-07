@@ -4,20 +4,35 @@ import { firstPaginationCall } from './paginationLib';
 const watched = document.querySelector('.library__button--watched');
 const queue = document.querySelector('.library__button--queue');
 
-onClickWatched();
-// firstPaginationCall('watched');
+onClickWatched()
+
+
 watched.addEventListener('click', onClickWatched);
+queue.addEventListener('click', onClickQueue);
 
 function onClickWatched() {
   const item = JSON.parse(localStorage.getItem('watched'));
-  // markUpForLibrary(item);
+  if (item) {
+    console.log(item);
+  markUpForLibrary(item)
   firstPaginationCall('watched');
+  } else {
+    markUpForLibrary([])
+  }
+  
 }
 
-queue.addEventListener('click', onClickQueue);
+
 
 function onClickQueue() {
   const item = JSON.parse(localStorage.getItem('queue'));
-  // markUpForLibrary(item);
+  if (item) {
+    
+  markUpForLibrary(item)
   firstPaginationCall('queue');
+  } else {
+    markUpForLibrary([])
+  }
+  
+  
 }
