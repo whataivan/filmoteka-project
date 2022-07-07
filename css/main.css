@@ -51,6 +51,12 @@ main {
   }
 }
 
+.spinner-border {
+  margin-left: auto;
+  margin-right: auto;
+  color: #8a0d0d;
+}
+
 ul {
   list-style: none;
   margin-top: 0;

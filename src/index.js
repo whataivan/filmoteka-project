@@ -13,17 +13,19 @@ fetchGenres().then(data => {
     localStorage.setItem('genres', JSON.stringify(obj1));
   });
 });
-a()
-function a(){
-//при загрузке сразу показать спиннеор, файнали использовать. 
-fetchTrends().then(res => {
-  markUpForGallery(res.results);
-  localStorage.setItem('response', JSON.stringify(res.results));
+(function spin() {
+  galleryItem.innerHTML = '<div class="spinner-border"></div>';
 
-  paginationMarkup(res.page, res.total_pages);
-});
-}
-form.addEventListener('submit', onSubmit);
+  //при загрузке сразу показать спиннеор, файнали использовать.
+  fetchTrends().then(res => {
+    markUpForGallery(res.results);
+    localStorage.setItem('response', JSON.stringify(res.results));
+
+    paginationMarkup(res.page, res.total_pages);
+  });
+
+  form.addEventListener('submit', onSubmit);
+})();
 
 function onSubmit(evt) {
   evt.preventDefault();
@@ -36,25 +38,29 @@ function onSubmit(evt) {
     return;
   }
 
-  fetchByName(query)
-    .then(res => {
-      if (!res.results.length) {
-        findErr.classList.remove('visually-hidden');
-        setTimeout(() => {
-          findErr.classList.add('visually-hidden');
-        }, 3000);
+  (function spin() {
+    galleryItem.innerHTML = '<div class="spinner-border"></div>';
 
-        evt.target.reset();
-        return;
-      }
-      localStorage.setItem('response', JSON.stringify(res.results));
-      markUpForGallery(res.results);
+    fetchByName(query)
+      .then(res => {
+        if (!res.results.length) {
+          findErr.classList.remove('visually-hidden');
+          setTimeout(() => {
+            findErr.classList.add('visually-hidden');
+          }, 3000);
 
-      paginationMarkup(res.page, res.total_pages, query);
-    })
-    .catch(err => {
-      console.log(err);
-    });
+          evt.target.reset();
+          return;
+        }
+        localStorage.setItem('response', JSON.stringify(res.results));
+        markUpForGallery(res.results);
+
+        paginationMarkup(res.page, res.total_pages, query);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  })();
 }
 
 function markUpForGallery(arr) {
