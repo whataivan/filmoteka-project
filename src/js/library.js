@@ -1,37 +1,33 @@
 import { markUpForLibrary } from './markUp/markUpforLibrary';
 import { firstPaginationCall } from './paginationLib';
-import markUpModalLib from './markUp/markupModalLibrary'
-import Notiflix from 'notiflix';
+import markUpModalLib from './markUp/markupModalLibrary';
+// import Notiflix from 'notiflix';
 const watched = document.querySelector('.library__button--watched');
 const queue = document.querySelector('.library__button--queue');
 let elementForModal;
-onClickWatched()//dont touch
+onClickWatched(); //dont touch
 
 let arrForQueue = [];
-let arrForWatched = []
+let arrForWatched = [];
 if (localStorage.getItem('watched')) {
-  arrForWatched = JSON.parse(localStorage.getItem('watched'))
+  arrForWatched = JSON.parse(localStorage.getItem('watched'));
 }
 if (localStorage.getItem('queue')) {
-  arrForQueue = JSON.parse(localStorage.getItem('queue'))
+  arrForQueue = JSON.parse(localStorage.getItem('queue'));
 }
-arrForWatched = JSON.parse(localStorage.getItem('watched'))
-arrForQueue = JSON.parse(localStorage.getItem('queue'))
+arrForWatched = JSON.parse(localStorage.getItem('watched'));
+arrForQueue = JSON.parse(localStorage.getItem('queue'));
 
-const gallery = document.querySelector('.gallery')
-const backdrop = document.querySelector('.backdrop')
+const gallery = document.querySelector('.gallery');
+const backdrop = document.querySelector('.backdrop');
 //==================
 let deleteBtn;
 let addToQueue;
 
-
-    //=============================
+//=============================
 gallery.addEventListener('click', onClick);
 
 function onClick(event) {
-
-  
-
   if (!event.target.closest('li')) {
     return;
   } else {
@@ -40,42 +36,40 @@ function onClick(event) {
     const currentId = event.target.closest('li').id;
     elementForModal = response.find(el => String(el.id) === currentId);
 
-    forLocalStorage = elementForModal
+    forLocalStorage = elementForModal;
     if (watched.classList.contains('active')) {
       markUpModalLib(elementForModal, 'DELETE', 'add to queue');
     } else {
       markUpModalLib(elementForModal, 'DELETE', 'add to watched');
     }
     deleteBtn = document.querySelector('.delete-btn');
- addToQueue = document.querySelector('.queue-btn');
-deleteBtn.addEventListener('click', onClickDelete)
-addToQueue.addEventListener('click', onClickAddtBtn)
-
+    addToQueue = document.querySelector('.queue-btn');
+    deleteBtn.addEventListener('click', onClickDelete);
+    addToQueue.addEventListener('click', onClickAddtBtn);
   }
 }
-function  onClickDelete(){
+function onClickDelete() {
   console.log('dsfevsdf');
-   checkDeleteBtn()
+  checkDeleteBtn();
 }
-function onClickAddtBtn(){
+function onClickAddtBtn() {
   console.log('dsfevsdf');
 }
 
 function checkDeleteBtn() {
-  
   if (deleteBtn.textContent === 'DELETE') {
-    deleteBtn.textContent = 'DONE!'
-    Notiflix.Notify.success('Film was removed')
-    deleteBtn.classList.add('visually-hidden')
-    let resFromWatch = JSON.parse(localStorage.getItem('watched'))
+    deleteBtn.textContent = 'DONE!';
+    // Notiflix.Notify.success('Film was removed')
+    deleteBtn.classList.add('visually-hidden');
+    let resFromWatch = JSON.parse(localStorage.getItem('watched'));
     console.log(elementForModal);
-        let resToStorage = resFromWatch.filter(el => el.id !== elementForModal.id)
-        
-        localStorage.setItem('watched', JSON.stringify(resToStorage))
-    return 'ADD'
+    let resToStorage = resFromWatch.filter(el => el.id !== elementForModal.id);
+
+    localStorage.setItem('watched', JSON.stringify(resToStorage));
+    return 'ADD';
   }
-  return
-    // return 'REMOVE'
+  return;
+  // return 'REMOVE'
 
   // }
 }
@@ -87,31 +81,27 @@ function checkDeleteBtn() {
 //   return 'REMOVE'
 // }
 
-
 watched.addEventListener('click', onClickWatched);
 queue.addEventListener('click', onClickQueue);
 
 function onClickWatched() {
-  queue.classList.remove('active')
+  queue.classList.remove('active');
   const item = JSON.parse(localStorage.getItem('watched'));
-  if (item){
-    markUpForLibrary(item)
+  if (item) {
+    markUpForLibrary(item);
     firstPaginationCall('watched');
   } else {
-    markUpForLibrary([])
+    markUpForLibrary([]);
   }
 }
 function onClickQueue() {
   const item = JSON.parse(localStorage.getItem('queue'));
-  queue.classList.add('active')
-  watched.classList.remove('active')
+  queue.classList.add('active');
+  watched.classList.remove('active');
   if (item) {
-
-    markUpForLibrary(item)
+    markUpForLibrary(item);
     firstPaginationCall('queue');
   } else {
-    markUpForLibrary([])
+    markUpForLibrary([]);
   }
-
 }
-
