@@ -13,14 +13,16 @@ fetchGenres().then(data => {
     localStorage.setItem('genres', JSON.stringify(obj1));
   });
 });
-
+a()
+function a(){
+//при загрузке сразу показать спиннеор, файнали использовать. 
 fetchTrends().then(res => {
   markUpForGallery(res.results);
   localStorage.setItem('response', JSON.stringify(res.results));
 
   paginationMarkup(res.page, res.total_pages);
 });
-
+}
 form.addEventListener('submit', onSubmit);
 
 function onSubmit(evt) {
