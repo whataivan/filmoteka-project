@@ -1103,6 +1103,10 @@ tbody {
   }
 }
 
+.underline {
+  text-decoration: underline;
+}
+
 .visually-hidden {
   position: absolute;
   width: 1px;
