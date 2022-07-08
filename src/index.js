@@ -17,6 +17,7 @@ fetchGenres().then(data => {
     localStorage.setItem('genres', JSON.stringify(obj1));
   });
 });
+
 // (function spin() {
 // galleryItem.innerHTML = '<div class="spinner-border"></div>';
 
@@ -35,6 +36,8 @@ fetchTrends(JSON.parse(localStorage.getItem('page'))).then(res => {
 form.addEventListener('submit', onSubmit);
 // })();
 
+
+
 function onSubmit(evt) {
   evt.preventDefault();
   const query = evt.currentTarget.name.value.trim();
@@ -47,9 +50,11 @@ function onSubmit(evt) {
     return;
   }
 
-  (function spin() {
-    galleryItem.innerHTML = '<div class="spinner-border"></div>';
-
+  spin();
+  function spin() {
+    galleryItem.innerHTML =
+      '<div class="spinner"><span class="spinner__animation"></span><span class="spinner__info"></span></div>';
+    const spinEl = document.querySelector('.spinner');
     fetchByName(query)
       .then(res => {
         if (!res.results.length) {
@@ -69,8 +74,10 @@ function onSubmit(evt) {
       })
       .catch(err => {
         console.log(err);
-      });
-  })();
+      })
+
+      .finally(() => spinEl.classList.add('visually-hidden'));
+  }
 }
 
 function markUpForGallery(arr) {
