@@ -11,7 +11,7 @@ export function markUpForLibrary(arr) {
     let markUp = arr.reduce(
       (acc, el) =>
         (acc += `<li id="${el.id}" class="gallery__item gallery__link">
-                  <img
+          <img
             class="gallery__img"
             src='${
               el.poster_path
@@ -40,7 +40,7 @@ export function markUpForLibrary(arr) {
         <span class="gallery-text__rating">${el.vote_average}</span>
             </div>
           </div>
-             </li>`),
+        </li>`),
       ''
     );
     gallery.innerHTML = markUp;

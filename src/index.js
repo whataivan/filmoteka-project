@@ -55,6 +55,7 @@ function onSubmit(evt) {
     const spinEl = document.querySelector('.spinner');
     fetchByName(query)
       .then(res => {
+        console.log(res.results.length);
         if (!res.results.length) {
           fetchTrends(JSON.parse(localStorage.getItem('page'))).then(res => {
             localStorage.setItem('response', JSON.stringify(res.results));
@@ -65,7 +66,9 @@ function onSubmit(evt) {
           setTimeout(() => {
             findErr.classList.add('visually-hidden');
           }, 3000);
-
+          fetchTrends(1).then(result => {
+            markUpForGallery(result.results);
+          });
           evt.target.reset();
           return;
         }
