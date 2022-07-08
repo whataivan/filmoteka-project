@@ -15,11 +15,10 @@ function changeCurrentPage(page) {
   currentPage = Number(JSON.parse(localStorage.getItem(PAGE)));
 }
 
-function firstPaginationCall(pages) {
-  const response = JSON.parse(localStorage.getItem('response'));
-  markUpForGallery(response);
-  paginationMarkup(currentPage, pages);
-}
+// function firstPaginationCall(pages, response) {
+//   markUpForGallery(response);
+//   paginationMarkup(currentPage, pages);
+// }
 
 function paginationMarkup(page, pages, name = null) {
   changeCurrentPage(page);
