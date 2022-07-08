@@ -7,6 +7,7 @@ const nextBtn = document.querySelector('.pagination__btn-next');
 let currentPage;
 let totalPages;
 let arrLib;
+
 function firstPaginationCall(arr) {
   arrLib = JSON.parse(localStorage.getItem(`${arr}`));
   currentPage = 1;
@@ -14,6 +15,19 @@ function firstPaginationCall(arr) {
   markUpForLibrary(arrLib.slice(0, 20));
   paginationMarkupLib();
 }
+
+function paginationRemoveFromLib(arr) {
+  arrLib = JSON.parse(localStorage.getItem(`${arr}`));
+  totalPages = Math.ceil(arrLib.length / 20);
+  console.log('remove');
+  if (currentPage > totalPages) {
+    currentPage = totalPages;
+  }
+  const indexOfArrLib = (currentPage - 1) * 20;
+  markUpForLibrary(arrLib.slice(indexOfArrLib, indexOfArrLib + 20));
+  paginationMarkupLib();
+}
+
 function paginationMarkupLib() {
   //   paginBlock.removeEventListener('click', onClickPagination);
   let markup = '';
@@ -146,4 +160,13 @@ function sendRequest() {
   console.log('~ currentPage', currentPage);
   console.log('~ totalPages', totalPages);
 }
-export { paginationMarkupLib, firstPaginationCall };
+function removePagination() {
+  paginBlock.innerHTML = '';
+}
+
+export {
+  paginationMarkupLib,
+  firstPaginationCall,
+  paginationRemoveFromLib,
+  removePagination,
+};

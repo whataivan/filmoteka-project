@@ -1,5 +1,9 @@
 import { fetchTrends, fetchByName, fetchGenres } from './js/api/fetchApi';
-import { paginationMarkup } from './js/pagination';
+import {
+  paginationMarkup,
+  firstPaginationCall,
+  removePagination,
+} from './js/pagination';
 let findErr = document.querySelector('.form-text');
 
 let obj1 = {};
@@ -18,10 +22,13 @@ fetchGenres().then(data => {
 
   //при загрузке сразу показать спиннеор, файнали использовать.
   fetchTrends().then(res => {
-    markUpForGallery(res.results);
-    localStorage.setItem('response', JSON.stringify(res.results));
-
-    paginationMarkup(res.page, res.total_pages);
+    if (localStorage.getItem('page')) {
+      firstPaginationCall(res.total_pages);
+    } else {
+      localStorage.setItem('response', JSON.stringify(res.results));
+      markUpForGallery(res.results);
+      paginationMarkup(res.page, res.total_pages);
+    }
   });
 
   form.addEventListener('submit', onSubmit);
@@ -31,6 +38,7 @@ function onSubmit(evt) {
   evt.preventDefault();
   const query = evt.currentTarget.name.value.trim();
   if (!query) {
+    removePagination();
     findErr.classList.remove('visually-hidden');
     setTimeout(() => {
       findErr.classList.add('visually-hidden');
@@ -44,6 +52,7 @@ function onSubmit(evt) {
     fetchByName(query)
       .then(res => {
         if (!res.results.length) {
+          removePagination();
           findErr.classList.remove('visually-hidden');
           setTimeout(() => {
             findErr.classList.add('visually-hidden');

@@ -1,5 +1,6 @@
 import { markUpForLibrary } from './markUp/markUpforLibrary';
-import { firstPaginationCall } from './paginationLib';
+
+import { firstPaginationCall, removePagination } from './paginationLib';
 import markUpModalLib from './markUp/markupModalLibrary';
 import Notiflix from 'notiflix';
 
@@ -18,7 +19,6 @@ Notiflix.Notify.init({
     backOverlayColor: 'rgba(50,198,130,0.2)',
   },
 });
-
 
 const watched = document.querySelector('.library__button--watched');
 const queue = document.querySelector('.library__button--queue');
@@ -64,7 +64,7 @@ function onClick(event) {
     backdrop.classList.remove('is-hidden');
     const currentId = event.target.closest('li').id;
     elementForModal = response.find(el => String(el.id) === currentId);
-    
+
 
     if (watched.classList.contains('active')) {
 
@@ -81,14 +81,13 @@ function onClick(event) {
 function onClickDelete() {
   if (watched.classList.contains('active')) {
     checkDeleteBtn('watched');
-
   } else if (queue.classList.contains('active')) {
     checkDeleteBtn('queue');
-
   }
-
 }
 function onClickAddtBtn() {
+
+
   
   if (queue.classList.contains('active')) {
     let res = arrForWatched.filter(el => el.id !== elementForModal.id)
@@ -105,25 +104,31 @@ function onClickAddtBtn() {
     localStorage.setItem('queue', JSON.stringify(arrForQueue))
     addToQueue.setAttribute('disabled', true)
     addToQueue.classList.add('inactive')
+
   }
 }
 
 function checkDeleteBtn(name) {
-
   if (deleteBtn.textContent === 'REMOVE FROM LIST') {
+
+
 
     Notiflix.Notify.success('Film was removed');
     deleteBtn.classList.add('visually-hidden');
     let resFromStorage = JSON.parse(localStorage.getItem(name));
 
+
     let resToStorage = resFromStorage.filter(el => el.id !== elementForModal.id);
+
 
     localStorage.setItem(name, JSON.stringify(resToStorage));
     // return 'ADD';
     if (name === 'watched') {
+
       onClickWatched()
     } else if (name === 'queue') {
       onClickQueue()
+
     }
   }
   return;
@@ -135,11 +140,16 @@ function onClickWatched() {
   watched.classList.add('active');
   queue.classList.remove('active');
   const item = JSON.parse(localStorage.getItem('watched'));
-  if (item) {
+  console.log('~ item', item);
+  if (item && item.length > 0) {
     markUpForLibrary(item);
+
+
     firstPaginationCall('watched');//dont touch==============
 
+
   } else {
+    removePagination();
     markUpForLibrary([]);
   }
 }
@@ -147,10 +157,13 @@ function onClickQueue() {
   const item = JSON.parse(localStorage.getItem('queue'));
   queue.classList.add('active');
   watched.classList.remove('active');
-  if (item) {
+  if (item && item.length > 0) {
     markUpForLibrary(item);
-    firstPaginationCall('queue');//dont touch===========
+    firstPaginationCall('queue'); //dont touch===========
   } else {
+    removePagination();
     markUpForLibrary([]);
   }
 }
+
+// paginationRemoveFromLib('watched');
