@@ -11,7 +11,9 @@ function fetchByName(name, page = 1) {
 }
 
 function fetchTrends(page = 1) {
-  const url = 'https://developers.themoviedb.org/3/trending/get-trending';
+  if (!page) {
+    page = 1;
+  }
 
   return fetch(
     `https://api.themoviedb.org/3/trending/movie/day?api_key=${key}&page=${page}&language=en-US`

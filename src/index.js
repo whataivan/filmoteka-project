@@ -17,22 +17,23 @@ fetchGenres().then(data => {
     localStorage.setItem('genres', JSON.stringify(obj1));
   });
 });
-(function spin() {
-  galleryItem.innerHTML = '<div class="spinner-border"></div>';
+// (function spin() {
+// galleryItem.innerHTML = '<div class="spinner-border"></div>';
 
-  //при загрузке сразу показать спиннеор, файнали использовать.
-  fetchTrends(Number(JSON.parse(localStorage.getItem('page')))).then(res => {
-    // if (localStorage.getItem('page')) {
-    //   firstPaginationCall(res.total_pages, res.results);
-    // } else {
-    localStorage.setItem('response', JSON.stringify(res.results));
-    markUpForGallery(res.results);
-    paginationMarkup(res.page, res.total_pages);
-    // }
-  });
+//при загрузке сразу показать спиннеор, файнали использовать.
 
-  form.addEventListener('submit', onSubmit);
-})();
+fetchTrends(JSON.parse(localStorage.getItem('page'))).then(res => {
+  // if (localStorage.getItem('page')) {
+  //   firstPaginationCall(res.total_pages, res.results);
+  // } else {
+  localStorage.setItem('response', JSON.stringify(res.results));
+  markUpForGallery(res.results);
+  paginationMarkup(res.page, res.total_pages);
+  // }
+});
+
+form.addEventListener('submit', onSubmit);
+// })();
 
 function onSubmit(evt) {
   evt.preventDefault();
@@ -93,19 +94,21 @@ function markUpForGallery(arr) {
             <div class="gallery-text__info">
 
 
-              <p class="gallery-text__genre"> ${el.genre_ids.length?el.genre_ids.map(gen => {
-                return (gen = obj1[gen]);
-              }).length > 3
-                ? el.genre_ids
-                    .map(gen => {
-                      return (gen = ' ' + obj1[gen]);
-                    })
-                    .slice(0, 2) + ', Other '
-                : el.genre_ids.map(gen => {
-                    return (gen = ' ' + obj1[gen]);
-                  })
-            : 'no genres found'
-                } | ${el.release_date.slice(0, 4)}</p>
+              <p class="gallery-text__genre"> ${
+                el.genre_ids.length
+                  ? el.genre_ids.map(gen => {
+                      return (gen = obj1[gen]);
+                    }).length > 3
+                    ? el.genre_ids
+                        .map(gen => {
+                          return (gen = ' ' + obj1[gen]);
+                        })
+                        .slice(0, 2) + ', Other '
+                    : el.genre_ids.map(gen => {
+                        return (gen = ' ' + obj1[gen]);
+                      })
+                  : 'no genres found'
+              } | ${el.release_date.slice(0, 4)}</p>
 
                 </div>
                 </div>
