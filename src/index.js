@@ -67,7 +67,7 @@ function markUpForGallery(arr) {
   galleryItem.innerHTML = '';
   let a = arr.reduce(
     (acc, el) =>
-      (acc += `<li id='${el.id}' class="gallery__item">
+      (acc += `<li id='${el.id}' class="gallery__item" >
       
           <img 
             class="gallery__img"

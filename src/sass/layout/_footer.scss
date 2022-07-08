@@ -2,7 +2,13 @@
   padding-top: 29px;
   padding-bottom: 30px;
   background-color: #f7f7f7;
-  margin-top: 60px;
+
+  // @media (prefers-color-scheme: dark) {
+  //   & {
+  //     background-color: #222a31;
+  //     color: #545454;
+  //   }
+  // }
 }
 .footer__cotainer {
   display: flex;
@@ -48,6 +54,11 @@
 
 .button-open {
   cursor: pointer;
+  // @media (prefers-color-scheme: dark) {
+  //   & {
+  //     color: #545454;
+  //   }
+  // }
 }
 // =================
 
