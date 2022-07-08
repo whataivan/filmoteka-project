@@ -17,8 +17,10 @@ fetchGenres().then(data => {
     localStorage.setItem('genres', JSON.stringify(obj1));
   });
 });
-(function spin() {
-  galleryItem.innerHTML = '<div class="spinner-border"></div>';
+spin();
+function spin() {
+  galleryItem.innerHTML =
+    '<div class="spinner"><span class="spinner__animation"></span><span class="spinner__info"></span></div>';
 
   //при загрузке сразу показать спиннеор, файнали использовать.
   fetchTrends().then(res => {
@@ -30,9 +32,8 @@ fetchGenres().then(data => {
       paginationMarkup(res.page, res.total_pages);
     }
   });
-
-  form.addEventListener('submit', onSubmit);
-})();
+}
+form.addEventListener('submit', onSubmit);
 
 function onSubmit(evt) {
   evt.preventDefault();
@@ -46,9 +47,11 @@ function onSubmit(evt) {
     return;
   }
 
-  (function spin() {
-    galleryItem.innerHTML = '<div class="spinner-border"></div>';
-
+  spin();
+  function spin() {
+    galleryItem.innerHTML =
+      '<div class="spinner"><span class="spinner__animation"></span><span class="spinner__info"></span></div>';
+    const spinEl = document.querySelector('.spinner');
     fetchByName(query)
       .then(res => {
         if (!res.results.length) {
@@ -68,8 +71,10 @@ function onSubmit(evt) {
       })
       .catch(err => {
         console.log(err);
-      });
-  })();
+      })
+
+      .finally(() => spinEl.classList.add('visually-hidden'));
+  }
 }
 
 function markUpForGallery(arr) {
@@ -93,19 +98,21 @@ function markUpForGallery(arr) {
             <div class="gallery-text__info">
 
 
-              <p class="gallery-text__genre"> ${el.genre_ids.length?el.genre_ids.map(gen => {
-                return (gen = obj1[gen]);
-              }).length > 3
-                ? el.genre_ids
-                    .map(gen => {
-                      return (gen = ' ' + obj1[gen]);
-                    })
-                    .slice(0, 2) + ', Other '
-                : el.genre_ids.map(gen => {
-                    return (gen = ' ' + obj1[gen]);
-                  })
-            : 'no genres found'
-                } | ${el.release_date.slice(0, 4)}</p>
+              <p class="gallery-text__genre"> ${
+                el.genre_ids.length
+                  ? el.genre_ids.map(gen => {
+                      return (gen = obj1[gen]);
+                    }).length > 3
+                    ? el.genre_ids
+                        .map(gen => {
+                          return (gen = ' ' + obj1[gen]);
+                        })
+                        .slice(0, 2) + ', Other '
+                    : el.genre_ids.map(gen => {
+                        return (gen = ' ' + obj1[gen]);
+                      })
+                  : 'no genres found'
+              } | ${el.release_date.slice(0, 4)}</p>
 
                 </div>
                 </div>
