@@ -1,7 +1,24 @@
 import { markUpForLibrary } from './markUp/markUpforLibrary';
 import { firstPaginationCall } from './paginationLib';
 import markUpModalLib from './markUp/markupModalLibrary';
-// import Notiflix from 'notiflix';
+import Notiflix from 'notiflix';
+
+Notiflix.Notify.init({
+  width: '300px',
+  position: 'center-center',
+  closeButton: false,
+  cssAnimationStyle: 'zoom',
+  success: {
+    background: '#FF6B08',
+    svgColor: '#32c682',
+    titleColor: '#1e1e1e',
+    messageColor: '#242424',
+    buttonBackground: '#32c682',
+    buttonColor: '#fff',
+    backOverlayColor: 'rgba(50,198,130,0.2)',
+  },
+});
+
 const watched = document.querySelector('.library__button--watched');
 const queue = document.querySelector('.library__button--queue');
 let elementForModal;
@@ -59,7 +76,7 @@ function onClickAddtBtn() {
 function checkDeleteBtn() {
   if (deleteBtn.textContent === 'DELETE') {
     deleteBtn.textContent = 'DONE!';
-    // Notiflix.Notify.success('Film was removed')
+    Notiflix.Notify.success('Film was removed');
     deleteBtn.classList.add('visually-hidden');
     let resFromWatch = JSON.parse(localStorage.getItem('watched'));
     console.log(elementForModal);

@@ -14,8 +14,22 @@
   body{
     height: 100%;
     font-family: Roboto, sans-serif;
+    background-color: #ffffff;
   
   }
+
+  
+  // @media (prefers-color-scheme: dark) {
+  //   body{ 
+  //     background-color: #1d2125;
+  //     color: #fff;
+  //   }
+
+  //   h2,h3,p,span{
+  //     color: #fff;
+  //   }
+   
+  // }
   
   .body-wrapper{
     min-height: 100%;
