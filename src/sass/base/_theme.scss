@@ -16,54 +16,97 @@
 .page-theme {
   background-color: transparent;
   //   border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  //   background: url(../src/images/moon.svg) 0 0 / 100% no-repeat;
+  width: 28px;
+  height: 28px;
+  background: url(../src/images/moon.svg) 0 0 / 100% no-repeat;
+
+  filter: invert(1);
+  transition: 0.3s;
 }
 
 .sun-svg {
   fill: #fff;
 }
 
-.page-reset::before {
-  content: 'x';
-  position: absolute;
-  top: 0;
-  right: 0;
-  cursor: pointer;
-  width: 10px;
-  height: 10px;
-  font-size: 7px;
-  border-radius: 50%;
-  line-height: 10px;
-  color: #fff;
-  text-align: center;
-  background-color: #666;
-}
-
 html.dark body {
   color: #fff;
-  background-color: #333;
+  background-color: #1e2227;
+  transition: 0.3s;
+}
+
+html.dark .gallery-text__title {
+  color: #fff;
+  background-color: transparent;
+  transition: 0.3s;
+}
+
+html.dark .modal-group {
+  color: #fff;
+  background: #1e2227e0;
+  transition: 0.3s;
+}
+
+html.dark .modal-group__about-title {
+  color: #fff;
+}
+
+html.dark .modal-group__about-text {
+  color: #fff;
+}
+
+html.dark .table__text {
+  color: rgb(190, 190, 190);
+}
+
+html.dark .table-text-grey {
+  color: rgb(43, 43, 43);
+}
+
+html.dark .modal-group__close-icon {
+  filter: invert(1);
 }
 
 html.light body {
   background-color: #fff;
   color: #333;
+  transition: 0.3s;
 }
 
 html.dark .page-theme {
-  padding: 20px;
-  background: url(../src/images/123.png) 0 0 / 100% no-repeat;
-  width: 20px;
-  height: 20px;
+  background: url(../src/images/sun.svg) 0 0 / 100% no-repeat;
+  width: 25px;
+  height: 25px;
   fill: #fff;
 
   filter: invert(1);
 }
 
-html.light .page-reset {
-  //   background: url(../src/images/123.png) 0 0 / 100% no-repeat;
-  //   width: 30px;
-  //   height: 30px;
-  //   padding: 20px;
+.page-theme:hover {
+  filter: invert(0.8);
+}
+
+/* 
+
+
+    PAGINATION
+
+
+*/
+
+html.dark .pagination__btn-next {
+  filter: invert(1);
+}
+html.dark .pagination__btn-prev {
+  filter: invert(1);
+}
+
+html.dark .footer {
+  background-color: #242629;
+}
+
+html.dark .title-first {
+  color: #fff;
+}
+html.dark .title-footer {
+  color: #fff;
 }

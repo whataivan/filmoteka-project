@@ -13,6 +13,7 @@
 .footer__cotainer {
   display: flex;
   flex-direction: column;
+  align-items: center;
 
   @include mq(tablet) {
     flex-direction: row;
@@ -38,12 +39,12 @@
 .footer__second {
   display: flex;
   flex-direction: row;
-  gap: 10px;
-  margin-left: auto;
-  margin-right: auto;
 
+  gap: 10px;
+  // margin-left: auto;
+  // margin-right: auto;
+  margin-left: 3px;
   @include mq(tablet) {
-    margin-left: 0;
     margin-right: 0;
   }
 }
