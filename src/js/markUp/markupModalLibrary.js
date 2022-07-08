@@ -33,7 +33,7 @@ export default function markUpModalLib(obj, nameBtnFirst, nameBtnLast) {
         <div class="modal-group__img-wrapper">
           <img
             class="modal-group__img"
-            src="${urlImg}${obj.poster_path}"
+            src="${obj.poster_path?urlImg+obj.poster_path:'https://s1.hostingkartinok.com/uploads/images/2022/07/40ceaea2e22257d2a139ca5a0c0b8ba9.jpg'}"
             alt="${obj.original_title}"
             width="280"
           />
