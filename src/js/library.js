@@ -1,5 +1,10 @@
 import { markUpForLibrary } from './markUp/markUpforLibrary';
-import { firstPaginationCall } from './paginationLib';
+
+import {
+  firstPaginationCall,
+  removePagination,
+  paginationMarkupLib,
+} from './paginationLib';
 import markUpModalLib from './markUp/markupModalLibrary';
 import Notiflix from 'notiflix';
 
@@ -21,7 +26,9 @@ Notiflix.Notify.init({
 
 const watched = document.querySelector('.library__button--watched');
 const queue = document.querySelector('.library__button--queue');
+
 let elementForModal;
+
 onClickWatched(); //dont touch
 
 let arrForQueue = [];
@@ -45,11 +52,14 @@ function onClick(event) {
   if (!event.target.closest('li')) {
     return;
   } else {
+
     let response = JSON.parse(localStorage.getItem('watched'));
     backdrop.classList.remove('is-hidden');
     const currentId = event.target.closest('li').id;
     elementForModal = response.find(el => String(el.id) === currentId);
     console.log(elementForModal);
+
+
     if (watched.classList.contains('active')) {
       markUpModalLib(elementForModal, 'REMOVE FROM LIST', 'add to queue');
     } else {
@@ -69,6 +79,7 @@ function onClickDelete() {
   }
 }
 function onClickAddtBtn() {
+
   if (watched.classList.contains('active')) {
     let res = arrForWatched.filter(el => el.id !== forLocalStorage.id);
     arrForWatched = res;
@@ -76,7 +87,23 @@ function onClickAddtBtn() {
     localStorage.setItem('watched', JSON.stringify(arrForWatched));
   } else if (queue.classList.contains('active')) {
     checkDeleteBtn('queue');
-  }
+
+  // if (queue.classList.contains('active')) {
+  //  let res = arrForWatched.filter(el => el.id !== elementForModal.id);
+  //  arrForWatched = res;
+  //  arrForWatched.push(elementForModal);
+  //  localStorage.setItem('watched', JSON.stringify(arrForWatched));
+  //  addToQueue.setAttribute('disabled', true);
+  //  addToQueue.classList.add('inactive');
+  // } else if (watched.classList.contains('active')) {
+  //  let res = arrForQueue.filter(el => el.id !== elementForModal.id);
+  //  arrForQueue = res;
+  //  arrForQueue.push(elementForModal);
+  //  localStorage.setItem('queue', JSON.stringify(arrForQueue));
+  //  addToQueue.setAttribute('disabled', true);
+  //  addToQueue.classList.add('inactive');
+  //
+  //}
 }
 // function checkAddBtn{
 
@@ -108,11 +135,16 @@ function onClickWatched() {
   watched.classList.add('active');
   queue.classList.remove('active');
   const item = JSON.parse(localStorage.getItem('watched'));
-  if (item) {
+  console.log('~ item', item);
+  if (item && item.length > 0) {
     markUpForLibrary(item);
-    firstPaginationCall('watched'); //dont touch==============
+
+    firstPaginationCall('watched'); 
     // markUpModalLib()
+
+
   } else {
+    removePagination();
     markUpForLibrary([]);
   }
 }
@@ -120,10 +152,13 @@ function onClickQueue() {
   const item = JSON.parse(localStorage.getItem('queue'));
   queue.classList.add('active');
   watched.classList.remove('active');
-  if (item) {
+  if (item && item.length > 0) {
     markUpForLibrary(item);
     firstPaginationCall('queue'); //dont touch===========
   } else {
+    removePagination();
     markUpForLibrary([]);
   }
 }
+
+// paginationRemoveFromLib('watched');

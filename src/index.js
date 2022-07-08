@@ -1,5 +1,9 @@
 import { fetchTrends, fetchByName, fetchGenres } from './js/api/fetchApi';
-import { paginationMarkup } from './js/pagination';
+import {
+  paginationMarkup,
+  firstPaginationCall,
+  removePagination,
+} from './js/pagination';
 let findErr = document.querySelector('.form-text');
 
 let obj1 = {};
@@ -13,24 +17,32 @@ fetchGenres().then(data => {
     localStorage.setItem('genres', JSON.stringify(obj1));
   });
 });
-(function spin() {
-  galleryItem.innerHTML = '<div class="spinner-border"></div>';
 
-  //при загрузке сразу показать спиннеор, файнали использовать.
-  fetchTrends().then(res => {
-    markUpForGallery(res.results);
-    localStorage.setItem('response', JSON.stringify(res.results));
+// (function spin() {
+// galleryItem.innerHTML = '<div class="spinner-border"></div>';
 
-    paginationMarkup(res.page, res.total_pages);
-  });
+//при загрузке сразу показать спиннеор, файнали использовать.
 
-  form.addEventListener('submit', onSubmit);
-})();
+fetchTrends(JSON.parse(localStorage.getItem('page'))).then(res => {
+  // if (localStorage.getItem('page')) {
+  //   firstPaginationCall(res.total_pages, res.results);
+  // } else {
+  localStorage.setItem('response', JSON.stringify(res.results));
+  markUpForGallery(res.results);
+  paginationMarkup(res.page, res.total_pages);
+  // }
+});
+
+form.addEventListener('submit', onSubmit);
+// })();
+
+
 
 function onSubmit(evt) {
   evt.preventDefault();
   const query = evt.currentTarget.name.value.trim();
   if (!query) {
+    removePagination();
     findErr.classList.remove('visually-hidden');
     setTimeout(() => {
       findErr.classList.add('visually-hidden');
@@ -38,12 +50,15 @@ function onSubmit(evt) {
     return;
   }
 
-  (function spin() {
-    galleryItem.innerHTML = '<div class="spinner-border"></div>';
-
+  spin();
+  function spin() {
+    galleryItem.innerHTML =
+      '<div class="spinner"><span class="spinner__animation"></span><span class="spinner__info"></span></div>';
+    const spinEl = document.querySelector('.spinner');
     fetchByName(query)
       .then(res => {
         if (!res.results.length) {
+          removePagination();
           findErr.classList.remove('visually-hidden');
           setTimeout(() => {
             findErr.classList.add('visually-hidden');
@@ -59,8 +74,10 @@ function onSubmit(evt) {
       })
       .catch(err => {
         console.log(err);
-      });
-  })();
+      })
+
+      .finally(() => spinEl.classList.add('visually-hidden'));
+  }
 }
 
 function markUpForGallery(arr) {
@@ -84,19 +101,21 @@ function markUpForGallery(arr) {
             <div class="gallery-text__info">
 
 
-              <p class="gallery-text__genre"> ${el.genre_ids.length?el.genre_ids.map(gen => {
-                return (gen = obj1[gen]);
-              }).length > 3
-                ? el.genre_ids
-                    .map(gen => {
-                      return (gen = ' ' + obj1[gen]);
-                    })
-                    .slice(0, 2) + ', Other '
-                : el.genre_ids.map(gen => {
-                    return (gen = ' ' + obj1[gen]);
-                  })
-            : 'no genres found'
-                } | ${el.release_date.slice(0, 4)}</p>
+              <p class="gallery-text__genre"> ${
+                el.genre_ids.length
+                  ? el.genre_ids.map(gen => {
+                      return (gen = obj1[gen]);
+                    }).length > 3
+                    ? el.genre_ids
+                        .map(gen => {
+                          return (gen = ' ' + obj1[gen]);
+                        })
+                        .slice(0, 2) + ', Other '
+                    : el.genre_ids.map(gen => {
+                        return (gen = ' ' + obj1[gen]);
+                      })
+                  : 'no genres found'
+              } | ${el.release_date.slice(0, 4)}</p>
 
                 </div>
                 </div>

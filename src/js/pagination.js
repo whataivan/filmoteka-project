@@ -1,16 +1,28 @@
-import { fetchTrends, fetchByName, fetchGenres } from './api/fetchApi';
+import { fetchTrends, fetchByName } from './api/fetchApi';
 import { markUpForGallery } from '/src/index';
 const paginList = document.querySelector('.pagination__list');
 const paginBlock = document.querySelector('.pagination');
 const prevBtn = document.querySelector('.pagination__btn-prev');
 const nextBtn = document.querySelector('.pagination__btn-next');
+const PAGE = 'page';
 
-let currentPage;
+let currentPage = Number(JSON.parse(localStorage.getItem(PAGE))) || 1;
 let totalPages;
 let searchName = null;
+
+function changeCurrentPage(page) {
+  localStorage.setItem(PAGE, JSON.stringify(page));
+  currentPage = Number(JSON.parse(localStorage.getItem(PAGE)));
+}
+
+// function firstPaginationCall(pages, response) {
+//   markUpForGallery(response);
+//   paginationMarkup(currentPage, pages);
+// }
+
 function paginationMarkup(page, pages, name = null) {
-  currentPage = page;
-  totalPages = pages;
+  changeCurrentPage(page);
+  totalPages = Number(pages);
   searchName = name;
   paginBlock.removeEventListener('click', onClickPagination);
   let markup = '';
@@ -55,7 +67,7 @@ function paginationMarkup(page, pages, name = null) {
     paginList.innerHTML = markup;
     addEdgeClass();
     addCurrentClassBtn();
-    isEdgePage(page, pages);
+    isEdgePage();
     paginBlock.addEventListener('click', onClickPagination);
     return;
   }
@@ -63,18 +75,19 @@ function paginationMarkup(page, pages, name = null) {
   paginList.innerHTML = markup;
   addEdgeClass();
   addCurrentClassBtn();
-  isEdgePage(page, pages);
+  isEdgePage();
   paginBlock.addEventListener('click', onClickPagination);
 }
 
 function onClickPagination(evt) {
   if (evt.target.nodeName === 'BUTTON') {
     if (evt.target.dataset.btn === 'prev') {
-      currentPage -= 1;
+      changeCurrentPage(currentPage - 1);
       sendRequest();
     }
     if (evt.target.dataset.btn === 'next') {
-      currentPage += 1;
+      console.log('~ currentPage', currentPage);
+      changeCurrentPage(currentPage + 1);
       sendRequest();
     }
   }
@@ -87,7 +100,7 @@ function onClickPagination(evt) {
   if (String(currentPage) === evt.target.textContent) {
     return;
   }
-  currentPage = evt.target.textContent;
+  changeCurrentPage(evt.target.textContent);
   sendRequest();
 }
 
@@ -151,4 +164,9 @@ function sendRequest() {
     });
   }
 }
-export { paginationMarkup };
+
+function removePagination() {
+  paginBlock.innerHTML = '';
+}
+
+export { paginationMarkup, firstPaginationCall, removePagination };

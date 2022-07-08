@@ -3,17 +3,42 @@ const paginList = document.querySelector('.pagination__list');
 const paginBlock = document.querySelector('.pagination');
 const prevBtn = document.querySelector('.pagination__btn-prev');
 const nextBtn = document.querySelector('.pagination__btn-next');
+const PAGE = 'pageLib';
 
-let currentPage;
+let currentPage =
+  Number(JSON.parse(localStorage.getItem(PAGE))) ||
+  localStorage.setItem(PAGE, 1);
 let totalPages;
 let arrLib;
+
+function changeCurrentPage(page) {
+  localStorage.setItem(PAGE, JSON.stringify(page));
+  currentPage = Number(JSON.parse(localStorage.getItem(PAGE)));
+}
+
 function firstPaginationCall(arr) {
   arrLib = JSON.parse(localStorage.getItem(`${arr}`));
-  currentPage = 1;
   totalPages = Math.ceil(arrLib.length / 20);
-  markUpForLibrary(arrLib.slice(0, 20));
+  if (currentPage > totalPages) {
+    changeCurrentPage(totalPages);
+  }
+  const indexOfArrLib = (currentPage - 1) * 20;
+  markUpForLibrary(arrLib.slice(indexOfArrLib, indexOfArrLib + 20));
   paginationMarkupLib();
 }
+
+// function paginationRemoveFromLib(arr) {
+//   arrLib = JSON.parse(localStorage.getItem(`${arr}`));
+//   totalPages = Math.ceil(arrLib.length / 20);
+//   console.log('remove');
+//   if (currentPage > totalPages) {
+//     currentPage = totalPages;
+//   }
+//   const indexOfArrLib = (currentPage - 1) * 20;
+//   markUpForLibrary(arrLib.slice(indexOfArrLib, indexOfArrLib + 20));
+//   paginationMarkupLib();
+// }
+
 function paginationMarkupLib() {
   //   paginBlock.removeEventListener('click', onClickPagination);
   let markup = '';
@@ -73,11 +98,11 @@ function paginationMarkupLib() {
 function onClickPagination(evt) {
   if (evt.target.nodeName === 'BUTTON') {
     if (evt.target.dataset.btn === 'prev') {
-      currentPage -= 1;
+      changeCurrentPage(currentPage - 1);
       sendRequest();
     }
     if (evt.target.dataset.btn === 'next') {
-      currentPage += 1;
+      changeCurrentPage(currentPage + 1);
       sendRequest();
     }
   }
@@ -90,7 +115,7 @@ function onClickPagination(evt) {
   if (String(currentPage) === evt.target.textContent) {
     return;
   }
-  currentPage = Number(evt.target.textContent);
+  changeCurrentPage(Number(evt.target.textContent));
   sendRequest();
 }
 
@@ -146,4 +171,13 @@ function sendRequest() {
   console.log('~ currentPage', currentPage);
   console.log('~ totalPages', totalPages);
 }
-export { paginationMarkupLib, firstPaginationCall };
+function removePagination() {
+  paginBlock.innerHTML = '';
+}
+
+export {
+  paginationMarkupLib,
+  firstPaginationCall,
+  // paginationRemoveFromLib,
+  removePagination,
+};
