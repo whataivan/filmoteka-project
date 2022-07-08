@@ -77,7 +77,10 @@ function onClickDelete() {
 }
 function onClickAddtBtn() {
   if (watched.classList.contains('active')) {
-    checkDeleteBtn('watched');
+    let res = arrForWatched.filter(el => el.id !== forLocalStorage.id)
+      arrForWatched = res
+      arrForWatched.push(forLocalStorage)
+      localStorage.setItem('watched', JSON.stringify(arrForWatched))
 
   } else if (queue.classList.contains('active')) {
     checkDeleteBtn('queue');
