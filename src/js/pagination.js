@@ -165,4 +165,9 @@ function sendRequest() {
     });
   }
 }
-export { paginationMarkup, firstPaginationCall };
+
+function removePagination() {
+  paginBlock.innerHTML = '';
+}
+
+export { paginationMarkup, firstPaginationCall, removePagination };

@@ -1,5 +1,9 @@
 import { fetchTrends, fetchByName, fetchGenres } from './js/api/fetchApi';
-import { paginationMarkup, firstPaginationCall } from './js/pagination';
+import {
+  paginationMarkup,
+  firstPaginationCall,
+  removePagination,
+} from './js/pagination';
 let findErr = document.querySelector('.form-text');
 
 let obj1 = {};
@@ -34,6 +38,7 @@ function onSubmit(evt) {
   evt.preventDefault();
   const query = evt.currentTarget.name.value.trim();
   if (!query) {
+    removePagination();
     findErr.classList.remove('visually-hidden');
     setTimeout(() => {
       findErr.classList.add('visually-hidden');
@@ -47,6 +52,7 @@ function onSubmit(evt) {
     fetchByName(query)
       .then(res => {
         if (!res.results.length) {
+          removePagination();
           findErr.classList.remove('visually-hidden');
           setTimeout(() => {
             findErr.classList.add('visually-hidden');
