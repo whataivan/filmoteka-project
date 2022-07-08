@@ -9,17 +9,16 @@ const list = document.querySelector('.gallery');
 const backdrop = document.querySelector('.backdrop');
 
 let forLocalStorage
+let objFindItem;
 let arrForQueue = [];
 let arrForWatched = []
+
 if (localStorage.getItem('watched')) {
   arrForWatched = JSON.parse(localStorage.getItem('watched'))
 }
 if (localStorage.getItem('queue')) {
   arrForQueue = JSON.parse(localStorage.getItem('queue'))
 }
- 
-let objFindItem;
-
 
 list.addEventListener('click', onClick);
 //при нажатии на карточку обект карточки пущится в массив
@@ -33,7 +32,7 @@ function onClick(event) {
     backdrop.classList.remove('is-hidden');
     const currentId = event.target.closest('li').id;
     elementForModal = response.find(el => String(el.id) === currentId);
-   
+
     forLocalStorage = elementForModal
 
     createMarkUpModal(elementForModal);
@@ -129,7 +128,7 @@ function createMarkUpModal(obj) {
 
   addToWatched.addEventListener('click', onClickWatched);
   addToQueue.addEventListener('click', onClickQueue);
- 
+
   //проверка для вотчд==========================================
   let resFromLocalWatch = JSON.parse(localStorage.getItem('watched'))
   const finalRes = resFromLocalWatch.some(el =>
@@ -153,7 +152,7 @@ function createMarkUpModal(obj) {
   }
   //====================================== END
   function checkWatched() {
-   
+
     if (addToWatched.textContent === 'ADD TO WATCHED') {
       addToWatched.textContent = 'REMOVE FROM WATCHED'
       return 'ADD'
@@ -161,7 +160,7 @@ function createMarkUpModal(obj) {
       addToWatched.textContent = 'ADD TO WATCHED'
       return 'REMOVE'
     }
- 
+
   }
 
   function checkQueue() {
@@ -176,48 +175,37 @@ function createMarkUpModal(obj) {
   }
 
   function onClickWatched() {
-    // checkWatched()
+
     const resWatched = checkWatched()
-    console.log(resWatched);
+
     if (resWatched === 'REMOVE') {
-      console.log('rew');
       let resFromWatch = JSON.parse(localStorage.getItem('watched'))
-      console.log(resFromWatch);
       let resToStorage = resFromWatch.filter(el => el.id !== objFindItem.id)
-      console.log(resToStorage);
       localStorage.setItem('watched', JSON.stringify(resToStorage))
-    
-  
     } else {
-      
+      let res = arrForWatched.filter(el => el.id !== forLocalStorage.id)
+      arrForWatched = res
       arrForWatched.push(forLocalStorage)
       localStorage.setItem('watched', JSON.stringify(arrForWatched))
-      
     }
-    
   }
-
   function onClickQueue() {
     const resq = checkQueue()
     if (resq === 'REMOVE') {
-      // console.log('rew');
+      ;
       let resFromQ = JSON.parse(localStorage.getItem('queue'))
-      // console.log(resFromWatch);
       let resToStorage = resFromQ.filter(el => el.id !== objFindItem.id)
-      // console.log(resToStorage);
       localStorage.setItem('queue', JSON.stringify(resToStorage))
-    
-  
     } else {
-      
+      let res = arrForQueue.filter(el => el.id !== forLocalStorage.id)
+      arrForQueue = res
+
       arrForQueue.push(forLocalStorage)
       localStorage.setItem('queue', JSON.stringify(arrForQueue))
-      
+
     }
   }
 }
-
-// export { onClick, createMarkUpModal };
 
 ///////// Ф-ція закриття по Escape/////
 

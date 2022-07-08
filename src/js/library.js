@@ -19,6 +19,7 @@ Notiflix.Notify.init({
   },
 });
 
+
 const watched = document.querySelector('.library__button--watched');
 const queue = document.querySelector('.library__button--queue');
 let elementForModal;
@@ -32,8 +33,7 @@ if (localStorage.getItem('watched')) {
 if (localStorage.getItem('queue')) {
   arrForQueue = JSON.parse(localStorage.getItem('queue'));
 }
-arrForWatched = JSON.parse(localStorage.getItem('watched'));
-arrForQueue = JSON.parse(localStorage.getItem('queue'));
+// console.log(arrForQueue, arrForWatched);
 
 const gallery = document.querySelector('.gallery');
 const backdrop = document.querySelector('.backdrop');
@@ -53,11 +53,11 @@ function onClick(event) {
     const currentId = event.target.closest('li').id;
     elementForModal = response.find(el => String(el.id) === currentId);
 
-    forLocalStorage = elementForModal;
+    
     if (watched.classList.contains('active')) {
-      markUpModalLib(elementForModal, 'DELETE', 'add to queue');
+      markUpModalLib(elementForModal, 'REMOVE FROM LIST', 'add to queue');
     } else {
-      markUpModalLib(elementForModal, 'DELETE', 'add to watched');
+      markUpModalLib(elementForModal, 'REMOVE FROM LIST', 'add to watched');
     }
     deleteBtn = document.querySelector('.delete-btn');
     addToQueue = document.querySelector('.queue-btn');
@@ -66,47 +66,59 @@ function onClick(event) {
   }
 }
 function onClickDelete() {
-  console.log('dsfevsdf');
-  checkDeleteBtn();
+  if (watched.classList.contains('active')) {
+    checkDeleteBtn('watched');
+
+  } else if (queue.classList.contains('active')) {
+    checkDeleteBtn('queue');
+
+  }
+
 }
 function onClickAddtBtn() {
-  console.log('dsfevsdf');
-}
+  if (watched.classList.contains('active')) {
+    checkDeleteBtn('watched');
 
-function checkDeleteBtn() {
-  if (deleteBtn.textContent === 'DELETE') {
-    deleteBtn.textContent = 'DONE!';
+  } else if (queue.classList.contains('active')) {
+    checkDeleteBtn('queue');
+
+  }
+}
+// function checkAddBtn{
+
+// }
+function checkDeleteBtn(name) {
+
+  if (deleteBtn.textContent === 'REMOVE FROM LIST') {
+    
     Notiflix.Notify.success('Film was removed');
     deleteBtn.classList.add('visually-hidden');
-    let resFromWatch = JSON.parse(localStorage.getItem('watched'));
-    console.log(elementForModal);
-    let resToStorage = resFromWatch.filter(el => el.id !== elementForModal.id);
+    let resFromStorage = JSON.parse(localStorage.getItem(name));
+    
+    let resToStorage = resFromStorage.filter(el => el.id !== elementForModal.id);
 
-    localStorage.setItem('watched', JSON.stringify(resToStorage));
-    return 'ADD';
+    localStorage.setItem(name, JSON.stringify(resToStorage));
+    // return 'ADD';
+    if (name==='watched') {
+      onClickWatched()
+    } else if(name==='queue'){
+      onClickQueue() 
+    }
   }
   return;
-  // return 'REMOVE'
-
-  // }
 }
-// if (deleteBtn.textContent === 'ADD TO QUEUE') {
-//   deleteBtn.textContent = 'REMOVE FROM QUEUE'
-//   return 'ADD'
-// } else {
-//   deleteBtn.textContent = 'ADD TO QUEUE'
-//   return 'REMOVE'
-// }
-
 watched.addEventListener('click', onClickWatched);
 queue.addEventListener('click', onClickQueue);
 
 function onClickWatched() {
+  watched.classList.add('active');
   queue.classList.remove('active');
   const item = JSON.parse(localStorage.getItem('watched'));
   if (item) {
     markUpForLibrary(item);
-    firstPaginationCall('watched');
+    firstPaginationCall('watched');//dont touch==============
+    // markUpModalLib()
+    
   } else {
     markUpForLibrary([]);
   }
@@ -117,7 +129,7 @@ function onClickQueue() {
   watched.classList.remove('active');
   if (item) {
     markUpForLibrary(item);
-    firstPaginationCall('queue');
+    firstPaginationCall('queue');//dont touch===========
   } else {
     markUpForLibrary([]);
   }
