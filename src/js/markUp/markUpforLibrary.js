@@ -15,7 +15,7 @@ export function markUpForLibrary(arr) {
         <a class="gallery__link" href="#">
           <img
             class="gallery__img"
-            src='${urlImg}${el.poster_path}'
+            src='${el.poster_path?urlImg+el.poster_path:'https://s1.hostingkartinok.com/uploads/images/2022/07/40ceaea2e22257d2a139ca5a0c0b8ba9.jpg'}'
             alt="${el.original_title}"
              
           />

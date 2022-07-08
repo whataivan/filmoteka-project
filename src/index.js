@@ -84,19 +84,19 @@ function markUpForGallery(arr) {
             <div class="gallery-text__info">
 
 
-              <p class="gallery-text__genre"> ${
-                el.genre_ids.map(gen => {
-                  return (gen = obj1[gen]);
-                }).length > 3
-                  ? el.genre_ids
-                      .map(gen => {
-                        return (gen = ' ' + obj1[gen]);
-                      })
-                      .slice(0, 2) + ', Other '
-                  : el.genre_ids.map(gen => {
+              <p class="gallery-text__genre"> ${el.genre_ids.length?el.genre_ids.map(gen => {
+                return (gen = obj1[gen]);
+              }).length > 3
+                ? el.genre_ids
+                    .map(gen => {
                       return (gen = ' ' + obj1[gen]);
                     })
-              } | ${el.release_date.slice(0, 4)}</p>
+                    .slice(0, 2) + ', Other '
+                : el.genre_ids.map(gen => {
+                    return (gen = ' ' + obj1[gen]);
+                  })
+            : 'no genres found'
+                } | ${el.release_date.slice(0, 4)}</p>
 
                 </div>
                 </div>
