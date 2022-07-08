@@ -7,6 +7,8 @@ let  objFindItem;
 
 
 export default function markUpModalLib(obj, nameBtnFirst, nameBtnLast) {
+    if (obj) {
+      
     
     // //////////////////////////////////////////////////////
     // document.addEventListener('click', handleClick);
@@ -111,7 +113,7 @@ export default function markUpModalLib(obj, nameBtnFirst, nameBtnLast) {
       }
     }
   }
-  
+}
   
   
   ///////// Ф-ція закриття по Escape/////
