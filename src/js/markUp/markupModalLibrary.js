@@ -1,7 +1,7 @@
 import sprite from '../../images/symbol-defs.svg';
 
 
-
+let  objFindItem;
    
    const backdrop = document.querySelector('.backdrop')
 
@@ -91,80 +91,6 @@ export default function markUpModalLib(obj, nameBtnFirst, nameBtnLast) {
       // ///////////////////////////////////////////////////
     });
   
-    
-
-  
-    
-///////////////////////////////////////////////////////////////////////////////////////
-
-    // addToQueue.addEventListener('click', onClickQueue);
-   
-    //проверка для вотчд==========================================
-//     let resFromLocalWatch = JSON.parse(localStorage.getItem('watched'))
-//     const finalRes = resFromLocalWatch.some(el =>
-//       el.id === objFindItem.id
-//     )
-//     if (finalRes) {
-//       addToWatched.textContent = 'REMOVE FROM WATCHED'
-//     } else {
-//       addToWatched.textContent = 'ADD TO WATCHED'
-//     }
-  
-//     //================ //проверка для que
-//     let resFromLocalQueue = JSON.parse(localStorage.getItem('queue'))
-//     const finalResQ = resFromLocalQueue.some(el =>
-//       el.id === objFindItem.id
-//     )
-//     if (finalResQ) {
-//       addToQueue.textContent = 'REMOVE FROM QUEUE'
-//     } else {
-//       addToQueue.textContent = 'ADD TO QUEUE'
-//     }
-//     //====================================== END
-//     function checkWatched() {
-     
-//       if (addToWatched.textContent === 'ADD TO WATCHED') {
-//         addToWatched.textContent = 'REMOVE FROM WATCHED'
-//         return 'ADD'
-//       } else {
-//         addToWatched.textContent = 'ADD TO WATCHED'
-//         return 'REMOVE'
-//       }
-   
-//     }
-  
-//     function checkQueue() {
-  
-//       if (addToQueue.textContent === 'ADD TO QUEUE') {
-//         addToQueue.textContent = 'REMOVE FROM QUEUE'
-//         return 'ADD'
-//       } else {
-//         addToQueue.textContent = 'ADD TO QUEUE'
-//         return 'REMOVE'
-//       }
-//     }
-  
-//     function onClickWatched() {
-//       // checkWatched()
-//       const resWatched = checkWatched()
-//       console.log(resWatched);
-//       if (resWatched === 'REMOVE') {
-//         console.log('rew');
-//         let resFromWatch = JSON.parse(localStorage.getItem('watched'))
-//         console.log(resFromWatch);
-//         let resToStorage = resFromWatch.filter(el => el.id !== objFindItem.id)
-//         console.log(resToStorage);
-//         localStorage.setItem('watched', JSON.stringify(resToStorage))
-      
-    
-//       } else {
-        
-//         arrForWatched.push(forLocalStorage)
-//         localStorage.setItem('watched', JSON.stringify(arrForWatched))
-        
-//       }
-      
-//     }
   
     function onClickQueue() {
       const resq = checkQueue()
@@ -186,7 +112,7 @@ export default function markUpModalLib(obj, nameBtnFirst, nameBtnLast) {
     }
   }
   
-  // export { onClick, createMarkUpModal };
+  
   
   ///////// Ф-ція закриття по Escape/////
   
