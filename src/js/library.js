@@ -45,32 +45,40 @@ const backdrop = document.querySelector('.backdrop');
 //==================
 let deleteBtn;
 let addToQueue;
+
+let onButtonGenerate = '';
 //=============================
 gallery.addEventListener('click', onClick);
 
 function onClick(event) {
   if (!event.target.closest('li')) {
     return;
+  }
+  if (watched.classList.contains('active')) {
+    onButtonGenerate = 'watched';
   } else {
 
-    let response = JSON.parse(localStorage.getItem('watched'));
-    backdrop.classList.remove('is-hidden');
-    const currentId = event.target.closest('li').id;
-    elementForModal = response.find(el => String(el.id) === currentId);
-    console.log(elementForModal);
-
-
-    if (watched.classList.contains('active')) {
-      markUpModalLib(elementForModal, 'REMOVE FROM LIST', 'add to queue');
-    } else {
-      markUpModalLib(elementForModal, 'REMOVE FROM LIST', 'add to watched');
-    }
-    deleteBtn = document.querySelector('.delete-btn');
-    addToQueue = document.querySelector('.queue-btn');
-    deleteBtn.addEventListener('click', onClickDelete);
-    addToQueue.addEventListener('click', onClickAddtBtn);
+    onButtonGenerate = 'queue';
   }
+  let response = JSON.parse(localStorage.getItem(onButtonGenerate));
+
+  backdrop.classList.remove('is-hidden');
+  const currentId = event.target.closest('li').id;
+
+  elementForModal = response.find(el => String(el.id) === currentId);
+  console.log(elementForModal);
+  if (watched.classList.contains('active')) {
+    markUpModalLib(elementForModal, 'REMOVE FROM LIST', 'add to queue');
+  } else {
+    markUpModalLib(elementForModal, 'REMOVE FROM LIST', 'add to watched');
+
+  }
+  deleteBtn = document.querySelector('.delete-btn');
+  addToQueue = document.querySelector('.queue-btn');
+  deleteBtn.addEventListener('click', onClickDelete);
+  addToQueue.addEventListener('click', onClickAddtBtn);
 }
+
 function onClickDelete() {
   if (watched.classList.contains('active')) {
     checkDeleteBtn('watched');

@@ -57,13 +57,16 @@ function onSubmit(evt) {
     const spinEl = document.querySelector('.spinner');
     fetchByName(query)
       .then(res => {
+        console.log(res.results.length);
         if (!res.results.length) {
           removePagination();
           findErr.classList.remove('visually-hidden');
           setTimeout(() => {
             findErr.classList.add('visually-hidden');
           }, 3000);
-
+          fetchTrends(1).then(result => {
+            markUpForGallery(result.results);
+          });
           evt.target.reset();
           return;
         }
