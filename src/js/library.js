@@ -1,6 +1,10 @@
 import { markUpForLibrary } from './markUp/markUpforLibrary';
 
-import { firstPaginationCall, removePagination } from './paginationLib';
+import {
+  firstPaginationCall,
+  removePagination,
+  paginationMarkupLib,
+} from './paginationLib';
 import markUpModalLib from './markUp/markupModalLibrary';
 import Notiflix from 'notiflix';
 

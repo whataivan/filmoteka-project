@@ -1,6 +1,5 @@
 export { fetchTrends, fetchByName, fetchGenres };
 const key = 'fdee5313a0b876498560bfe4baaab806';
-
 function fetchByName(name, page = 1) {
   const url = `https://api.themoviedb.org/3/search/movie?`;
 
@@ -17,7 +16,6 @@ function fetchTrends(page = 1) {
   return fetch(
     `https://api.themoviedb.org/3/trending/movie/day?api_key=${key}&page=${page}&language=en-US`
   ).then(res => res.json());
-
   // .then(res=>console.log(res)).catch(err=>console.log(err))
 }
 

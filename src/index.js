@@ -21,14 +21,14 @@ fetchGenres().then(data => {
   galleryItem.innerHTML = '<div class="spinner-border"></div>';
 
   //при загрузке сразу показать спиннеор, файнали использовать.
-  fetchTrends().then(res => {
-    if (localStorage.getItem('page')) {
-      firstPaginationCall(res.total_pages);
-    } else {
-      localStorage.setItem('response', JSON.stringify(res.results));
-      markUpForGallery(res.results);
-      paginationMarkup(res.page, res.total_pages);
-    }
+  fetchTrends(Number(JSON.parse(localStorage.getItem('page')))).then(res => {
+    // if (localStorage.getItem('page')) {
+    //   firstPaginationCall(res.total_pages, res.results);
+    // } else {
+    localStorage.setItem('response', JSON.stringify(res.results));
+    markUpForGallery(res.results);
+    paginationMarkup(res.page, res.total_pages);
+    // }
   });
 
   form.addEventListener('submit', onSubmit);
