@@ -14,7 +14,7 @@ export function markUpForLibrary(arr) {
             class="gallery__img"
             src='${urlImg}${el.poster_path}'
             alt=""
-            width = '280'
+            width = '280' 
           />
           <div class="gallery-text">
             <p class="gallery-text__title">${el.original_title}</p>
