@@ -33,14 +33,12 @@ if (localStorage.getItem('watched')) {
 if (localStorage.getItem('queue')) {
   arrForQueue = JSON.parse(localStorage.getItem('queue'));
 }
-// console.log(arrForQueue, arrForWatched);
 
 const gallery = document.querySelector('.gallery');
 const backdrop = document.querySelector('.backdrop');
 //==================
 let deleteBtn;
 let addToQueue;
-
 //=============================
 gallery.addEventListener('click', onClick);
 
