@@ -16,7 +16,7 @@ function fetchTrends(page = 1) {
 
   return fetch(
     `https://api.themoviedb.org/3/movie/top_rated?api_key=${key}&page=${page}&language=en-US`
-  ).then(res => res.json())
+  ).then(res => res.json());
   // .then(res=>console.log(res)).catch(err=>console.log(err))
 }
 
