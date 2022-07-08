@@ -1,6 +1,6 @@
 import { markUpForLibrary } from './markUp/markUpforLibrary';
 
-import { firstPaginationCall, paginationRemoveFromLib } from './paginationLib';
+import { firstPaginationCall, removePagination } from './paginationLib';
 import markUpModalLib from './markUp/markupModalLibrary';
 import Notiflix from 'notiflix';
 
@@ -108,11 +108,13 @@ function onClickWatched() {
   watched.classList.add('active');
   queue.classList.remove('active');
   const item = JSON.parse(localStorage.getItem('watched'));
-  if (item) {
+  console.log('~ item', item);
+  if (item && item.length > 0) {
     markUpForLibrary(item);
     firstPaginationCall('watched'); //dont touch==============
     // markUpModalLib()
   } else {
+    removePagination();
     markUpForLibrary([]);
   }
 }

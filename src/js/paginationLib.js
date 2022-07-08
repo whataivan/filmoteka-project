@@ -160,4 +160,13 @@ function sendRequest() {
   console.log('~ currentPage', currentPage);
   console.log('~ totalPages', totalPages);
 }
-export { paginationMarkupLib, firstPaginationCall, paginationRemoveFromLib };
+function removePagination() {
+  paginBlock.innerHTML = '';
+}
+
+export {
+  paginationMarkupLib,
+  firstPaginationCall,
+  paginationRemoveFromLib,
+  removePagination,
+};
