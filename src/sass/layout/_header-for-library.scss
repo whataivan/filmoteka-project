@@ -2,7 +2,6 @@
   padding-top: 44px;
   padding-bottom: 62px;
   height: 230px;
-
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -26,8 +25,7 @@
   @include mq(tablet) {
     padding-top: 50px;
     padding-bottom: 60px;
-    height: 219px;
-
+    height: 216px;
     background-image: linear-gradient(
         to right,
         rgba(0, 0, 0, 0.56),
@@ -66,26 +64,42 @@
 }
 
 .header-library__container {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  // display: flex;
+  // flex-direction: column;
+  // align-items: center;
+  // flex-wrap: wrap;
+  // justify-content: space-between;
 
   @include mq(mobile-only) {
     max-width: 320px;
   }
 
   @include mq(tablet) {
-    align-items: baseline;
-    justify-content: space-around;
+    // align-items: baseline;
+    // justify-content: space-around;
     text-align: center;
   }
+}
+
+.header-library__inner-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.nav-library {
+  margin-left: auto;
 }
 
 .logo-library__icon {
   display: inline-block;
   fill: currentColor;
   align-items: baseline;
+}
+
+.logo__library {
+  @include mq(desktop) {
+    margin-right: auto;
+  }
 }
 
 // ///////////Filmoteka///////////////////
@@ -108,10 +122,6 @@
     &:focus {
       color: #ff6b01;
     }
-  }
-
-  @include mq(desktop) {
-    margin-right: 898px;
   }
 }
 
@@ -175,7 +185,7 @@
 
 // /////////////////////button //////////////////////////////////////
 .library {
-  display: flex;
+  display: block;
   flex-direction: row;
   margin-top: 65px;
 

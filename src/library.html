@@ -4,22 +4,41 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Library</title>
-
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/modern-normalize@1.1.0/modern-normalize.min.css"
     />
     <link rel="stylesheet" href="/css/main.min.css" />
   </head>
-  <body>
-    <!-- Так добавляются фрагменты в главные HTML-файлы страниц.  -->
 
-    <include src="./partials/library_header.html"></include>
-    <main>
-      <include src="./partials/gallery.html"></include>
-      <include src="./partials/pagination.html"></include>
-    </main>
-    <include src="./partials/footer.html"></include>
-    <script src="./js/library.js" type="module"></script>
+  <body>
+    <div class="body-wrapper">
+      <div class="container modal__container">
+        <ul class="gallery_lib"></ul>
+      </div>
+      <div class="backdrop is-hidden" data-modal></div>
+      <!-- Так добавляются фрагменты в главные HTML-файлы страниц.  -->
+
+
+      <include src="./partials/library_header.html"></include>
+      <main>
+        <include src="./partials/gallery.html"></include>
+        <include src="./partials/pagination.html"></include>
+      </main>
+      <include src="./partials/footer.html"></include>
+      <script src="./js/library.js" type="module"></script>
+
+      
+      <script src="./js/team-modal-library.js" type="module"></script>
+      <script src="./js/team-modal.js" type="module"></script>
+      <script src="./js/markUp/markupModalLibrary.js" type="module"></script>
+
+    </div>
   </body>
 </html>

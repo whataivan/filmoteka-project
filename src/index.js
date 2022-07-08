@@ -13,18 +13,22 @@ fetchGenres().then(data => {
     localStorage.setItem('genres', JSON.stringify(obj1));
   });
 });
+(function spin() {
+  galleryItem.innerHTML = '<div class="spinner-border"></div>';
 
-fetchTrends().then(res => {
-  if (localStorage.getItem('page')) {
-    firstPaginationCall(res.total_pages);
-  } else {
-    localStorage.setItem('response', JSON.stringify(res.results));
-    markUpForGallery(res.results);
-    paginationMarkup(res.page, res.total_pages);
-  }
-});
+  //при загрузке сразу показать спиннеор, файнали использовать.
+  fetchTrends().then(res => {
+    if (localStorage.getItem('page')) {
+      firstPaginationCall(res.total_pages);
+    } else {
+      localStorage.setItem('response', JSON.stringify(res.results));
+      markUpForGallery(res.results);
+      paginationMarkup(res.page, res.total_pages);
+    }
+  });
 
-form.addEventListener('submit', onSubmit);
+  form.addEventListener('submit', onSubmit);
+})();
 
 function onSubmit(evt) {
   evt.preventDefault();
@@ -37,32 +41,36 @@ function onSubmit(evt) {
     return;
   }
 
-  fetchByName(query)
-    .then(res => {
-      if (!res.results.length) {
-        findErr.classList.remove('visually-hidden');
-        setTimeout(() => {
-          findErr.classList.add('visually-hidden');
-        }, 3000);
+  (function spin() {
+    galleryItem.innerHTML = '<div class="spinner-border"></div>';
 
-        evt.target.reset();
-        return;
-      }
-      localStorage.setItem('response', JSON.stringify(res.results));
-      markUpForGallery(res.results);
+    fetchByName(query)
+      .then(res => {
+        if (!res.results.length) {
+          findErr.classList.remove('visually-hidden');
+          setTimeout(() => {
+            findErr.classList.add('visually-hidden');
+          }, 3000);
 
-      paginationMarkup(res.page, res.total_pages, query);
-    })
-    .catch(err => {
-      console.log(err);
-    });
+          evt.target.reset();
+          return;
+        }
+        localStorage.setItem('response', JSON.stringify(res.results));
+        markUpForGallery(res.results);
+
+        paginationMarkup(res.page, res.total_pages, query);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  })();
 }
 
 function markUpForGallery(arr) {
   galleryItem.innerHTML = '';
   let a = arr.reduce(
     (acc, el) =>
-      (acc += `<li id='${el.id}' class="gallery__item">
+      (acc += `<li id='${el.id}' class="gallery__item" >
       
           <img 
             class="gallery__img"

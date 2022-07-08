@@ -32,6 +32,7 @@
 }
 
 .gallery__item {
+  transition: 0.3s;
   @include mq(tablet-only) {
     width: calc((100% / 2) - 16px);
   }
@@ -49,6 +50,10 @@
       //   margin-bottom: 0;
     }
   }
+
+  &:hover {
+    transform: scale(1.02);
+  }
 }
 
 .gallery__item:hover {
@@ -60,6 +65,13 @@
 }
 
 .gallery-text {
+  // @media (prefers-color-scheme: dark) {
+  //   h2,
+  //   h3,
+  //   span {
+  //     color: #fff;
+  //   }
+  // }
   margin-top: 8px;
   font-size: 12px;
   font-weight: 500;
@@ -75,6 +87,11 @@
 .gallery-text__title {
   text-transform: uppercase;
   color: var(--main-black-color);
+  // @media (prefers-color-scheme: dark) {
+  //   & {
+  //     color: #fff;
+  //   }
+  // }
 }
 
 .gallery-text__info {
