@@ -114,7 +114,7 @@ function createMarkUpModal(obj) {
 
   closeBtn.addEventListener('click', () => {
     backdrop.classList.add('is-hidden');
-    arrForLocalStorage = []
+    
     // ///////////////////////////////////////////
     document.removeEventListener('click', handleClick);
     document.removeEventListener('keydown', onEscape);
@@ -212,7 +212,7 @@ function createMarkUpModal(obj) {
 function onEscape(event) {
   if (event.keyCode === 27) {
     backdrop.classList.add('is-hidden');
-    arrForLocalStorage = []
+    
   }
 }
 
@@ -220,7 +220,7 @@ function onEscape(event) {
 function handleClick(event) {
   if (event.target === backdrop) {
     backdrop.classList.add('is-hidden');
-    arrForLocalStorage = []
+    
   }
 }
 

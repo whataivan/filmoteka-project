@@ -33,14 +33,12 @@ if (localStorage.getItem('watched')) {
 if (localStorage.getItem('queue')) {
   arrForQueue = JSON.parse(localStorage.getItem('queue'));
 }
-// console.log(arrForQueue, arrForWatched);
 
 const gallery = document.querySelector('.gallery');
 const backdrop = document.querySelector('.backdrop');
 //==================
 let deleteBtn;
 let addToQueue;
-
 //=============================
 gallery.addEventListener('click', onClick);
 
@@ -73,7 +71,10 @@ function onClickDelete() {
 }
 function onClickAddtBtn() {
   if (watched.classList.contains('active')) {
-    checkDeleteBtn('watched');
+    let res = arrForWatched.filter(el => el.id !== forLocalStorage.id);
+    arrForWatched = res;
+    arrForWatched.push(forLocalStorage);
+    localStorage.setItem('watched', JSON.stringify(arrForWatched));
   } else if (queue.classList.contains('active')) {
     checkDeleteBtn('queue');
   }
@@ -122,10 +123,11 @@ function onClickQueue() {
   const item = JSON.parse(localStorage.getItem('queue'));
   queue.classList.add('active');
   watched.classList.remove('active');
-  if (item) {
+  if (item && item.length > 0) {
     markUpForLibrary(item);
     firstPaginationCall('queue'); //dont touch===========
   } else {
+    removePagination();
     markUpForLibrary([]);
   }
 }
