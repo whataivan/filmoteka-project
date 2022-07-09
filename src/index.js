@@ -18,19 +18,18 @@ fetchGenres().then(data => {
   });
 });
 
-// (function spin() {
-// galleryItem.innerHTML = '<div class="spinner-border"></div>';
+spin();
+function spin() {
+  galleryItem.innerHTML =
+    '<div class="spinner"><span class="spinner__animation"></span><span class="spinner__info"></span></div>';
 
-//при загрузке сразу показать спиннеор, файнали использовать.
-
-fetchTrends(JSON.parse(localStorage.getItem('page'))).then(res => {
-  localStorage.setItem('response', JSON.stringify(res.results));
-  markUpForGallery(res.results);
-  paginationMarkup(res.page, res.total_pages);
-});
-
+  fetchTrends(JSON.parse(localStorage.getItem('page'))).then(res => {
+    localStorage.setItem('response', JSON.stringify(res.results));
+    markUpForGallery(res.results);
+    paginationMarkup(res.page, res.total_pages);
+  });
+}
 form.addEventListener('submit', onSubmit);
-// })();
 
 function onSubmit(evt) {
   evt.preventDefault();
