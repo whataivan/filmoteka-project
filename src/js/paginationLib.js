@@ -5,9 +5,7 @@ const prevBtn = document.querySelector('.pagination__btn-prev');
 const nextBtn = document.querySelector('.pagination__btn-next');
 const PAGE = 'pageLib';
 
-let currentPage =
-  Number(JSON.parse(localStorage.getItem(PAGE))) ||
-  localStorage.setItem(PAGE, 1);
+let currentPage = Number(JSON.parse(localStorage.getItem(PAGE)));
 let totalPages;
 let arrLib;
 
@@ -19,6 +17,10 @@ function changeCurrentPage(page) {
 function firstPaginationCall(arr) {
   arrLib = JSON.parse(localStorage.getItem(`${arr}`));
   totalPages = Math.ceil(arrLib.length / 20);
+  console.log('~ currentPage', currentPage);
+  if (!currentPage) {
+    changeCurrentPage(1);
+  }
   if (currentPage > totalPages) {
     changeCurrentPage(totalPages);
   }
