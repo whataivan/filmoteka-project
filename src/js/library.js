@@ -64,14 +64,14 @@ function onClick(event) {
 
   backdrop.classList.remove('is-hidden');
   const currentId = event.target.closest('li').id;
-
+  
   elementForModal = response.find(el => String(el.id) === currentId);
-  console.log(elementForModal);
+ 
+
   if (watched.classList.contains('active')) {
     markUpModalLib(elementForModal, 'REMOVE FROM LIST', 'add to queue');
   } else {
     markUpModalLib(elementForModal, 'REMOVE FROM LIST', 'add to watched');
-
   }
   deleteBtn = document.querySelector('.delete-btn');
   addToQueue = document.querySelector('.queue-btn');

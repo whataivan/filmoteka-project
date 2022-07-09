@@ -24,25 +24,23 @@ fetchGenres().then(data => {
 //при загрузке сразу показать спиннеор, файнали использовать.
 
 fetchTrends(JSON.parse(localStorage.getItem('page'))).then(res => {
-  // if (localStorage.getItem('page')) {
-  //   firstPaginationCall(res.total_pages, res.results);
-  // } else {
   localStorage.setItem('response', JSON.stringify(res.results));
   markUpForGallery(res.results);
   paginationMarkup(res.page, res.total_pages);
-  // }
 });
 
 form.addEventListener('submit', onSubmit);
 // })();
 
-
-
 function onSubmit(evt) {
   evt.preventDefault();
   const query = evt.currentTarget.name.value.trim();
   if (!query) {
-    removePagination();
+    fetchTrends(JSON.parse(localStorage.getItem('page'))).then(res => {
+      localStorage.setItem('response', JSON.stringify(res.results));
+      markUpForGallery(res.results);
+      paginationMarkup(res.page, res.total_pages);
+    });
     findErr.classList.remove('visually-hidden');
     setTimeout(() => {
       findErr.classList.add('visually-hidden');
@@ -59,7 +57,11 @@ function onSubmit(evt) {
       .then(res => {
         console.log(res.results.length);
         if (!res.results.length) {
-          removePagination();
+          fetchTrends(JSON.parse(localStorage.getItem('page'))).then(res => {
+            localStorage.setItem('response', JSON.stringify(res.results));
+            markUpForGallery(res.results);
+            paginationMarkup(res.page, res.total_pages);
+          });
           findErr.classList.remove('visually-hidden');
           setTimeout(() => {
             findErr.classList.add('visually-hidden');
