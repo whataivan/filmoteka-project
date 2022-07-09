@@ -166,5 +166,5 @@ function onClickQueue() {
     markUpForLibrary([]);
   }
 }
-
+}
 // paginationRemoveFromLib('watched');
