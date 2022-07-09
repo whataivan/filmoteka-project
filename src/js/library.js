@@ -26,9 +26,7 @@ Notiflix.Notify.init({
 
 const watched = document.querySelector('.library__button--watched');
 const queue = document.querySelector('.library__button--queue');
-
-let elementForModal;
-
+let elementForModal; //елемент открытой картинки
 onClickWatched(); //dont touch
 
 let arrForQueue = [];
@@ -45,11 +43,22 @@ const backdrop = document.querySelector('.backdrop');
 //==================
 let deleteBtn;
 let addToQueue;
-
-let onButtonGenerate = '';
 //=============================
 gallery.addEventListener('click', onClick);
+// function checkAddBtn() {
+//   if (watched.classList.contains('active')) {
+//    const res = JSON.parse(localStorage.getItem('watched')).some(el=>el.id===elementForModal.id)
+//    console.log(res);
+//    if (res) {
+//     addToQueue.setAttribute('disabled', true)
+//    }
 
+//   } else if (queue.classList.contains('active')) {
+//     checkDeleteBtn('queue');
+
+//   }
+// }
+let onButtonGenerate = '';
 function onClick(event) {
   if (!event.target.closest('li')) {
     return;
@@ -57,16 +66,15 @@ function onClick(event) {
   if (watched.classList.contains('active')) {
     onButtonGenerate = 'watched';
   } else {
-
     onButtonGenerate = 'queue';
   }
   let response = JSON.parse(localStorage.getItem(onButtonGenerate));
-
+  console.log('~ response', response);
   backdrop.classList.remove('is-hidden');
   const currentId = event.target.closest('li').id;
-  
+  console.log('~ currentId', currentId);
   elementForModal = response.find(el => String(el.id) === currentId);
- 
+  console.log('~ elementForModal', elementForModal);
 
   if (watched.classList.contains('active')) {
     markUpModalLib(elementForModal, 'REMOVE FROM LIST', 'add to queue');
@@ -78,7 +86,6 @@ function onClick(event) {
   deleteBtn.addEventListener('click', onClickDelete);
   addToQueue.addEventListener('click', onClickAddtBtn);
 }
-
 function onClickDelete() {
   if (watched.classList.contains('active')) {
     checkDeleteBtn('watched');
@@ -87,35 +94,23 @@ function onClickDelete() {
   }
 }
 function onClickAddtBtn() {
-
-  if (watched.classList.contains('active')) {
-    let res = arrForWatched.filter(el => el.id !== forLocalStorage.id);
+  if (queue.classList.contains('active')) {
+    let res = arrForWatched.filter(el => el.id !== elementForModal.id);
     arrForWatched = res;
-    arrForWatched.push(forLocalStorage);
+    arrForWatched.push(elementForModal);
     localStorage.setItem('watched', JSON.stringify(arrForWatched));
-  } else if (queue.classList.contains('active')) {
-    checkDeleteBtn('queue');
-
-  // if (queue.classList.contains('active')) {
-  //  let res = arrForWatched.filter(el => el.id !== elementForModal.id);
-  //  arrForWatched = res;
-  //  arrForWatched.push(elementForModal);
-  //  localStorage.setItem('watched', JSON.stringify(arrForWatched));
-  //  addToQueue.setAttribute('disabled', true);
-  //  addToQueue.classList.add('inactive');
-  // } else if (watched.classList.contains('active')) {
-  //  let res = arrForQueue.filter(el => el.id !== elementForModal.id);
-  //  arrForQueue = res;
-  //  arrForQueue.push(elementForModal);
-  //  localStorage.setItem('queue', JSON.stringify(arrForQueue));
-  //  addToQueue.setAttribute('disabled', true);
-  //  addToQueue.classList.add('inactive');
-  //
-  //}
+    addToQueue.setAttribute('disabled', true);
+    addToQueue.classList.add('inactive');
+  } else if (watched.classList.contains('active')) {
+    let res = arrForQueue.filter(el => el.id !== elementForModal.id);
+    arrForQueue = res;
+    arrForQueue.push(elementForModal);
+    localStorage.setItem('queue', JSON.stringify(arrForQueue));
+    addToQueue.setAttribute('disabled', true);
+    addToQueue.classList.add('inactive');
+  }
 }
-// function checkAddBtn{
 
-// }
 function checkDeleteBtn(name) {
   if (deleteBtn.textContent === 'REMOVE FROM LIST') {
     Notiflix.Notify.success('Film was removed');
@@ -145,10 +140,8 @@ function onClickWatched() {
   const item = JSON.parse(localStorage.getItem('watched'));
   console.log('~ item', item);
   if (item && item.length > 0) {
-
     firstPaginationCall('watched'); //dont touch==============
     // markUpForLibrary(item);
-
   } else {
     removePagination();
     markUpForLibrary([]);
