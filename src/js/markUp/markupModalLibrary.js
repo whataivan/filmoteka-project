@@ -1,26 +1,22 @@
 import sprite from '../../images/symbol-defs.svg';
 
+let objFindItem;
 
-let  objFindItem;
-   
-   const backdrop = document.querySelector('.backdrop')
-
+const backdrop = document.querySelector('.backdrop');
 
 export default function markUpModalLib(obj, nameBtnFirst, nameBtnLast) {
-    if (obj) {
-      
-    
+  if (obj) {
     // //////////////////////////////////////////////////////
-    // document.addEventListener('click', handleClick);
-    // document.addEventListener('keydown', onEscape);
+    document.addEventListener('click', handleClick);
+    document.addEventListener('keydown', onEscape);
     // ////////////////////////////////////////////////////
     const genres = JSON.parse(localStorage.getItem('genres'));
     const urlImg = 'https://image.tmdb.org/t/p/w500';
 
     objFindItem = obj;
-   
+
     //при нажатии на карточку обект карточки пущится в массив
-    
+
     const markUp = `
       <div class="modal-group">
         <button data-modal-close class="modal-group__close-btn">
@@ -33,7 +29,11 @@ export default function markUpModalLib(obj, nameBtnFirst, nameBtnLast) {
         <div class="modal-group__img-wrapper">
           <img
             class="modal-group__img"
-            src="${obj.poster_path?urlImg+obj.poster_path:'https://s1.hostingkartinok.com/uploads/images/2022/07/40ceaea2e22257d2a139ca5a0c0b8ba9.jpg'}"
+            src="${
+              obj.poster_path
+                ? urlImg + obj.poster_path
+                : 'https://s1.hostingkartinok.com/uploads/images/2022/07/40ceaea2e22257d2a139ca5a0c0b8ba9.jpg'
+            }"
             alt="${obj.original_title}"
             width="280"
           />
@@ -45,8 +45,9 @@ export default function markUpModalLib(obj, nameBtnFirst, nameBtnLast) {
               <tr>
                 <td class="table__title">Vote / Votes</td>
                 <td class="table__text">
-                  <span class="gallery-text__rating table-text-orange">${obj.vote_average
-      }</span>
+                  <span class="gallery-text__rating table-text-orange">${
+                    obj.vote_average
+                  }</span>
                   /
                   <span class="table-text-grey">${obj.vote_count}</span>
                 </td>
@@ -63,8 +64,8 @@ export default function markUpModalLib(obj, nameBtnFirst, nameBtnLast) {
               <tr>
                 <td class="table__title">Genre</td>
                 <td class="table__text">${obj.genre_ids.map(gen => {
-        return (gen = ' ' + genres[gen]);
-      })}</td>
+                  return (gen = ' ' + genres[gen]);
+                })}</td>
               </tr>
             </tbody>
           </table>
@@ -79,56 +80,48 @@ export default function markUpModalLib(obj, nameBtnFirst, nameBtnLast) {
           </div>
         </div>
       </div>`;
-  
-      backdrop.innerHTML = markUp;
+
+    backdrop.innerHTML = markUp;
 
     const closeBtn = document.querySelector('.modal-group__close-btn');
-  
+
     closeBtn.addEventListener('click', () => {
       backdrop.classList.add('is-hidden');
-      
+
       // ///////////////////////////////////////////
       document.removeEventListener('click', handleClick);
       document.removeEventListener('keydown', onEscape);
       // ///////////////////////////////////////////////////
     });
-  
-  
+
     function onClickQueue() {
-      const resq = checkQueue()
+      const resq = checkQueue();
       if (resq === 'REMOVE') {
         // console.log('rew');
-        let resFromQ = JSON.parse(localStorage.getItem('queue'))
+        let resFromQ = JSON.parse(localStorage.getItem('queue'));
         // console.log(resFromWatch);
-        let resToStorage = resFromQ.filter(el => el.id !== objFindItem.id)
+        let resToStorage = resFromQ.filter(el => el.id !== objFindItem.id);
         // console.log(resToStorage);
-        localStorage.setItem('queue', JSON.stringify(resToStorage))
-      
-    
+        localStorage.setItem('queue', JSON.stringify(resToStorage));
       } else {
-        
-        arrForQueue.push(forLocalStorage)
-        localStorage.setItem('queue', JSON.stringify(arrForQueue))
-        
+        arrForQueue.push(forLocalStorage);
+        localStorage.setItem('queue', JSON.stringify(arrForQueue));
       }
     }
   }
 }
-  
-  
-  ///////// Ф-ція закриття по Escape/////
-  
-  function onEscape(event) {
-    if (event.keyCode === 27) {
-      backdrop.classList.add('is-hidden');
-      arrForLocalStorage = []
-    }
+
+///////// Ф-ція закриття по Escape/////
+
+function onEscape(event) {
+  if (event.keyCode === 27) {
+    backdrop.classList.add('is-hidden');
   }
-  
-  ///////// Ф-ція закриття модалки  handleClick за кліком поза межами модалки/////
-  function handleClick(event) {
-    if (event.target === forModal) {
-      backdrop.classList.add('is-hidden');
-      
-    }
+}
+
+///////// Ф-ція закриття модалки  handleClick за кліком поза межами модалки/////
+function handleClick(event) {
+  if (event.target.nodeName === 'DIV') {
+    backdrop.classList.add('is-hidden');
   }
+}

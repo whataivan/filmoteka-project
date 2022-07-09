@@ -140,9 +140,8 @@ function onClickWatched() {
   const item = JSON.parse(localStorage.getItem('watched'));
   console.log('~ item', item);
   if (item && item.length > 0) {
-    markUpForLibrary(item);
-
     firstPaginationCall('watched'); //dont touch==============
+    // markUpForLibrary(item);
   } else {
     removePagination();
     markUpForLibrary([]);
@@ -153,8 +152,8 @@ function onClickQueue() {
   queue.classList.add('active');
   watched.classList.remove('active');
   if (item && item.length > 0) {
-    markUpForLibrary(item);
     firstPaginationCall('queue'); //dont touch===========
+    // markUpForLibrary(item);
   } else {
     removePagination();
     markUpForLibrary([]);
