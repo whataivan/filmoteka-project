@@ -141,22 +141,28 @@ function createMarkUpModal(obj) {
   addToQueue.addEventListener('click', onClickQueue);
 
   //проверка для вотчд==========================================
-  let resFromLocalWatch = JSON.parse(localStorage.getItem('watched'));
-  const finalRes = resFromLocalWatch.some(el => el.id === objFindItem.id);
+  let resFromLocalWatch = JSON.parse(localStorage.getItem('watched'));   
+  if (resFromLocalWatch) {                          //если будут вопросы с ошибкой some
+    const finalRes = resFromLocalWatch.some(el => el.id === objFindItem.id);
   if (finalRes) {
     addToWatched.textContent = 'REMOVE FROM WATCHED';
   } else {
     addToWatched.textContent = 'ADD TO WATCHED';
   }
+  }
+  
 
   //================ //проверка для que
   let resFromLocalQueue = JSON.parse(localStorage.getItem('queue'));
-  const finalResQ = resFromLocalQueue.some(el => el.id === objFindItem.id);
+   if (resFromLocalQueue) {
+    const finalResQ = resFromLocalQueue.some(el => el.id === objFindItem.id);
   if (finalResQ) {
     addToQueue.textContent = 'REMOVE FROM QUEUE';
   } else {
     addToQueue.textContent = 'ADD TO QUEUE';
   }
+   }                                           //если будут вопросы с ошибкой some
+  
   //====================================== END
   function checkWatched() {
     if (addToWatched.textContent === 'ADD TO WATCHED') {

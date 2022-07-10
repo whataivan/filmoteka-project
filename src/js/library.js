@@ -37,9 +37,13 @@ let arrForQueue = [];
 let arrForWatched = [];
 if (localStorage.getItem('watched')) {
   arrForWatched = JSON.parse(localStorage.getItem('watched'));
+} else {
+  localStorage.setItem('watched', JSON.stringify([]))
 }
 if (localStorage.getItem('queue')) {
   arrForQueue = JSON.parse(localStorage.getItem('queue'));
+}else {
+  localStorage.setItem('queue', JSON.stringify([]))
 }
 
 const gallery = document.querySelector('.gallery');
@@ -114,20 +118,20 @@ function onClickDelete() {
 }
 function onClickAddtBtn() {
   if (queue.classList.contains('active')) {
-    localStorage.setItem('watched', JSON.stringify(arrForWatched));
+    // localStorage.setItem('watched', JSON.stringify(arrForWatched));
     arrForWatched = JSON.parse(localStorage.getItem('watched'));
     // console.log(arrForQueue.length);
 
     let res = arrForWatched.filter(el => el.id !== elementForModal.id);
     arrForWatched = res;
     arrForWatched.push(elementForModal);
-    localStorage.setItem('watched', JSON.stringify(arrForWatched));
+    localStorage.setItem('watched', JSON.stringify(arrForWatched));//problem 
     Notiflix.Notify.info('Movie was addeed to your watched list');
     addToQueue.setAttribute('disabled', true);
     addToQueue.classList.add('inactive');
     return;
   } else if (watched.classList.contains('active')) {
-    localStorage.setItem('queue', JSON.stringify(arrForQueue));
+    // localStorage.setItem('queue', JSON.stringify(arrForQueue));
     arrForQueue.push(elementForModal);
 
     arrForQueue = JSON.parse(localStorage.getItem('queue'));
