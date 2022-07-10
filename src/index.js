@@ -18,11 +18,6 @@ fetchGenres().then(data => {
   });
 });
 
-// (function spin() {
-// galleryItem.innerHTML = '<div class="spinner-border"></div>';
-
-//при загрузке сразу показать спиннеор, файнали использовать.
-
 fetchTrends(JSON.parse(localStorage.getItem('page'))).then(res => {
   localStorage.setItem('response', JSON.stringify(res.results));
   markUpForGallery(res.results);
@@ -30,19 +25,14 @@ fetchTrends(JSON.parse(localStorage.getItem('page'))).then(res => {
 });
 
 form.addEventListener('submit', onSubmit);
-// })();
 
 function onSubmit(evt) {
   evt.preventDefault();
 
   const query = evt.currentTarget.name.value.trim();
-  evt.target.reset();
+
   if (!query) {
-    fetchTrends(JSON.parse(localStorage.getItem('page'))).then(res => {
-      localStorage.setItem('response', JSON.stringify(res.results));
-      markUpForGallery(res.results);
-      paginationMarkup(res.page, res.total_pages);
-    });
+    evt.target.reset();
     findErr.classList.remove('visually-hidden');
     setTimeout(() => {
       findErr.classList.add('visually-hidden');
@@ -51,41 +41,24 @@ function onSubmit(evt) {
     return;
   }
 
-  spin();
-  function spin() {
-    galleryItem.innerHTML =
-      '<div class="spinner"><span class="spinner__animation"></span><span class="spinner__info"></span></div>';
-    const spinEl = document.querySelector('.spinner');
-    fetchByName(query)
-      .then(res => {
-        console.log(res.results.length);
-        if (!res.results.length) {
-          fetchTrends(JSON.parse(localStorage.getItem('page'))).then(res => {
-            localStorage.setItem('response', JSON.stringify(res.results));
-            markUpForGallery(res.results);
-            paginationMarkup(res.page, res.total_pages);
-          });
-          findErr.classList.remove('visually-hidden');
-          setTimeout(() => {
-            findErr.classList.add('visually-hidden');
-          }, 3000);
-          fetchTrends(1).then(result => {
-            markUpForGallery(result.results);
-          });
-          evt.target.reset();
-          return;
-        }
-        localStorage.setItem('response', JSON.stringify(res.results));
-        markUpForGallery(res.results);
-
-        paginationMarkup(res.page, res.total_pages, query);
-      })
-      .catch(err => {
-        console.log(err);
-      })
-
-      .finally(() => spinEl.classList.add('visually-hidden'));
-  }
+  fetchByName(query)
+    .then(res => {
+      console.log(res.results.length);
+      if (res.results.length === 0) {
+        findErr.classList.remove('visually-hidden');
+        setTimeout(() => {
+          findErr.classList.add('visually-hidden');
+        }, 3000);
+        return;
+      }
+      evt.target.reset();
+      localStorage.setItem('response', JSON.stringify(res.results));
+      markUpForGallery(res.results);
+      paginationMarkup(res.page, res.total_pages, query);
+    })
+    .catch(err => {
+      console.log(err);
+    });
 }
 
 function markUpForGallery(arr) {
@@ -95,7 +68,7 @@ function markUpForGallery(arr) {
       (acc += `<li id='${el.id}' class="gallery__item" >
       
           <img 
-            class="gallery__img"
+            class="gallery__img no-cover"
             src='${
               el.poster_path
                 ? urlImg + el.poster_path
@@ -122,8 +95,10 @@ function markUpForGallery(arr) {
                     : el.genre_ids.map(gen => {
                         return (gen = ' ' + obj1[gen]);
                       })
-                  : 'no genres found'
-              } | ${el.release_date.slice(0, 4)}</p>
+                  : 'No genres found'
+              } | ${
+        el.release_date ? el.release_date.slice(0, 4) : 'No info'
+      }</p>
 
                 </div>
                 </div>
@@ -133,7 +108,6 @@ function markUpForGallery(arr) {
     ``
   );
   galleryItem.insertAdjacentHTML('beforeend', a);
-  //<span class="gallery-text__rating">${el.vote_average}</span>
 }
 
 export { markUpForGallery };

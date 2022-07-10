@@ -399,6 +399,13 @@ td {
   }
 }
 
+.iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+}
+
 @media screen and (max-width: 767.98px) {
   .gallery {
     display: flex;
@@ -469,6 +476,12 @@ td {
 
 .gallery__img {
   border-radius: 5px;
+}
+
+@media screen and (min-width: 1280px) {
+  .no-cover {
+    height: 594px;
+  }
 }
 
 .gallery-text {

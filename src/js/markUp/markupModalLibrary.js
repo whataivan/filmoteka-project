@@ -63,9 +63,13 @@ export default function markUpModalLib(obj, nameBtnFirst, nameBtnLast) {
               </tr>
               <tr>
                 <td class="table__title">Genre</td>
-                <td class="table__text">${obj.genre_ids.map(gen => {
-                  return (gen = ' ' + genres[gen]);
-                })}</td>
+                <td class="table__text">${
+                  obj.genre_ids.length > 0
+                    ? obj.genre_ids.map(gen => {
+                        return (gen = ' ' + genres[gen]);
+                      })
+                    : 'No genres found'
+                }</td>
               </tr>
             </tbody>
           </table>
