@@ -151,20 +151,37 @@ html.dark .title-footer {
 }
 
 html.dark .watched-btn,
-html.dark .queue-btn {
+html.dark .queue-btn,
+html.dark .trailer-btn {
   background: #4f545940;
   color: #fff;
 }
 html.dark .watched-btn:hover,
-html.dark .queue-btn:hover {
+html.dark .queue-btn:hover,
+html.dark .trailer-btn:hover {
   background: var(--main-accent-color);
 }
 
 .inactive:disabled {
+  // display: none;
   background-color: #e6e6e6;
   color: #b6b6b6;
-  transform: translateX(200px) scale(0);
-  border-radius: 20px;
+  cursor: default;
+  &:hover {
+    background-color: #e6e6e6;
+    color: #b6b6b6;
+  }
+  // transform: translateX(200px) scale(0);
+  // border-radius: 20px;
+}
+html.dark .inactive:disabled {
+  background-color: #4f545940;
+  color: #818181;
+  cursor: default;
+  &:hover {
+    background-color: #4f545940;
+    color: #818181;
+  }
 }
 
 // // /// /////// ///// /////// / / // / // /

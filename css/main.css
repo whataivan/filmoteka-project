@@ -791,6 +791,30 @@ tbody {
   }
 }
 
+.trailer-btn {
+  background-color: #e6e6e6;
+  color: #000000;
+  padding: 6px 27px;
+  text-transform: uppercase;
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.33;
+  transition: 0.25s;
+}
+
+.trailer-btn:hover {
+  background-color: var(--main-accent-color);
+  color: #ffffff;
+  border: transparent;
+}
+
+@media screen and (min-width: 768px) {
+  .trailer-btn {
+    padding: 14px 9px;
+  }
+}
+
 .modal-group__close-icon {
   fill: black;
   transition: 0.3s;
@@ -1568,21 +1592,38 @@ html.dark .title-footer {
 }
 
 html.dark .watched-btn,
-html.dark .queue-btn {
+html.dark .queue-btn,
+html.dark .trailer-btn {
   background: #4f545940;
   color: #fff;
 }
 
 html.dark .watched-btn:hover,
-html.dark .queue-btn:hover {
+html.dark .queue-btn:hover,
+html.dark .trailer-btn:hover {
   background: var(--main-accent-color);
 }
 
 .inactive:disabled {
   background-color: #e6e6e6;
   color: #b6b6b6;
-  transform: translateX(200px) scale(0);
-  border-radius: 20px;
+  cursor: default;
+}
+
+.inactive:disabled:hover {
+  background-color: #e6e6e6;
+  color: #b6b6b6;
+}
+
+html.dark .inactive:disabled {
+  background-color: #4f545940;
+  color: #818181;
+  cursor: default;
+}
+
+html.dark .inactive:disabled:hover {
+  background-color: #4f545940;
+  color: #818181;
 }
 
 .back-to-top {

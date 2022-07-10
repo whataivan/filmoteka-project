@@ -1,4 +1,4 @@
-export { fetchTrends, fetchByName, fetchGenres };
+export { fetchTrends, fetchByName, fetchGenres, fetchVideo };
 const key = 'fdee5313a0b876498560bfe4baaab806';
 function fetchByName(name, page = 1) {
   const url = `https://api.themoviedb.org/3/search/movie?`;
@@ -28,4 +28,10 @@ function fetchGenres() {
   )
     .then(res => res.json())
     .catch(err => console.log(err));
+}
+
+function fetchVideo(id) {
+  return fetch(
+    `https://api.themoviedb.org/3/movie/${id}?append_to_response=videos&api_key=fdee5313a0b876498560bfe4baaab806&include_adult=false`
+  ).then(res => res.json());
 }
