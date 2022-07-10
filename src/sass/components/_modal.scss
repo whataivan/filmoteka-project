@@ -272,6 +272,32 @@ tbody {
   }
 }
 
+.trailer-btn {
+  background-color: #e6e6e6;
+  color: #000000;
+  // border: 1px solid #a4a4a4;
+
+  padding: 6px 27px;
+  text-transform: uppercase;
+  border-radius: 5px;
+
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.33;
+
+  transition: 0.25s;
+
+  &:hover {
+    background-color: var(--main-accent-color);
+    color: #ffffff;
+    border: transparent;
+  }
+
+  @include mq(tablet) {
+    padding: 14px 9px;
+  }
+}
+
 .modal-group__close-icon {
   fill: black;
   transition: 0.3s;

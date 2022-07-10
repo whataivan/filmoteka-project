@@ -49,19 +49,33 @@ let deleteBtn;
 let addToQueue;
 //=============================
 gallery.addEventListener('click', onClick);
-// function checkAddBtn() {
-//   if (watched.classList.contains('active')) {
-//    const res = JSON.parse(localStorage.getItem('watched')).some(el=>el.id===elementForModal.id)
-//    console.log(res);
-//    if (res) {
-//     addToQueue.setAttribute('disabled', true)
-//    }
 
-//   } else if (queue.classList.contains('active')) {
-//     checkDeleteBtn('queue');
+//========================================================================
 
-//   }
-// }
+function checkAddBtn() {
+  if (queue.classList.contains('active')) {
+    const res = JSON.parse(localStorage.getItem('watched')).some(
+      el => el.id === elementForModal.id
+    );
+
+    if (res) {
+      addToQueue.setAttribute('disabled', true);
+      addToQueue.textContent = 'Added to watched';
+      addToQueue.classList.add('inactive');
+      // addToQueue.style.display = 'none';
+    }
+  } else if (watched.classList.contains('active')) {
+    const res = JSON.parse(localStorage.getItem('queue')).some(
+      el => el.id === elementForModal.id
+    );
+    if (res) {
+      addToQueue.setAttribute('disabled', true);
+      addToQueue.textContent = 'Added to queue';
+      addToQueue.classList.add('inactive');
+    }
+  }
+}
+//========================================================================
 let onButtonGenerate = '';
 function onClick(event) {
   if (!event.target.closest('li')) {
@@ -73,12 +87,11 @@ function onClick(event) {
     onButtonGenerate = 'queue';
   }
   let response = JSON.parse(localStorage.getItem(onButtonGenerate));
-  console.log('~ response', response);
+
   backdrop.classList.remove('is-hidden');
   const currentId = event.target.closest('li').id;
-  console.log('~ currentId', currentId);
+
   elementForModal = response.find(el => String(el.id) === currentId);
-  console.log('~ elementForModal', elementForModal);
 
   if (watched.classList.contains('active')) {
     markUpModalLib(elementForModal, 'REMOVE FROM LIST', 'add to queue');
@@ -89,6 +102,8 @@ function onClick(event) {
   addToQueue = document.querySelector('.queue-btn');
   deleteBtn.addEventListener('click', onClickDelete);
   addToQueue.addEventListener('click', onClickAddtBtn);
+
+  checkAddBtn();
 }
 function onClickDelete() {
   if (watched.classList.contains('active')) {
@@ -99,14 +114,25 @@ function onClickDelete() {
 }
 function onClickAddtBtn() {
   if (queue.classList.contains('active')) {
+    localStorage.setItem('watched', JSON.stringify(arrForWatched));
+    arrForWatched = JSON.parse(localStorage.getItem('watched'));
+    // console.log(arrForQueue.length);
+
     let res = arrForWatched.filter(el => el.id !== elementForModal.id);
     arrForWatched = res;
     arrForWatched.push(elementForModal);
     localStorage.setItem('watched', JSON.stringify(arrForWatched));
+    Notiflix.Notify.info('Movie was addeed to your watched list');
     addToQueue.setAttribute('disabled', true);
-
     addToQueue.classList.add('inactive');
+    return;
   } else if (watched.classList.contains('active')) {
+    localStorage.setItem('queue', JSON.stringify(arrForQueue));
+    arrForQueue.push(elementForModal);
+
+    arrForQueue = JSON.parse(localStorage.getItem('queue'));
+
+    // if (arrForQueue.length > 1) {
     let res = arrForQueue.filter(el => el.id !== elementForModal.id);
     arrForQueue = res;
     arrForQueue.push(elementForModal);
@@ -116,6 +142,8 @@ function onClickAddtBtn() {
 
     addToQueue.setAttribute('disabled', true);
     addToQueue.classList.add('inactive');
+    return;
+    // }
   }
 }
 
@@ -148,7 +176,7 @@ function onClickWatched() {
 
   queue.classList.remove('active');
   const item = JSON.parse(localStorage.getItem('watched'));
-  console.log('~ item', item);
+
   if (item && item.length > 0) {
     firstPaginationCall('watched'); //dont touch==============
     // markUpForLibrary(item);
