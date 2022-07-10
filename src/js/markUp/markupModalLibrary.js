@@ -87,7 +87,6 @@ export default function markUpModalLib(obj, nameBtnFirst, nameBtnLast) {
 
     closeBtn.addEventListener('click', () => {
       backdrop.classList.add('is-hidden');
-
       // ///////////////////////////////////////////
       document.removeEventListener('click', handleClick);
       document.removeEventListener('keydown', onEscape);

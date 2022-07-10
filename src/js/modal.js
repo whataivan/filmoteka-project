@@ -1,23 +1,37 @@
 import { fetchByName, fetchTrends } from './api/fetchApi';
 
-import { markUpForLibrary } from './markUp/markUpforLibrary'
-
+import { markUpForLibrary } from './markUp/markUpforLibrary';
+import Notiflix from 'notiflix';
 import sprite from './../images/symbol-defs.svg';
+
+Notiflix.Notify.init({
+  width: '300px',
+  position: 'top-left',
+  closeButton: false,
+  cssAnimationStyle: 'from-right',
+  timeout: 1200,
+  success: {
+    background: '#50c184',
+  },
+  info: {
+    background: '#FF6B08',
+  },
+});
 
 const list = document.querySelector('.gallery');
 
 const backdrop = document.querySelector('.backdrop');
 
-let forLocalStorage
+let forLocalStorage;
 let objFindItem;
 let arrForQueue = [];
-let arrForWatched = []
+let arrForWatched = [];
 
 if (localStorage.getItem('watched')) {
-  arrForWatched = JSON.parse(localStorage.getItem('watched'))
+  arrForWatched = JSON.parse(localStorage.getItem('watched'));
 }
 if (localStorage.getItem('queue')) {
-  arrForQueue = JSON.parse(localStorage.getItem('queue'))
+  arrForQueue = JSON.parse(localStorage.getItem('queue'));
 }
 
 list.addEventListener('click', onClick);
@@ -33,13 +47,11 @@ function onClick(event) {
     const currentId = event.target.closest('li').id;
     elementForModal = response.find(el => String(el.id) === currentId);
 
-    forLocalStorage = elementForModal
+    forLocalStorage = elementForModal;
 
     createMarkUpModal(elementForModal);
-
   }
 }
-
 
 function createMarkUpModal(obj) {
   objFindItem = obj;
@@ -74,8 +86,9 @@ function createMarkUpModal(obj) {
             <tr>
               <td class="table__title">Vote / Votes</td>
               <td class="table__text">
-                <span class="gallery-text__rating table-text-orange">${obj.vote_average
-    }</span>
+                <span class="gallery-text__rating table-text-orange">${
+                  obj.vote_average
+                }</span>
                 /
                 <span class="table-text-grey">${obj.vote_count}</span>
               </td>
@@ -92,8 +105,8 @@ function createMarkUpModal(obj) {
             <tr>
               <td class="table__title">Genre</td>
               <td class="table__text">${obj.genre_ids.map(gen => {
-      return (gen = ' ' + genres[gen]);
-    })}</td>
+                return (gen = ' ' + genres[gen]);
+              })}</td>
             </tr>
           </tbody>
         </table>
@@ -114,14 +127,12 @@ function createMarkUpModal(obj) {
 
   closeBtn.addEventListener('click', () => {
     backdrop.classList.add('is-hidden');
-    
+
     // ///////////////////////////////////////////
     document.removeEventListener('click', handleClick);
     document.removeEventListener('keydown', onEscape);
     // ///////////////////////////////////////////////////
   });
-
-
 
   const addToWatched = document.querySelector('.watched-btn');
   const addToQueue = document.querySelector('.queue-btn');
@@ -130,79 +141,75 @@ function createMarkUpModal(obj) {
   addToQueue.addEventListener('click', onClickQueue);
 
   //проверка для вотчд==========================================
-  let resFromLocalWatch = JSON.parse(localStorage.getItem('watched'))
-  const finalRes = resFromLocalWatch.some(el =>
-    el.id === objFindItem.id
-  )
+  let resFromLocalWatch = JSON.parse(localStorage.getItem('watched'));
+  const finalRes = resFromLocalWatch.some(el => el.id === objFindItem.id);
   if (finalRes) {
-    addToWatched.textContent = 'REMOVE FROM WATCHED'
+    addToWatched.textContent = 'REMOVE FROM WATCHED';
   } else {
-    addToWatched.textContent = 'ADD TO WATCHED'
+    addToWatched.textContent = 'ADD TO WATCHED';
   }
 
   //================ //проверка для que
-  let resFromLocalQueue = JSON.parse(localStorage.getItem('queue'))
-  const finalResQ = resFromLocalQueue.some(el =>
-    el.id === objFindItem.id
-  )
+  let resFromLocalQueue = JSON.parse(localStorage.getItem('queue'));
+  const finalResQ = resFromLocalQueue.some(el => el.id === objFindItem.id);
   if (finalResQ) {
-    addToQueue.textContent = 'REMOVE FROM QUEUE'
+    addToQueue.textContent = 'REMOVE FROM QUEUE';
   } else {
-    addToQueue.textContent = 'ADD TO QUEUE'
+    addToQueue.textContent = 'ADD TO QUEUE';
   }
   //====================================== END
   function checkWatched() {
-
     if (addToWatched.textContent === 'ADD TO WATCHED') {
-      addToWatched.textContent = 'REMOVE FROM WATCHED'
-      return 'ADD'
-    } else {
-      addToWatched.textContent = 'ADD TO WATCHED'
-      return 'REMOVE'
-    }
+      Notiflix.Notify.success('Film was added to your library');
+      addToWatched.textContent = 'REMOVE FROM WATCHED';
 
+      return 'ADD';
+    } else {
+      addToWatched.textContent = 'ADD TO WATCHED';
+      Notiflix.Notify.info('Film was removed from your library');
+      return 'REMOVE';
+    }
   }
 
   function checkQueue() {
-
     if (addToQueue.textContent === 'ADD TO QUEUE') {
-      addToQueue.textContent = 'REMOVE FROM QUEUE'
-      return 'ADD'
+      Notiflix.Notify.success('Film was added to your queue');
+      addToQueue.textContent = 'REMOVE FROM QUEUE';
+
+      return 'ADD';
     } else {
-      addToQueue.textContent = 'ADD TO QUEUE'
-      return 'REMOVE'
+      addToQueue.textContent = 'ADD TO QUEUE';
+      Notiflix.Notify.info('Film was removed from your queue');
+      return 'REMOVE';
     }
   }
 
   function onClickWatched() {
-
-    const resWatched = checkWatched()
+    const resWatched = checkWatched();
 
     if (resWatched === 'REMOVE') {
-      let resFromWatch = JSON.parse(localStorage.getItem('watched'))
-      let resToStorage = resFromWatch.filter(el => el.id !== objFindItem.id)
-      localStorage.setItem('watched', JSON.stringify(resToStorage))
+      let resFromWatch = JSON.parse(localStorage.getItem('watched'));
+      let resToStorage = resFromWatch.filter(el => el.id !== objFindItem.id);
+      localStorage.setItem('watched', JSON.stringify(resToStorage));
     } else {
-      let res = arrForWatched.filter(el => el.id !== forLocalStorage.id)
-      arrForWatched = res
-      arrForWatched.push(forLocalStorage)
-      localStorage.setItem('watched', JSON.stringify(arrForWatched))
+      let res = arrForWatched.filter(el => el.id !== forLocalStorage.id);
+      arrForWatched = res;
+      arrForWatched.push(forLocalStorage);
+      localStorage.setItem('watched', JSON.stringify(arrForWatched));
     }
   }
   function onClickQueue() {
-    const resq = checkQueue()
+    const resq = checkQueue();
     if (resq === 'REMOVE') {
-      ;
-      let resFromQ = JSON.parse(localStorage.getItem('queue'))
-      let resToStorage = resFromQ.filter(el => el.id !== objFindItem.id)
-      localStorage.setItem('queue', JSON.stringify(resToStorage))
+      let resFromQ = JSON.parse(localStorage.getItem('queue'));
+      let resToStorage = resFromQ.filter(el => el.id !== objFindItem.id);
+      localStorage.setItem('queue', JSON.stringify(resToStorage));
     } else {
-      let res = arrForQueue.filter(el => el.id !== forLocalStorage.id)
-      arrForQueue = res
+      let res = arrForQueue.filter(el => el.id !== forLocalStorage.id);
+      arrForQueue = res;
 
-      arrForQueue.push(forLocalStorage)
-      localStorage.setItem('queue', JSON.stringify(arrForQueue))
-
+      arrForQueue.push(forLocalStorage);
+      localStorage.setItem('queue', JSON.stringify(arrForQueue));
     }
   }
 }
@@ -212,7 +219,6 @@ function createMarkUpModal(obj) {
 function onEscape(event) {
   if (event.keyCode === 27) {
     backdrop.classList.add('is-hidden');
-    
   }
 }
 
@@ -220,8 +226,5 @@ function onEscape(event) {
 function handleClick(event) {
   if (event.target === backdrop) {
     backdrop.classList.add('is-hidden');
-    
   }
 }
-
-

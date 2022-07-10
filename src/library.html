@@ -19,14 +19,11 @@
 
   <body>
     <div class="body-wrapper">
-      <div class="container modal__container">
-        <ul class="gallery_lib"></ul>
-      </div>
-      <div class="backdrop is-hidden" data-modal></div>
       <!-- Так добавляются фрагменты в главные HTML-файлы страниц.  -->
 
       <include src="./partials/library_header.html"></include>
       <main>
+        <div class="backdrop is-hidden" data-modal></div>
         <include src="./partials/gallery.html"></include>
         <include src="./partials/pagination.html"></include>
       </main>
@@ -36,6 +33,7 @@
       <script src="./js/team-modal-library.js" type="module"></script>
       <script src="./js/team-modal.js" type="module"></script>
       <script src="./js/markUp/markupModalLibrary.js" type="module"></script>
+      <script src="./js/themeChangeLib.js" type="module"></script>
     </div>
   </body>
 </html>
