@@ -74,9 +74,13 @@ function createMarkUpModal(obj) {
       <div class="modal-group__img-wrapper">
         <img
           class="modal-group__img"
-          src="${urlImg}${obj.poster_path}"
+          src="${
+            obj.poster_path
+              ? urlImg + obj.poster_path
+              : 'https://s1.hostingkartinok.com/uploads/images/2022/07/40ceaea2e22257d2a139ca5a0c0b8ba9.jpg'
+          }"
           alt="${obj.original_title}"
-          width="280"
+          
         />
       </div>
       <div class="modal-group__wrapper">
@@ -104,9 +108,13 @@ function createMarkUpModal(obj) {
             </tr>
             <tr>
               <td class="table__title">Genre</td>
-              <td class="table__text">${obj.genre_ids.map(gen => {
-                return (gen = ' ' + genres[gen]);
-              })}</td>
+              <td class="table__text">${
+                obj.genre_ids.length > 0
+                  ? obj.genre_ids.map(gen => {
+                      return (gen = ' ' + genres[gen]);
+                    })
+                  : 'No genres found'
+              }</td>
             </tr>
           </tbody>
         </table>
@@ -141,28 +149,28 @@ function createMarkUpModal(obj) {
   addToQueue.addEventListener('click', onClickQueue);
 
   //проверка для вотчд==========================================
-  let resFromLocalWatch = JSON.parse(localStorage.getItem('watched'));   
-  if (resFromLocalWatch) {                          //если будут вопросы с ошибкой some
+  let resFromLocalWatch = JSON.parse(localStorage.getItem('watched'));
+  if (resFromLocalWatch) {
+    //если будут вопросы с ошибкой some
     const finalRes = resFromLocalWatch.some(el => el.id === objFindItem.id);
-  if (finalRes) {
-    addToWatched.textContent = 'REMOVE FROM WATCHED';
-  } else {
-    addToWatched.textContent = 'ADD TO WATCHED';
+    if (finalRes) {
+      addToWatched.textContent = 'REMOVE FROM WATCHED';
+    } else {
+      addToWatched.textContent = 'ADD TO WATCHED';
+    }
   }
-  }
-  
 
   //================ //проверка для que
   let resFromLocalQueue = JSON.parse(localStorage.getItem('queue'));
-   if (resFromLocalQueue) {
+  if (resFromLocalQueue) {
     const finalResQ = resFromLocalQueue.some(el => el.id === objFindItem.id);
-  if (finalResQ) {
-    addToQueue.textContent = 'REMOVE FROM QUEUE';
-  } else {
-    addToQueue.textContent = 'ADD TO QUEUE';
-  }
-   }                                           //если будут вопросы с ошибкой some
-  
+    if (finalResQ) {
+      addToQueue.textContent = 'REMOVE FROM QUEUE';
+    } else {
+      addToQueue.textContent = 'ADD TO QUEUE';
+    }
+  } //если будут вопросы с ошибкой some
+
   //====================================== END
   function checkWatched() {
     if (addToWatched.textContent === 'ADD TO WATCHED') {

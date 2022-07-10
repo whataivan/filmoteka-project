@@ -25,19 +25,23 @@ export function markUpForLibrary(arr) {
           <div class="gallery-text">
             <p class="gallery-text__title">${el.original_title}</p>
             <div class="gallery-text__info">
-              <p class="gallery-text__genre"> ${
-                el.genre_ids.map(gen => {
-                  return (gen = obj1[gen]);
-                }).length > 3
-                  ? el.genre_ids
-                      .map(gen => {
-                        return (gen = ' ' + obj1[gen]);
-                      })
-                      .slice(0, 2) + ', Other '
-                  : el.genre_ids.map(gen => {
-                      return (gen = ' ' + obj1[gen]);
-                    })
-              } | ${el.release_date.slice(0, 4)}</p>
+               <p class="gallery-text__genre"> ${
+                 el.genre_ids.length
+                   ? el.genre_ids.map(gen => {
+                       return (gen = obj1[gen]);
+                     }).length > 3
+                     ? el.genre_ids
+                         .map(gen => {
+                           return (gen = ' ' + obj1[gen]);
+                         })
+                         .slice(0, 2) + ', Other '
+                     : el.genre_ids.map(gen => {
+                         return (gen = ' ' + obj1[gen]);
+                       })
+                   : 'No genres found'
+               } | ${
+          el.release_date ? el.release_date.slice(0, 4) : 'No info'
+        }</p>
         <span class="gallery-text__rating">${el.vote_average}</span>
             </div>
           </div>

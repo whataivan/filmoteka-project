@@ -64,6 +64,22 @@
   border-radius: 5px;
 }
 
+.no-cover {
+  // @include mq(mobile-only) {
+  //   height: 100%;
+  // }
+
+  // @include mq(mobile) {
+  //   height: 594px;
+  // }
+  // @include mq(tablet) {
+  //   height: 100%;
+  // }
+  @include mq(desktop) {
+    height: 594px;
+  }
+}
+
 .gallery-text {
   // @media (prefers-color-scheme: dark) {
   //   h2,
