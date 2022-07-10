@@ -5,7 +5,8 @@ const gallery = document.querySelector('.gallery');
 export function markUpForLibrary(arr) {
   if (arr) {
     if (arr.length === 0) {
-      gallery.innerHTML = '<h3 class="no movies">There is no movies</h3>';
+      gallery.innerHTML =
+        '<h3 class="no-movies">There is no movies to watch in you library</h3>';
       return;
     }
     let markUp = arr.reduce(

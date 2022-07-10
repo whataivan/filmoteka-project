@@ -185,8 +185,9 @@
 
 // /////////////////////button //////////////////////////////////////
 .library {
-  display: block;
-  flex-direction: row;
+  display: flex;
+  justify-content: center;
+
   margin-top: 65px;
 
   @include mq(tablet) {

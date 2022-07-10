@@ -34,7 +34,10 @@ form.addEventListener('submit', onSubmit);
 
 function onSubmit(evt) {
   evt.preventDefault();
+
   const query = evt.currentTarget.name.value.trim();
+  evt.target.reset(); // ---------------------------------------------------------------------------------------- НЕ ЗАБЫТЬ!
+
   if (!query) {
     fetchTrends(JSON.parse(localStorage.getItem('page'))).then(res => {
       localStorage.setItem('response', JSON.stringify(res.results));
@@ -45,6 +48,7 @@ function onSubmit(evt) {
     setTimeout(() => {
       findErr.classList.add('visually-hidden');
     }, 3000);
+
     return;
   }
 

@@ -10,9 +10,10 @@ import Notiflix from 'notiflix';
 
 Notiflix.Notify.init({
   width: '300px',
-  position: 'center-center',
+  position: 'top-left',
   closeButton: false,
-  cssAnimationStyle: 'zoom',
+  cssAnimationStyle: 'from-right',
+  timeout: 1000,
   success: {
     background: '#FF6B08',
     svgColor: '#32c682',
@@ -21,6 +22,9 @@ Notiflix.Notify.init({
     buttonBackground: '#32c682',
     buttonColor: '#fff',
     backOverlayColor: 'rgba(50,198,130,0.2)',
+  },
+  info: {
+    background: '#50c184',
   },
 });
 
@@ -100,12 +104,16 @@ function onClickAddtBtn() {
     arrForWatched.push(elementForModal);
     localStorage.setItem('watched', JSON.stringify(arrForWatched));
     addToQueue.setAttribute('disabled', true);
+
     addToQueue.classList.add('inactive');
   } else if (watched.classList.contains('active')) {
     let res = arrForQueue.filter(el => el.id !== elementForModal.id);
     arrForQueue = res;
     arrForQueue.push(elementForModal);
     localStorage.setItem('queue', JSON.stringify(arrForQueue));
+
+    Notiflix.Notify.info('Movie was addeed to your queue');
+
     addToQueue.setAttribute('disabled', true);
     addToQueue.classList.add('inactive');
   }
@@ -131,11 +139,13 @@ function checkDeleteBtn(name) {
   }
   return;
 }
+
 watched.addEventListener('click', onClickWatched);
 queue.addEventListener('click', onClickQueue);
 
 function onClickWatched() {
   watched.classList.add('active');
+
   queue.classList.remove('active');
   const item = JSON.parse(localStorage.getItem('watched'));
   console.log('~ item', item);
