@@ -11,12 +11,18 @@ let forLocalStor;
 const urlImg = 'https://image.tmdb.org/t/p/w500';
 const galleryItem = document.querySelector('.gallery');
 const form = document.querySelector('.form');
-fetchGenres().then(data => {
-  data.genres.map(el => {
-    obj1[el.id] = el.name;
-    localStorage.setItem('genres', JSON.stringify(obj1));
+spin();
+function spin() {
+  galleryItem.innerHTML =
+    '<div class="spinner"><span class="spinner__animation"></span><span class="spinner__info"></span></div>';
+
+  fetchGenres().then(data => {
+    data.genres.map(el => {
+      obj1[el.id] = el.name;
+      localStorage.setItem('genres', JSON.stringify(obj1));
+    });
   });
-});
+}
 
 fetchTrends(JSON.parse(localStorage.getItem('page'))).then(res => {
   localStorage.setItem('response', JSON.stringify(res.results));
@@ -41,24 +47,33 @@ function onSubmit(evt) {
     return;
   }
 
-  fetchByName(query)
-    .then(res => {
-      console.log(res.results.length);
-      if (res.results.length === 0) {
-        findErr.classList.remove('visually-hidden');
-        setTimeout(() => {
-          findErr.classList.add('visually-hidden');
-        }, 3000);
-        return;
-      }
-      evt.target.reset();
-      localStorage.setItem('response', JSON.stringify(res.results));
-      markUpForGallery(res.results);
-      paginationMarkup(res.page, res.total_pages, query);
-    })
-    .catch(err => {
-      console.log(err);
-    });
+  spin();
+  const spinEl = document.querySelector('.spinner');
+  function spin() {
+    galleryItem.innerHTML =
+      '<div class="spinner"><span class="spinner__animation"></span><span class="spinner__info"></span></div>';
+    fetchByName(query)
+      .then(res => {
+        console.log(res.results.length);
+        if (res.results.length === 0) {
+          findErr.classList.remove('visually-hidden');
+          setTimeout(() => {
+            findErr.classList.add('visually-hidden');
+          }, 3000);
+          return;
+        }
+        evt.target.reset();
+        localStorage.setItem('response', JSON.stringify(res.results));
+        markUpForGallery(res.results);
+        paginationMarkup(res.page, res.total_pages, query);
+      })
+      .catch(err => {
+        console.log(err);
+      })
+      .finally(() => {
+        spinEl.classList.add('visually-hidden');
+      });
+  }
 }
 
 function markUpForGallery(arr) {
