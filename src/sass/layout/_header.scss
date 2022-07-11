@@ -318,16 +318,38 @@
 }
 
 .form-text {
-  font-size: 14px;
-  line-height: 1.14;
-  color: #ff001b;
-  margin-top: 16px;
-  width: 280px;
+  @include mq(mobile-only) {
+    position: absolute;
+    top: 25px;
+    left: 20px;
+    font-size: 14px;
+    line-height: 1.14;
+    color: #ff001b;
+    margin-top: 16px;
+    width: 200px;
+  }
+
+  @include mq(mobile) {
+    position: absolute;
+    top: 25px;
+    left: 0px;
+    font-size: 14px;
+    line-height: 1.14;
+    color: #ff001b;
+    margin-top: 16px;
+    width: 280px;
+  }
 
   @include mq(tablet) {
+    left: 172px;
     width: 393px;
     margin-top: 20px;
     text-align: center;
+  }
+
+  @include mq(desktop) {
+    top: 25px;
+    left: 144px;
   }
 }
 /////////////////////////////////////////////
