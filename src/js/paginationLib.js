@@ -17,7 +17,7 @@ function changeCurrentPage(page) {
 function firstPaginationCall(arr) {
   arrLib = JSON.parse(localStorage.getItem(`${arr}`));
   totalPages = Math.ceil(arrLib.length / 20);
-  console.log('~ currentPage', currentPage);
+  
   if (!currentPage) {
     changeCurrentPage(1);
   }
@@ -32,7 +32,7 @@ function firstPaginationCall(arr) {
 // function paginationRemoveFromLib(arr) {
 //   arrLib = JSON.parse(localStorage.getItem(`${arr}`));
 //   totalPages = Math.ceil(arrLib.length / 20);
-//   console.log('remove');
+//   
 //   if (currentPage > totalPages) {
 //     currentPage = totalPages;
 //   }
@@ -174,7 +174,7 @@ function sendRequest() {
   console.log('~ totalPages', totalPages);
 }
 function removePagination() {
-  paginBlock.innerHTML = '';
+  paginList.innerHTML = '';
 }
 
 export {
