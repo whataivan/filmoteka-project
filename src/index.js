@@ -54,7 +54,7 @@ function onSubmit(evt) {
       '<div class="spinner"><span class="spinner__animation"></span><span class="spinner__info"></span></div>';
     fetchByName(query)
       .then(res => {
-        console.log(res.results.length);
+        
         if (res.results.length === 0) {
           findErr.classList.remove('visually-hidden');
           setTimeout(() => {

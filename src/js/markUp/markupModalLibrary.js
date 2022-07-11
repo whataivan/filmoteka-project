@@ -100,11 +100,11 @@ export default function markUpModalLib(obj, nameBtnFirst, nameBtnLast) {
     function onClickQueue() {
       const resq = checkQueue();
       if (resq === 'REMOVE') {
-        // console.log('rew');
+       
         let resFromQ = JSON.parse(localStorage.getItem('queue'));
-        // console.log(resFromWatch);
+        
         let resToStorage = resFromQ.filter(el => el.id !== objFindItem.id);
-        // console.log(resToStorage);
+       
         localStorage.setItem('queue', JSON.stringify(resToStorage));
       } else {
         arrForQueue.push(forLocalStorage);

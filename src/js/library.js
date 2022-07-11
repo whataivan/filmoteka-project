@@ -118,10 +118,9 @@ function onClickDelete() {
 }
 function onClickAddtBtn() {
   if (queue.classList.contains('active')) {
-    // localStorage.setItem('watched', JSON.stringify(arrForWatched));
+    
     arrForWatched = JSON.parse(localStorage.getItem('watched'));
-    // console.log(arrForQueue.length);
-
+    
     let res = arrForWatched.filter(el => el.id !== elementForModal.id);
     arrForWatched = res;
     arrForWatched.push(elementForModal);
@@ -131,12 +130,12 @@ function onClickAddtBtn() {
     addToQueue.classList.add('inactive');
     return;
   } else if (watched.classList.contains('active')) {
-    // localStorage.setItem('queue', JSON.stringify(arrForQueue));
+    
     arrForQueue.push(elementForModal);
 
     arrForQueue = JSON.parse(localStorage.getItem('queue'));
 
-    // if (arrForQueue.length > 1) {
+    
     let res = arrForQueue.filter(el => el.id !== elementForModal.id);
     arrForQueue = res;
     arrForQueue.push(elementForModal);
@@ -147,7 +146,7 @@ function onClickAddtBtn() {
     addToQueue.setAttribute('disabled', true);
     addToQueue.classList.add('inactive');
     return;
-    // }
+   
   }
 }
 
@@ -162,7 +161,7 @@ function checkDeleteBtn(name) {
     );
 
     localStorage.setItem(name, JSON.stringify(resToStorage));
-    // return 'ADD';
+    
     if (name === 'watched') {
       onClickWatched();
     } else if (name === 'queue') {
@@ -183,7 +182,7 @@ function onClickWatched() {
 
   if (item && item.length > 0) {
     firstPaginationCall('watched'); //dont touch==============
-    // markUpForLibrary(item);
+    
   } else {
     removePagination();
     markUpForLibrary([]);
@@ -195,11 +194,10 @@ function onClickQueue() {
   watched.classList.remove('active');
   if (item && item.length > 0) {
     firstPaginationCall('queue'); //dont touch===========
-    // markUpForLibrary(item);
+    
   } else {
     removePagination();
     markUpForLibrary([]);
   }
 }
 
-// paginationRemoveFromLib('watched');
