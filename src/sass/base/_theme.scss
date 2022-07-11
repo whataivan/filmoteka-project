@@ -1,16 +1,21 @@
 .theme-change {
-  position: absolute;
-  right: 0;
-  top: 160px;
+  // position: absolute;
+  // right: 0;
+  // top: 160px;
 
   // top: 50px;
   // right: 50%;
   // transform: translate(50%);
+  margin-left: auto;
+  display: block;
+  text-align: end;
+  margin-top: 20px;
 }
 
 .page-reset {
   opacity: 0;
   visibility: hidden;
+  position: absolute;
 }
 
 .page-reset.active {
@@ -256,13 +261,12 @@ html.dark .inactive:disabled {
 }
 .theme-change-lib {
   @include mq(mobile-only) {
-    position: absolute;
-    right: 0;
-    top: 193px;
+    display: block;
+    margin-left: auto;
+    margin-top: 10px;
   }
-  @include mq(tablet) {
-    top: 140px;
-  }
+
+  margin-top: 0;
 }
 
 html.dark .header {
