@@ -166,7 +166,7 @@ function sendRequest() {
 }
 
 function removePagination() {
-  paginBlock.innerHTML = '';
+  paginList.innerHTML = '';
 }
 
 export { paginationMarkup, firstPaginationCall, removePagination };
