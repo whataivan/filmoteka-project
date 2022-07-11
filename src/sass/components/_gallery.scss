@@ -58,6 +58,9 @@
 
 .gallery__item:hover {
   cursor: pointer;
+  background-color: rgba(255, 255, 255, 0);
+
+  border-radius: 5px;
 }
 
 .gallery__img {
@@ -81,13 +84,6 @@
 }
 
 .gallery-text {
-  // @media (prefers-color-scheme: dark) {
-  //   h2,
-  //   h3,
-  //   span {
-  //     color: #fff;
-  //   }
-  // }
   margin-top: 8px;
   font-size: 12px;
   font-weight: 500;
@@ -97,6 +93,7 @@
     margin-top: 12px;
     font-size: var(--font-size-desktop);
     line-height: 1.2;
+    transition: 0.3s;
   }
 }
 

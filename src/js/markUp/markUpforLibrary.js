@@ -12,8 +12,7 @@ export function markUpForLibrary(arr) {
     let markUp = arr.reduce(
       (acc, el) =>
         (acc += `<li id="${el.id}" class="gallery__item gallery__link">
-                  <img
-            class="gallery__img"
+          <img class="gallery__img no-cover "
             src='${
               el.poster_path
                 ? urlImg + el.poster_path

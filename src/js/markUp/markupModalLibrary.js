@@ -35,7 +35,7 @@ export default function markUpModalLib(obj, nameBtnFirst, nameBtnLast) {
                 : 'https://s1.hostingkartinok.com/uploads/images/2022/07/40ceaea2e22257d2a139ca5a0c0b8ba9.jpg'
             }"
             alt="${obj.original_title}"
-            width="280"
+            
           />
         </div>
         <div class="modal-group__wrapper">

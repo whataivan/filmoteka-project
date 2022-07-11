@@ -2,7 +2,7 @@
   position: absolute;
   right: 0;
   top: 160px;
-  position: absolute;
+
   // top: 50px;
   // right: 50%;
   // transform: translate(50%);
@@ -21,20 +21,24 @@
   position: relative;
   background-color: transparent;
   //   border-radius: 50%;
-  width: 20px;
-  height: 20px;
+  width: 25px;
+  height: 25px;
   background: url(../src/images/sun.svg) 0 0 / 100% no-repeat;
 
   transform: rotate(120deg);
-  filter: invert(1);
+  filter: invert(0);
   transition: 0.35s;
-  opacity: 0.5;
+}
+.theme-change-lib {
+  filter: invert(1);
 }
 
+html.dark .theme-change-lib {
+  filter: invert(0);
+}
 .page-theme:hover {
-  opacity: 1;
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
 }
 
 // .page-theme::before {
@@ -64,7 +68,7 @@
 
 html.dark body {
   color: #fff;
-  background-color: #1e2227;
+  background-color: #0c1115;
   transition: 0.3s;
 }
 
@@ -118,8 +122,8 @@ html.dark .page-theme {
 }
 
 html.dark .page-theme:hover {
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
   filter: invert(1);
   transform: rotate(30deg);
   // background: url(../src/images/moon2-orange.png) 0 0 / 100% no-repeat;
@@ -248,5 +252,161 @@ html.dark .inactive:disabled {
     margin-left: auto;
     margin-right: auto;
     padding-top: 250px;
+  }
+}
+.theme-change-lib {
+  @include mq(mobile-only) {
+    position: absolute;
+    right: 0;
+    top: 193px;
+  }
+  @include mq(tablet) {
+    top: 140px;
+  }
+}
+
+html.dark .header {
+  background-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.2),
+      rgba(0, 0, 0, 0)
+    ),
+    url(/src/images/main/mobile-header-bg-1x.jpg);
+
+  @include mq(retina) {
+    background-image: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.2),
+        rgba(0, 0, 0, 0)
+      ),
+      url(/src/images/main/mobile-header-bg-2x.jpg);
+    opacity: 1;
+  }
+
+  // tablet ///////
+  @include mq(tablet) {
+    padding-top: 40px;
+    padding-bottom: 81px;
+    height: 216px;
+    background-image: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.2),
+        rgba(0, 0, 0, 0)
+      ),
+      url(/src/images/main/tablet-header-bg-1x.jpg);
+    opacity: 1;
+
+    @include mq(retina) {
+      background-image: linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0.2),
+          rgba(0, 0, 0, 0)
+        ),
+        url(/src/images/main/tablet-header-bg-2x.jpg);
+      opacity: 1;
+    }
+  }
+
+  // desktop ///////
+  @include mq(desktop) {
+    background-color: black;
+
+    background-image: linear-gradient(
+        to bottom,
+        rgba(46, 46, 46, 0.2),
+        rgba(0, 0, 0, 0)
+      ),
+      url(/src/images/main/desktop-header-bg-1x-1.jpg);
+
+    @include mq(retina) {
+      background-image: linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0.2),
+          rgba(0, 0, 0, 0)
+        ),
+        url(/src/images/main/desktop-header-bg-2x.jpg);
+      opacity: 1;
+    }
+  }
+}
+
+html.light .nav__link {
+  color: #000;
+  &:hover {
+    color: var(--main-accent-color);
+  }
+}
+
+html.light .logo__title {
+  color: #000;
+  &:hover {
+    color: var(--main-accent-color);
+  }
+}
+
+html.light .logo__icon {
+  filter: invert(1);
+}
+
+html.light .form__field {
+  filter: invert(1);
+}
+
+html.dark .header-library {
+  background-image: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 1),
+      rgba(0, 0, 0, 0.8)
+    ),
+    url(/src/images/library/mobile-header-bg-library-1x.jpg);
+
+  @include mq(retina) {
+    background-image: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 1),
+        rgba(0, 0, 0, 0.8)
+      ),
+      url(/src/images/library/mobile-header-bg-library-2x.jpg);
+  }
+
+  // tablet ///////
+  @include mq(tablet) {
+    padding-top: 50px;
+    padding-bottom: 60px;
+    height: 216px;
+    background-image: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 1),
+        rgba(0, 0, 0, 0.8)
+      ),
+      url(/src/images/library/tablet-header-bg-library-1x.jpg);
+
+    @include mq(retina) {
+      background-image: linear-gradient(
+          to right,
+          rgba(0, 0, 0, 1),
+          rgba(0, 0, 0, 0.8)
+        ),
+        url(/src/images/library/tablet-header-bg-library-2x.jpg);
+    }
+  }
+
+  // desktop ///////
+  @include mq(desktop) {
+    background-image: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 1),
+        rgba(0, 0, 0, 0.8)
+      ),
+      url(/src/images/library/desktop-header-bg-library-1x.jpg);
+
+    @include mq(retina) {
+      background-image: linear-gradient(
+          to right,
+          rgba(0, 0, 0, 1),
+          rgba(0, 0, 0, 0.8)
+        ),
+        url(/src/images/library/desktop-header-bg-library-2x.jpg);
+    }
   }
 }

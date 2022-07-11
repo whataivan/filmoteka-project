@@ -4,22 +4,21 @@
   height: 230px;
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center;
 
   background-image: linear-gradient(
       to bottom,
-      rgba(0, 0, 0, 0.9),
-      rgba(0, 0, 0, 0.2)
+      rgba(46, 46, 46, 0),
+      rgba(255, 255, 255, 0.5)
     ),
-    url(/src/images/main/mobile-header-bg-1x.jpg);
+    url(/src/images/main/light/mobile-header-bg-1x-light.jpg);
 
   @include mq(retina) {
     background-image: linear-gradient(
         to bottom,
-        rgba(0, 0, 0, 0.9),
-        rgba(0, 0, 0, 0.2)
+        rgba(46, 46, 46, 0),
+        rgba(255, 255, 255, 0.5)
       ),
-      url(/src/images/main/mobile-header-bg-2x.jpg);
+      url(/src/images/main/light/mobile-header-bg-2x-light.jpg);
     opacity: 1;
   }
 
@@ -30,19 +29,19 @@
     height: 216px;
     background-image: linear-gradient(
         to bottom,
-        rgba(0, 0, 0, 0.9),
-        rgba(0, 0, 0, 0.2)
+        rgba(46, 46, 46, 0),
+        rgba(255, 255, 255, 0.5)
       ),
-      url(/src/images/main/tablet-header-bg-1x.jpg);
+      url(/src/images/main/light/tablet-header-bg-1x-light.jpg);
     opacity: 1;
 
     @include mq(retina) {
       background-image: linear-gradient(
           to bottom,
-          rgba(0, 0, 0, 0.9),
-          rgba(0, 0, 0, 0.2)
+          rgba(46, 46, 46, 0),
+          rgba(255, 255, 255, 0.5)
         ),
-        url(/src/images/main/tablet-header-bg-2x.jpg);
+        url(/src/images/main/light/tablet-header-bg-2x-light.jpg);
       opacity: 1;
     }
   }
@@ -53,18 +52,18 @@
 
     background-image: linear-gradient(
         to bottom,
-        rgba(0, 0, 0, 0.9),
-        rgba(0, 0, 0, 0.2)
+        rgba(46, 46, 46, 0),
+        rgba(255, 255, 255, 0.5)
       ),
-      url(/src/images/main/desktop-header-bg-1x.jpg);
+      url(/src/images/main/light/desktop-header-bg-1x-light.jpg);
 
     @include mq(retina) {
       background-image: linear-gradient(
           to bottom,
-          rgba(0, 0, 0, 0.9),
-          rgba(0, 0, 0, 0.2)
+          rgba(46, 46, 46, 0),
+          rgba(255, 255, 255, 0.5)
         ),
-        url(/src/images/main/desktop-header-bg-2x.jpg);
+        url(/src/images/main/light/desktop-header-bg-2x-light.jpg);
       opacity: 1;
     }
   }
@@ -172,7 +171,7 @@
 .nav__link {
   display: block;
   font-style: normal;
-  font-weight: 500;
+  font-weight: 700;
   font-size: 12px;
   line-height: 1.7;
   list-style: none;
@@ -227,6 +226,13 @@
 }
 
 .form__field {
+  @include mq(mobile-only) {
+    min-width: 240px;
+  }
+
+  @include mq(mobile) {
+    min-width: 280px;
+  }
   position: relative;
   display: flex;
   flex-direction: column;
