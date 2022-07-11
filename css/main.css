@@ -279,6 +279,7 @@ td {
 }
 
 .form {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -362,23 +363,28 @@ td {
 .form-button {
   border: none;
   position: absolute;
+  right: 10px;
   top: -5px;
-  right: -12px;
   padding: 10px;
   background-color: transparent;
 }
 
+@media screen and (min-width: 480px) {
+  .form-button {
+    right: -10;
+  }
+}
+
 @media screen and (min-width: 768px) {
   .form-button {
-    right: -10px;
-    top: -5px;
+    right: 173px;
+    top: 0;
   }
 }
 
 @media screen and (min-width: 1280px) {
   .form-button {
-    top: -5px;
-    right: -10px;
+    right: 143px;
   }
 }
 

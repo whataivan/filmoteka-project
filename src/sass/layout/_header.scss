@@ -209,6 +209,7 @@
 
 // /////////////////////input//////////////////////////////////////
 .form {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -282,20 +283,25 @@
 .form-button {
   border: none;
   position: absolute;
+  // top: -5px;
+  // right: -12px;
+  right: 10px;
   top: -5px;
-  right: -12px;
 
   padding: 10px;
   background-color: transparent;
 
+  @include mq(mobile) {
+    right: -10;
+  }
+
   @include mq(tablet) {
-    right: -10px;
-    top: -5px;
+    right: 173px;
+    top: 0;
   }
 
   @include mq(desktop) {
-    top: -5px;
-    right: -10px;
+    right: 143px;
   }
 }
 
