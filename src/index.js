@@ -60,7 +60,7 @@ function onSubmit(evt) {
           setTimeout(() => {
             findErr.classList.add('visually-hidden');
           }, 3000);
-          paginationMarkup(1,1);
+          paginationMarkup(1, 1);
           removePagination()
           return;
         }
@@ -80,17 +80,19 @@ function onSubmit(evt) {
 
 function markUpForGallery(arr) {
   galleryItem.innerHTML = '';
-  let a = arr.reduce(
-    (acc, el) =>
+  if (arr.length > 0 && arr) {
+
+
+    let a = arr.reduce(
+      (acc, el) =>
       (acc += `<li id='${el.id}' class="gallery__item" >
       
           <img 
             class="gallery__img no-cover"
-            src='${
-              el.poster_path
-                ? urlImg + el.poster_path
-                : 'https://s1.hostingkartinok.com/uploads/images/2022/07/40ceaea2e22257d2a139ca5a0c0b8ba9.jpg'
-            }'
+            src='${el.poster_path
+          ? urlImg + el.poster_path
+          : 'https://s1.hostingkartinok.com/uploads/images/2022/07/40ceaea2e22257d2a139ca5a0c0b8ba9.jpg'
+        }'
             alt="${el.original_title}"
             
           />
@@ -99,32 +101,34 @@ function markUpForGallery(arr) {
             <div class="gallery-text__info">
 
 
-              <p class="gallery-text__genre"> ${
-                el.genre_ids.length
-                  ? el.genre_ids.map(gen => {
-                      return (gen = obj1[gen]);
-                    }).length > 3
-                    ? el.genre_ids
-                        .map(gen => {
-                          return (gen = ' ' + obj1[gen]);
-                        })
-                        .slice(0, 2) + ', Other '
-                    : el.genre_ids.map(gen => {
-                        return (gen = ' ' + obj1[gen]);
-                      })
-                  : 'No genres found'
-              } | ${
-        el.release_date ? el.release_date.slice(0, 4) : 'No info'
-      }</p>
+              <p class="gallery-text__genre"> ${el.genre_ids.length
+          ? el.genre_ids.map(gen => {
+            return (gen = obj1[gen]);
+          }).length > 3
+            ? el.genre_ids
+              .map(gen => {
+                return (gen = ' ' + obj1[gen]);
+              })
+              .slice(0, 2) + ', Other '
+            : el.genre_ids.map(gen => {
+              return (gen = ' ' + obj1[gen]);
+            })
+          : 'No genres found'
+        } | ${el.release_date ? el.release_date.slice(0, 4) : 'No info'
+        }</p>
 
                 </div>
                 </div>
                 
                 </li>`),
 
-    ``
-  );
-  galleryItem.insertAdjacentHTML('beforeend', a);
+      ``
+    );
+    galleryItem.insertAdjacentHTML('beforeend', a);
+    return
+  }
+  paginationMarkup(1, 1);
+  removePagination()
 }
 
 export { markUpForGallery };
