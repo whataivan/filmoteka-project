@@ -86,7 +86,7 @@ function onClickPagination(evt) {
       sendRequest();
     }
     if (evt.target.dataset.btn === 'next') {
-      console.log('~ currentPage', currentPage);
+      
       changeCurrentPage(currentPage + 1);
       sendRequest();
     }
