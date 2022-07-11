@@ -76,7 +76,7 @@ export default function markUpModalLib(obj, nameBtnFirst, nameBtnLast) {
   
           <h3 class="modal-group__about-title">About</h3>
           <p class="modal-group__about-text">
-          ${obj.overview}
+          ${obj.overview?obj.overview:'No info'}
           </p>
           <div class="modal-group__btns">
             <button class="watched-btn delete-btn" type="submit" >${nameBtnFirst.toUpperCase()}</button>

@@ -1649,6 +1649,10 @@ html.dark .pagination__btn-next {
   filter: invert(1);
 }
 
+html.dark .pagination__btn-next:hover {
+  filter: invert(0);
+}
+
 html.dark .pagination__btn-prev {
   filter: invert(1);
 }
