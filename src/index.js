@@ -60,6 +60,7 @@ function onSubmit(evt) {
           setTimeout(() => {
             findErr.classList.add('visually-hidden');
           }, 3000);
+          removePagination()
           return;
         }
         evt.target.reset();
