@@ -60,6 +60,7 @@ function onSubmit(evt) {
           setTimeout(() => {
             findErr.classList.add('visually-hidden');
           }, 3000);
+          paginationMarkup(res.page, res.total_pages, query);
           removePagination()
           return;
         }
